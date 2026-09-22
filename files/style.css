@@ -1,0 +1,334 @@
+/* =========================================================
+   ЭТЕРНИЯ — общие стили
+   Палитра: чёрный / фиолетовый / тёмно-коричневый
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+:root{
+  /* --- фон --- */
+  --void:        #0a0710;
+  --void-deep:   #050308;
+  --panel:       #160f1c;
+  --panel-alt:   #1c1420;
+
+  /* --- дерево / бронза --- */
+  --umber:       #3c2a20;
+  --umber-light: #6b4a34;
+  --umber-glow:  #8a6248;
+
+  /* --- фиолетовый --- */
+  --violet-deep: #3a2350;
+  --violet:      #7c4f9e;
+  --violet-bright:#b48ad1;
+
+  /* --- текст --- */
+  --bone:        #d9cfd6;
+  --bone-dim:    #948699;
+  --heading:     #f1e7ec;
+
+  --radius: 3px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(124,79,158,.14), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 100%, rgba(107,74,52,.10), transparent 55%),
+    var(--void);
+  color:var(--bone);
+  font-family:'Cormorant Garamond', serif;
+  font-size:18px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,.display{
+  font-family:'Cinzel Decorative', 'Cormorant Garamond', serif;
+  color:var(--heading);
+  font-weight:700;
+  letter-spacing:.02em;
+  margin:0 0 .4em;
+}
+
+h1{ font-size:clamp(2.1rem, 4vw, 3.2rem); }
+h2{ font-size:clamp(1.5rem, 2.6vw, 2.05rem); }
+h3{ font-size:1.3rem; font-weight:400; }
+
+p{ margin:0 0 1em; max-width:38em; }
+a{ color:var(--violet-bright); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+::selection{ background:var(--violet-deep); color:var(--heading); }
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, .marker:focus-visible{
+  outline:2px solid var(--violet-bright);
+  outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001s !important; transition-duration:.001s !important; }
+}
+
+/* =========================================================
+   Вензели / орнаменты
+   ========================================================= */
+
+.divider{
+  display:block;
+  width:min(420px, 70%);
+  height:22px;
+  margin:2.2rem auto;
+  background:url('../assets/ornaments/divider.svg') center/contain no-repeat;
+  opacity:.75;
+}
+
+/* рамка с уголками-вензелями, добавляется в JS (см. main.js) */
+.ornate{ position:relative; }
+.ornate-corner{
+  position:absolute;
+  width:34px; height:34px;
+  background:url('../assets/ornaments/corner.svg') center/contain no-repeat;
+  opacity:.85;
+  pointer-events:none;
+}
+.ornate-corner.tl{ top:-6px; left:-6px; }
+.ornate-corner.tr{ top:-6px; right:-6px; transform:scaleX(-1); }
+.ornate-corner.bl{ bottom:-6px; left:-6px; transform:scaleY(-1); }
+.ornate-corner.br{ bottom:-6px; right:-6px; transform:scale(-1,-1); }
+
+/* =========================================================
+   Header / навигация
+   ========================================================= */
+
+.site-header{
+  position:sticky; top:0; z-index:40;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem;
+  padding:1.1rem clamp(1.2rem, 4vw, 3rem);
+  background:linear-gradient(to bottom, rgba(10,7,16,.96), rgba(10,7,16,.85));
+  border-bottom:1px solid var(--umber);
+  backdrop-filter:blur(6px);
+}
+
+.brand{
+  display:flex; align-items:baseline; gap:.6rem;
+  color:var(--heading);
+}
+.brand .mark{
+  font-family:'Cinzel Decorative', serif;
+  font-size:1.5rem;
+  letter-spacing:.12em;
+}
+.brand .tagline{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:.85rem;
+  color:var(--bone-dim);
+  display:none;
+}
+@media (min-width:640px){ .brand .tagline{ display:inline; } }
+
+nav.main-nav{ display:flex; align-items:center; gap:clamp(1rem,3vw,2.2rem); }
+nav.main-nav a{
+  color:var(--bone);
+  font-variant-caps: small-caps;
+  font-size:1.05rem;
+  letter-spacing:.03em;
+  position:relative;
+  padding-bottom:3px;
+}
+nav.main-nav a:hover{ text-decoration:none; color:var(--violet-bright); }
+nav.main-nav a::after{
+  content:"";
+  position:absolute; left:0; right:100%; bottom:0;
+  height:1px; background:var(--violet-bright);
+  transition:right .25s var(--ease);
+}
+nav.main-nav a:hover::after, nav.main-nav a.active::after{ right:0; }
+nav.main-nav a.active{ color:var(--violet-bright); }
+
+.nav-toggle{
+  display:none;
+  background:none; border:1px solid var(--umber-light);
+  color:var(--bone); width:38px; height:38px;
+  cursor:pointer; border-radius:var(--radius);
+}
+@media (max-width:720px){
+  .nav-toggle{ display:block; }
+  nav.main-nav{
+    position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; align-items:flex-start;
+    background:var(--panel);
+    border-bottom:1px solid var(--umber);
+    padding:1rem clamp(1.2rem,4vw,3rem) 1.4rem;
+    gap:1rem;
+    display:none;
+  }
+  nav.main-nav.open{ display:flex; }
+}
+
+/* =========================================================
+   Общая раскладка страниц (не карта)
+   ========================================================= */
+
+.page{
+  max-width:1080px;
+  margin:0 auto;
+  padding:clamp(2rem,5vw,4rem) clamp(1.2rem,4vw,3rem) 5rem;
+}
+
+.page-intro{ max-width:42em; margin-bottom:2.4rem; }
+.page-intro .eyebrow{
+  display:block;
+  font-style:italic;
+  color:var(--violet-bright);
+  margin-bottom:.4rem;
+  font-size:1.05rem;
+}
+
+/* =========================================================
+   Карточки (правители / локации)
+   ========================================================= */
+
+.card{
+  background:linear-gradient(160deg, var(--panel) 0%, var(--panel-alt) 100%);
+  border:1px solid var(--umber);
+  border-radius:var(--radius);
+  padding:1.8rem;
+  box-shadow: 0 18px 40px -20px rgba(0,0,0,.7);
+}
+
+.rulers-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+  gap:2.2rem;
+  margin-top:1rem;
+}
+
+.ruler-card{ display:flex; flex-direction:column; gap:1rem; }
+.ruler-head{ display:flex; align-items:center; gap:1.2rem; }
+
+.sigil-frame{
+  --size:88px;
+  width:var(--size); height:var(--size);
+  min-width:var(--size);
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, rgba(124,79,158,.25), var(--void-deep) 70%);
+  border:2px solid var(--umber-light);
+  box-shadow:
+    0 0 0 4px var(--void-deep),
+    0 0 0 5px var(--umber),
+    inset 0 0 18px rgba(124,79,158,.25);
+  display:flex; align-items:center; justify-content:center;
+  padding:14px;
+  flex-shrink:0;
+}
+.sigil-frame img{ width:100%; height:100%; display:block; }
+.sigil-frame.small{ --size:44px; padding:8px; }
+
+.ruler-name{ margin:0; font-size:1.35rem; }
+.ruler-title{
+  margin:.15rem 0 0; font-style:italic; color:var(--violet-bright);
+  font-size:.95rem;
+}
+.ruler-realm{
+  font-variant-caps: small-caps;
+  color:var(--bone-dim);
+  font-size:.92rem;
+}
+
+.ruler-body p{ margin:0 0 .8rem; font-size:1rem; }
+.ruler-quote{
+  border-left:2px solid var(--violet);
+  padding-left:1rem;
+  font-style:italic;
+  color:var(--bone-dim);
+  margin:0 0 .8rem;
+}
+.ruler-tag{
+  display:inline-block;
+  font-size:.78rem;
+  font-variant-caps: small-caps;
+  letter-spacing:.03em;
+  color:var(--umber-glow);
+  margin-bottom:.25rem;
+}
+
+/* локации (lore.html) */
+.locations-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+  gap:1.8rem;
+  margin-top:1rem;
+}
+.location-card .tag{
+  display:inline-block;
+  font-size:.8rem;
+  color:var(--violet-bright);
+  font-style:italic;
+  margin-bottom:.6rem;
+}
+.location-card h3{ margin-bottom:.5rem; }
+.location-card .danger{
+  margin-top:.9rem;
+  padding-top:.8rem;
+  border-top:1px dashed var(--umber);
+  font-size:.95rem;
+  color:var(--bone-dim);
+}
+.location-card .danger b{
+  color:var(--heading);
+  font-weight:500;
+  font-variant-caps: small-caps;
+}
+
+/* hero блок Серой Мглы на lore.html */
+.mist-hero{
+  padding:2.4rem clamp(1.2rem,4vw,2.6rem);
+  margin-bottom:2.6rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(124,79,158,.18), transparent 55%),
+    linear-gradient(160deg, #120a19, #1a1013 70%);
+  border:1px solid var(--umber);
+  position:relative;
+  overflow:hidden;
+}
+.mist-hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(100deg, transparent 0 40px, rgba(217,207,214,.03) 40px 42px);
+  pointer-events:none;
+}
+.mist-hero h2{ font-size:clamp(1.6rem,3vw,2.2rem); }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+.site-footer{
+  text-align:center;
+  padding:2.4rem 1rem 3rem;
+  color:var(--bone-dim);
+  font-size:.92rem;
+}
+.site-footer .flourish{
+  width:120px; height:16px; margin:0 auto 1rem;
+  background:url('../assets/ornaments/divider.svg') center/contain no-repeat;
+  opacity:.5;
+}
+
+/* =========================================================
+   Загрузочное появление
+   ========================================================= */
+.fade-in{
+  opacity:0; transform:translateY(10px);
+  animation: fadeIn .7s var(--ease) forwards;
+}
+@keyframes fadeIn{ to{ opacity:1; transform:none; } }
