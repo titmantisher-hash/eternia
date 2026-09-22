@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Этерния — Карта мира</title>
+<meta name="description" content="Интерактивная карта мира Этерния: Валория, Сильвария, Аквилла и Кхор-Тул.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/map.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <span class="mark">Этерния</span>
+    <span class="tagline">Мир на пороге Серой Мглы</span>
+  </div>
+  <button class="nav-toggle" aria-label="Меню" aria-expanded="false">☰</button>
+  <nav class="main-nav">
+    <a href="index.html">Карта</a>
+    <a href="rulers.html">Правители</a>
+    <a href="lore.html">Хроники</a>
+  </nav>
+</header>
+
+<main class="map-page">
+  <div class="page-intro fade-in">
+    <span class="eyebrow">Атлас континента</span>
+    <h1>Карта Этернии</h1>
+    <p>Четыре государства и земли между ними. Нажми на точку, чтобы узнать больше о регионе.</p>
+  </div>
+
+  <div class="map-wrap">
+    <div class="map-frame">
+      <img class="map-image" alt="Карта мира Этерния">
+      <div class="map-legend">
+        <span class="item"><span class="swatch"></span> Государство</span>
+        <span class="item"><span class="swatch minor"></span> Особая зона</span>
+      </div>
+    </div>
+
+    <aside class="map-panel">
+      <div class="panel-inner ornate">
+        <div class="panel-placeholder">
+          <p>Выбери точку на карте — здесь появятся сведения о регионе: общая информация, население и правительство.</p>
+        </div>
+        <div class="panel-content"></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="flourish"></div>
+  <p>Этерния — авторский мир. Атлас ведётся вручную и дополняется по мере расширения границ известного.</p>
+</footer>
+
+<script src="js/map-data.js"></script>
+<script>
+  // подставляем реальный URL карты из map-data.js в img.src
+  document.querySelector(".map-image").src = MAP_IMAGE_URL;
+</script>
+<script src="js/map.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
