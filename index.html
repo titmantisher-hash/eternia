@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир Этернии</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            --bg-dark: #050508;
+            --text-main: #b8b8c0;
+            --text-accent: #b388ff;
+            --text-silver: #e5e5e5;
+            --panel-bg: rgba(10, 8, 14, 0.95);
+            --border-color: #2a203b;
+            --glow: rgba(138, 43, 226, 0.6);
+            --mist-glow: rgba(180, 0, 255, 0.8);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            color: var(--text-main);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--text-silver);
+            font-weight: normal;
+        }
+
+        /* --- ШАПКА С ПРОКАЧАННЫМ ЭФФЕКТОМ --- */
+        header {
+            text-align: center;
+            padding: 40px 0 10px 0;
+            position: relative;
+            z-index: 50;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Сложный неравномерный эффект сияния/дыма */
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 130%; 
+            height: 160%;
+            background: radial-gradient(ellipse, rgba(160, 50, 255, 0.7) 0%, rgba(90, 10, 200, 0.4) 40%, transparent 70%);
+            filter: blur(20px);
+            animation: intense-smoke-glow 3.5s infinite ease-in-out;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes intense-smoke-glow {
+            0% { opacity: 0.4; filter: blur(15px) scale(0.9); background: radial-gradient(ellipse, rgba(130, 30, 220, 0.5) 0%, transparent 60%); }
+            25% { opacity: 0.9; filter: blur(25px) scale(1.1); background: radial-gradient(ellipse, rgba(180, 60, 255, 0.8) 0%, rgba(80, 0, 150, 0.4) 50%, transparent 70%); }
+            50% { opacity: 0.6; filter: blur(20px) scale(0.95); }
+            75% { opacity: 1; filter: blur(35px) scale(1.15); background: radial-gradient(ellipse, rgba(200, 80, 255, 0.9) 0%, rgba(100, 20, 220, 0.5) 40%, transparent 80%); }
+            100% { opacity: 0.4; filter: blur(15px) scale(0.9); background: radial-gradient(ellipse, rgba(130, 30, 220, 0.5) 0%, transparent 60%); }
+        }
+
+        .logo-img {
+            max-width: 500px;
+            height: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .decor-divider-thin {
+            width: 100%;
+            max-width: 700px;
+            height: 25px;
+            margin: 20px auto;
+            background-image: url('divider2.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            cursor: pointer;
+            padding-bottom: 5px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.4s;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--text-accent);
+            border-bottom: 1px solid var(--text-accent);
+            text-shadow: 0 0 15px var(--glow);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+        .page.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- СТРАНИЦА: КАРТА --- */
+        .map-container {
+            position: relative;
+            width: 95%;
+            max-width: 1300px;
+            margin: 40px auto 80px auto;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(138, 43, 226, 0.2);
+            overflow: hidden;
+        }
+
+        .map-image {
+            width: 100%;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ПРОКАЧАННАЯ МГЛА */
+        .mist-overlay {
+            position: absolute;
+            inset: 0;
+            /* Более агрессивный контраст черного и неоново-фиолетового */
+            background-image: 
+                radial-gradient(circle at 70% 80%, rgba(180, 0, 255, 0.5) 0%, rgba(0, 0, 0, 0.9) 50%, transparent 80%),
+                radial-gradient(circle at 30% 40%, rgba(120, 20, 200, 0.6) 0%, rgba(10, 0, 20, 0.9) 60%, transparent 90%);
+            background-size: 200% 200%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+            /* Ускоренная анимация переливов */
+            animation: drift-fast 4s infinite alternate ease-in-out;
+            mix-blend-mode: hard-light;
+        }
+
+        .mist-overlay.active {
+            opacity: 1;
+        }
+
+        @keyframes drift-fast {
+            0% { background-position: 0% 0%; filter: blur(5px) brightness(1); }
+            50% { background-position: 100% 50%; filter: blur(10px) brightness(1.2); }
+            100% { background-position: 50% 100%; filter: blur(15px) brightness(0.8); }
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background-color: #0d0a14;
+            border-radius: 50% 50% 50% 0;
+            transform: translate(-50%, -100%) rotate(-45deg);
+            cursor: pointer;
+            border: 1px solid var(--text-accent);
+            box-shadow: 0 0 15px 5px var(--glow);
+            animation: pulse-purple 2s infinite;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .map-pin:hover {
+            transform: translate(-50%, -100%) rotate(-45deg) scale(1.3);
+            background-color: var(--text-accent);
+        }
+
+        @keyframes pulse-purple {
+            0% { box-shadow: 0 0 10px 2px rgba(138, 43, 226, 0.4); }
+            50% { box-shadow: 0 0 20px 8px rgba(138, 43, 226, 0.8); }
+            100% { box-shadow: 0 0 10px 2px rgba(138, 43, 226, 0.4); }
+        }
+
+        /* --- БОКОВАЯ ПАНЕЛЬ (ВЫНЕСЕНА В КОРЕНЬ) --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -600px;
+            width: 550px;
+            height: 100vh;
+            background: var(--panel-bg);
+            border-left: 2px solid var(--border-color);
+            box-shadow: -15px 0 50px rgba(0,0,0,0.9);
+            transition: right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            overflow-y: auto;
+            z-index: 9999; /* Поверх всего */
+            padding: 60px 45px;
+            box-sizing: border-box;
+        }
+        .sidebar.active { right: 0; }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 32px;
+            color: #555;
+            cursor: pointer;
+            border: none;
+            background: none;
+            z-index: 101;
+            transition: color 0.3s;
+        }
+        .close-btn:hover { color: var(--text-accent); }
+
+        .decor-corner {
+            position: absolute;
+            width: 100px; 
+            height: 100px;
+            background-image: url('corner.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            opacity: 0.7;
+            z-index: 0;
+        }
+        .corner-tl { top: 0; left: 0; }
+        .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+        .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+        .corner-br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+        .decor-divider {
+            width: 100%;
+            height: 30px;
+            background-image: url('divider.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 25px 0;
+            opacity: 0.9;
+        }
+
+        .sidebar-title {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 0;
+            color: var(--text-silver);
+            text-shadow: 0 0 15px rgba(179, 136, 255, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .region-bg-image {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-section h3 {
+            font-size: 24px;
+            color: var(--text-accent);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .accent-silver { color: var(--text-silver); font-weight: bold; }
+        .accent-purple { color: var(--text-accent); font-style: italic; }
+        
+        .styled-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        .styled-list li {
+            padding-left: 22px;
+            position: relative;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .styled-list li::before {
+            content: '♦';
+            position: absolute;
+            left: 0;
+            color: var(--text-accent);
+            font-size: 14px;
+            top: 2px;
+        }
+
+        .quote-block {
+            border-left: 2px solid var(--text-accent);
+            padding-left: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #999;
+        }
+
+        .btn-person {
+            display: block;
+            width: 100%;
+            background: rgba(20, 15, 30, 0.5);
+            color: var(--text-silver);
+            padding: 15px 20px;
+            border: 1px solid var(--text-accent);
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 40px;
+            transition: all 0.4s;
+            position: relative;
+            z-index: 2;
+        }
+        .btn-person:hover {
+            background: var(--text-accent);
+            color: #000;
+            box-shadow: 0 0 25px var(--glow);
+        }
+
+        /* --- СТРАНИЦА: ЛИЧНОСТИ --- */
+        .characters-grid {
+            max-width: 1500px;
+            margin: 20px auto 60px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            padding: 0 30px;
+            align-items: start;
+        }
+
+        .char-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .char-card:hover {
+            border-color: var(--text-accent);
+            transform: translateY(-5px);
+        }
+
+        .char-portrait {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #050505;
+            border: 1px solid #1a1525;
+            margin-bottom: 15px;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3) grayscale(0.8) contrast(1.2);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .char-card:hover .char-portrait,
+        .char-card.expanded .char-portrait {
+            filter: brightness(1) grayscale(0) contrast(1);
+            border-color: var(--text-accent);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+        }
+
+        #img-malakor { background-image: url('malakor.jpg'); }
+        #img-elara { background-image: url('elara.jpg'); }
+        #img-cassian { background-image: url('cassian.jpg'); }
+        #img-amon { background-image: url('amon.jpg'); }
+
+        .char-name {
+            font-size: 22px;
+            text-align: center;
+            margin: 10px 0;
+            line-height: 1.3;
+            transition: color 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .char-card:hover .char-name,
+        .char-card.expanded .char-name {
+            color: var(--text-accent);
+        }
+
+        .char-details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, opacity 0.6s ease;
+            font-size: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .char-card.expanded .char-details {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 15px;
+        }
+
+        .char-details h4 {
+            color: var(--text-silver);
+            font-size: 18px;
+            margin: 20px 0 5px 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .hint-text {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .char-card.expanded .hint-text { display: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-wrapper">
+            <img src="logo.png" alt="Этерния" class="logo-img">
+        </div>
+        <div class="decor-divider-thin"></div>
+        <nav class="nav-links">
+            <button class="nav-btn active" id="btn-map" onclick="switchPage('map')">Карта Мира</button>
+            <button class="nav-btn" id="btn-chars" onclick="switchPage('chars')">Правители</button>
+        </nav>
+        <div class="decor-divider-thin"></div>
+    </header>
+
+    <!-- СТРАНИЦА 1: КАРТА -->
+    <main id="page-map" class="page active">
+        <div class="map-container">
+            <img src="map.jpg" alt="Карта Этернии" class="map-image">
+            
+            <div class="mist-overlay" id="mist-layer"></div>
+
+            <div class="map-pin" style="left: 38%; top: 21%;" onclick="openSidebar('valoria')"></div>
+            <div class="map-pin" style="left: 58%; top: 22%;" onclick="openSidebar('rusty')"></div>
+            <div class="map-pin" style="left: 81%; top: 22%;" onclick="openSidebar('sylvaria')"></div>
+            <div class="map-pin" style="left: 57.5%; top: 35.5%;" onclick="openSidebar('ashen')"></div>
+            <div class="map-pin" style="left: 15.5%; top: 45%;" onclick="openSidebar('khor_tul')"></div>
+            <div class="map-pin" style="left: 49%; top: 61%;" onclick="openSidebar('aquilla')"></div>
+            <div class="map-pin" style="left: 13.5%; top: 72%;" onclick="openSidebar('pilgrim')"></div>
+            
+            <div class="map-pin" style="left: 85%; top: 66%;" onclick="openSidebar('misty')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+            <div class="map-pin" style="left: 49%; top: 83%;" onclick="openSidebar('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+        </div>
+    </main>
+
+    <!-- СТРАНИЦА 2: ЛИЧНОСТИ -->
+    <main id="page-chars" class="page">
+        <div class="characters-grid">
+            
+            <!-- Малакор -->
+            <div class="char-card" id="card-malakor" onclick="toggleRuler('malakor')">
+                <div class="decor-corner corner-tl"></div>
+                <div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" id="img-malakor"></div>
+                <h2 class="char-name">Малакор Торн</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«Плоть слаба. Шестерни вечны.»</p>
+                    <p><span class="accent-silver">Верховный Архонт Валории</span>. От живой плоти в нем осталось лишь сердце, всё остальное — шедевры из черной стали и мерцающих рун[cite: 8].</p>
+                    <h4>Характер</h4>
+                    <p>Лишен человеческих страстей. Говорит <span class="accent-purple">рублеными фразами</span>, оценивая мир через призму эффективности[cite: 8].</p>
+                    <h4>Слухи</h4>
+                    <p>Не спит уже 10 лет, его разум интегрирован в вычислительную машину Оплота[cite: 8].</p>
+                </div>
+                <div class="decor-corner corner-bl"></div>
+                <div class="decor-corner corner-br"></div>
+            </div>
+
+            <!-- Элара -->
+            <div class="char-card" id="card-elara" onclick="toggleRuler('elara')">
+                <div class="decor-corner corner-tl"></div>
+                <div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" id="img-elara"></div>
+                <h2 class="char-name">Элара Глубокого Корня</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«Мы не спешим. Лес помнит всё.»</p>
+                    <p><span class="accent-silver">Матриарх Сильварии</span>. Древний Лесной Вечник. Её ноги превратились в корневую систему, навсегда связавшую её с живым троном-деревом[cite: 8].</p>
+                    <h4>Характер</h4>
+                    <p>Отстраненная, голос звучит как <span class="accent-purple">шелест листвы</span>. Видит мир глазами каждой птицы леса[cite: 8].</p>
+                    <h4>Гнев Леса</h4>
+                    <p>В гневе может приказать лесу прорасти сквозь врага, оставив на его месте цветущий куст[cite: 8].</p>
+                </div>
+                <div class="decor-corner corner-bl"></div>
+                <div class="decor-corner corner-br"></div>
+            </div>
+
+            <!-- Кассиан -->
+            <div class="char-card" id="card-cassian" onclick="toggleRuler('cassian')">
+                <div class="decor-corner corner-tl"></div>
+                <div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" id="img-cassian"></div>
+                <h2 class="char-name">Кассиан Вейн</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«У каждого секрета есть своя цена.»</p>
+                    <p><span class="accent-silver">Великий Дож Аквиллы</span>. Аристократ Ихорец, чье тело пропитано магией Бездны, отчего кожа кажется почти прозрачной[cite: 8].</p>
+                    <h4>Характер</h4>
+                    <p>Воплощение изящества. <span class="accent-purple">Остроумен и коварен</span>, способен продать человеку его же ботинки[cite: 8].</p>
+                    <h4>Одержимость</h4>
+                    <p>Фанатично ищет воспоминания о Серой Мгле, коллекционируя чужую память[cite: 8].</p>
+                </div>
+                <div class="decor-corner corner-bl"></div>
+                <div class="decor-corner corner-br"></div>
+            </div>
+
+            <!-- Амон -->
+            <div class="char-card" id="card-amon" onclick="toggleRuler('amon')">
+                <div class="decor-corner corner-tl"></div>
+                <div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" id="img-amon"></div>
+                <h2 class="char-name">Воскресший Амон</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«Ибо тьма очищается лишь огнем.»</p>
+                    <p><span class="accent-silver">Патриарх Кхор-Тула</span>. Старейший Остогон. Его рога срослись в корону, а закрытые глаза видят скрытую суть[cite: 8].</p>
+                    <h4>Характер</h4>
+                    <p>Религиозный фанатик. Голос гремит как шторм. Считает, что <span class="accent-purple">слышит сердце богов</span>[cite: 8].</p>
+                    <h4>Крестовый Поход</h4>
+                    <p>Готовит свой народ к походу, чтобы выжечь ересь в мире до прихода Мглы[cite: 8].</p>
+                </div>
+                <div class="decor-corner corner-bl"></div>
+                <div class="decor-corner corner-br"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ ВЫНЕСЕНА В КОРЕНЬ BODY -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">✖</button>
+        <div class="decor-corner corner-tl"></div>
+        <div class="decor-corner corner-tr"></div>
+        <div class="decor-corner corner-bl"></div>
+        <div class="decor-corner corner-br"></div>
+
+        <h1 class="sidebar-title" id="r-title">Название</h1>
+        
+        <div class="region-bg-image" id="r-image"></div>
+        
+        <div class="decor-divider"></div>
+        <div class="content-section" id="r-desc"></div>
+        <div class="content-section" id="r-society"></div>
+        <div class="content-section" id="r-rule"></div>
+        <div id="r-action"></div>
+    </div>
+
+    <script>
+        const regionsData = {
+            valoria: {
+                title: "Валория",
+                desc: `<h3>Мрачная Кузница</h3><p>Циклопический конгломерат из черного гранита и чугуна, стиснутый в ледяных каньонах севера[cite: 8]. Здесь нет поэзии, только гул заводов. Буры Оплота <span class="accent-purple">высасывают магическую сущность</span> мира, оставляя мертвый монолит[cite: 8].</p>`,
+                society: `<h3>Шестерни Общества</h3><ul class="styled-list"><li><span class="accent-silver">Первородные:</span> Аристократы, хранящие чистоту плоти[cite: 8].</li><li><span class="accent-silver">Сплавленные:</span> Элита с имплантами из Живого серебра[cite: 8].</li><li><span class="accent-silver">Ржавые:</span> Бедняки, гниющие от металлической лихорадки[cite: 8].</li></ul>`,
+                rule: `<h3>Власть Синода</h3><p>Управляется <span class="accent-silver">Стальным Синодом</span> — решения лишены эмоций и строятся на холодном расчете[cite: 8].</p>`,
+                personId: "malakor"
+            },
+            sylvaria: {
+                title: "Сильвария",
+                desc: `<h3>Изумрудная Колыбель</h3><p>Древний лес на востоке. Столица Эльвейн — это единый организм из <span class="accent-purple">колоссальных деревьев-небоскребов</span>[cite: 8]. Ночью лес вспыхивает неоновым свечением биолюминесцентных грибов[cite: 8].</p>`,
+                society: `<h3>Дети Леса</h3><ul class="styled-list"><li><span class="accent-silver">Лесные Вечники:</span> Бессмертные хранители памяти с кожей-берестой[cite: 8].</li><li><span class="accent-silver">Звероусты:</span> Полулюди с чертами зверей[cite: 8].</li></ul><p class="quote-block">Здесь не ценят золото, лишь умение слышать Шепот Леса[cite: 8].</p>`,
+                rule: `<h3>Власть Сезонов</h3><p>Направляется <span class="accent-silver">Кругом Сезонов</span>, медитирующим у корней Великого Древа[cite: 8].</p>`,
+                personId: "elara"
+            },
+            aquilla: {
+                title: "Аквилла",
+                desc: `<h3>Город над Бездной</h3><p>Жемчужина юга в стиле Dark Deco, выстроенная над <span class="accent-purple">чудовищным разломом</span>[cite: 8]. Элегантные белые башни отражаются в бирюзовых водах[cite: 8].</p>`,
+                society: `<h3>Рынок Секретов</h3><ul class="styled-list"><li><span class="accent-silver">Ихорцы:</span> Бледные аристократы с жабрами[cite: 8].</li><li><span class="accent-silver">Рынок Воспоминаний:</span> Место, где алхимики продают чужую память во флаконах[cite: 8].</li></ul>`,
+                rule: `<h3>Власть Масок</h3><p>Управляется <span class="accent-silver">Советом Десяти Масок</span>, где воюют ядами и слухами[cite: 8].</p>`,
+                personId: "cassian"
+            },
+            khor_tul: {
+                title: "Кхор-Тул (Пики)",
+                desc: `<h3>Порог Небес</h3><p>Монастыри, вырубленные в скалах над облаками[cite: 8]. Храмы соединены жуткими мостами из <span class="accent-purple">костей и цепей</span>, а вершины купаются в ослепительном эфирном свете[cite: 8].</p>`,
+                society: `<h3>Путь Искупления</h3><p>Родина <span class="accent-silver">Остогонов</span> — рогатых гуманоидов. Их жизнь — изнурительная аскеза и молитвы, искупающие демонический вид[cite: 8].</p>`,
+                rule: `<h3>Власть Вере</h3><p>Теократия <span class="accent-silver">Синода Небесного Света</span>, толкующего знамения в облаках[cite: 8].</p>`,
+                personId: "amon"
+            },
+            rusty: {
+                title: "Ржавые Сады",
+                desc: `<h3>Механическое Кладбище</h3><p>Техногенная свалка на окраинах Валории. Горы бракованных машин <span class="accent-purple">ожили</span> под воздействием магии[cite: 8].</p>`,
+                society: `<h3>Изгои</h3><p>Убежище для изгнанных Сплавленных и механических паразитов, охотящихся на теплую кровь[cite: 8].</p>`,
+                rule: ``, personId: ""
+            },
+            ashen: {
+                title: "Пепельная Пустошь",
+                desc: `<h3>Разорванная Земля</h3><p>Мертвая граница, где вместо песка хрустит <span class="accent-purple">пепел сожженных эпох</span>. Время и гравитация здесь нестабильны[cite: 8].</p>`,
+                society: `<h3>Эхо Прошлого</h3><p>Главная угроза — призрачные проекции древних битв, способные нанести реальную рану случайному путнику[cite: 8].</p>`,
+                rule: ``, personId: ""
+            },
+            pilgrim: {
+                title: "Приют Пилигрима",
+                desc: `<h3>Костяные Врата</h3><p>Поселение у подножия Пиков, вырезанное внутри <span class="accent-purple">исполинского скелета</span> существа, рухнувшего с небес[cite: 8].</p>`,
+                society: `<h3>Покаяние</h3><p>Любой смех чужака может закончиться публичной поркой. Сюда приходят лишь за священной солью и искуплением[cite: 8].</p>`,
+                rule: ``, personId: ""
+            },
+            misty: {
+                title: "Туманные Топи",
+                desc: `<h3>Шепчущие Болота</h3><p>Сеть топких равнин в белом тумане. Стоячие воды источают аромат <span class="accent-purple">гнили и дорогих духов</span>[cite: 8].</p>`,
+                society: `<h3>Узел Безмолвия</h3><p>Идеальный каменный круг в центре топей, где полностью исчезают звуки. Путь к нему преграждают «Шептуны», крадущие голоса любимых[cite: 8].</p>`,
+                rule: ``, personId: ""
+            },
+            abyss: {
+                title: "Бездна",
+                desc: `<h3>Дыхание Тьмы</h3><p>Необъятный подводный разлом под Аквиллой. Раз в столетие Бездна делает <span class="accent-purple">«выдох»</span>, срывая магические замки[cite: 8].</p>`,
+                society: `<h3>Серая Мгла</h3><p>Мелкодисперсная тьма поднимается из океана, материализуя призраков. Ни один смертный не смеет спуститься в её глубины[cite: 8].</p>`,
+                rule: ``, personId: ""
+            }
+        };
+
+        function showMist() { document.getElementById('mist-layer').classList.add('active'); }
+        function hideMist() { document.getElementById('mist-layer').classList.remove('active'); }
+
+        function switchPage(page) {
+            document.getElementById('page-map').classList.remove('active');
+            document.getElementById('page-chars').classList.remove('active');
+            document.getElementById('btn-map').classList.remove('active');
+            document.getElementById('btn-chars').classList.remove('active');
+
+            if(page === 'map') {
+                document.getElementById('page-map').classList.add('active');
+                document.getElementById('btn-map').classList.add('active');
+            } else {
+                document.getElementById('page-chars').classList.add('active');
+                document.getElementById('btn-chars').classList.add('active');
+                closeSidebar();
+            }
+        }
+
+        function openSidebar(id) {
+            const region = regionsData[id];
+            document.getElementById('r-title').innerHTML = region.title;
+            
+            document.getElementById('r-image').style.backgroundImage = `url('${id}-bg.jpg')`;
+            
+            document.getElementById('r-desc').innerHTML = region.desc;
+            document.getElementById('r-society').innerHTML = region.society;
+            document.getElementById('r-rule').innerHTML = region.rule;
+
+            const actionDiv = document.getElementById('r-action');
+            if (region.personId) {
+                actionDiv.innerHTML = `<button class="btn-person" onclick="goToPerson('${region.personId}')">Личность Правителя</button>`;
+            } else {
+                actionDiv.innerHTML = '';
+            }
+            document.getElementById('sidebar').classList.add('active');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('active');
+        }
+
+        function toggleRuler(id) {
+            document.querySelectorAll('.char-card').forEach(card => {
+                if(card.id !== 'card-' + id) card.classList.remove('expanded');
+            });
+            document.getElementById('card-' + id).classList.toggle('expanded');
+        }
+
+        function goToPerson(personId) {
+            switchPage('chars');
+            setTimeout(() => {
+                const card = document.getElementById(`card-${personId}`);
+                if(card) {
+                    document.querySelectorAll('.char-card').forEach(c => c.classList.remove('expanded'));
+                    card.classList.add('expanded');
+                    
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.style.boxShadow = "0 0 30px rgba(179, 136, 255, 0.8)";
+                    card.style.borderColor = "#b388ff";
+                    
+                    setTimeout(() => { 
+                        card.style.boxShadow = "0 10px 30px rgba(0,0,0,0.8)"; 
+                        card.style.borderColor = "var(--border-color)";
+                    }, 2000);
+                }
+            }, 150);
+        }
+    </script>
+</body>
+</html>
