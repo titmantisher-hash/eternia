@@ -15,7 +15,6 @@
             --panel-bg: rgba(10, 8, 14, 0.95);
             --border-color: #2a203b;
             --glow: rgba(138, 43, 226, 0.6);
-            --mist-glow: rgba(180, 0, 255, 0.8);
         }
 
         body {
@@ -35,7 +34,7 @@
             font-weight: normal;
         }
 
-        /* --- ШАПКА С ПРОКАЧАННЫМ ЭФФЕКТОМ --- */
+        /* --- ШАПКА --- */
         header {
             text-align: center;
             padding: 40px 0 10px 0;
@@ -48,28 +47,42 @@
             display: inline-block;
         }
 
-        /* Сложный неравномерный эффект сияния/дыма */
+        /* Улучшенная, плавная анимация логотипа (радиус чуть меньше) */
         .logo-wrapper::before {
             content: '';
             position: absolute;
             top: 50%; 
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 130%; 
-            height: 160%;
-            background: radial-gradient(ellipse, rgba(160, 50, 255, 0.7) 0%, rgba(90, 10, 200, 0.4) 40%, transparent 70%);
-            filter: blur(20px);
-            animation: intense-smoke-glow 3.5s infinite ease-in-out;
+            width: 110%; 
+            height: 140%;
+            background: radial-gradient(ellipse, rgba(160, 50, 255, 0.7) 0%, rgba(90, 10, 200, 0.3) 40%, transparent 70%);
             z-index: -1;
             pointer-events: none;
+            /* Плавная анимация на 6 секунд */
+            animation: smooth-smoke-glow 6s infinite ease-in-out;
         }
 
-        @keyframes intense-smoke-glow {
-            0% { opacity: 0.4; filter: blur(15px) scale(0.9); background: radial-gradient(ellipse, rgba(130, 30, 220, 0.5) 0%, transparent 60%); }
-            25% { opacity: 0.9; filter: blur(25px) scale(1.1); background: radial-gradient(ellipse, rgba(180, 60, 255, 0.8) 0%, rgba(80, 0, 150, 0.4) 50%, transparent 70%); }
-            50% { opacity: 0.6; filter: blur(20px) scale(0.95); }
-            75% { opacity: 1; filter: blur(35px) scale(1.15); background: radial-gradient(ellipse, rgba(200, 80, 255, 0.9) 0%, rgba(100, 20, 220, 0.5) 40%, transparent 80%); }
-            100% { opacity: 0.4; filter: blur(15px) scale(0.9); background: radial-gradient(ellipse, rgba(130, 30, 220, 0.5) 0%, transparent 60%); }
+        @keyframes smooth-smoke-glow {
+            0% { 
+                opacity: 0.5; 
+                transform: translate(-50%, -50%) scale(0.95); 
+                filter: blur(18px); 
+            }
+            35% { 
+                opacity: 0.9; 
+                transform: translate(-50%, -50%) scale(1.05); 
+                filter: blur(25px); 
+            }
+            65% { 
+                opacity: 0.6; 
+                transform: translate(-50%, -50%) scale(0.98); 
+                filter: blur(20px); 
+            }
+            100% { 
+                opacity: 0.5; 
+                transform: translate(-50%, -50%) scale(0.95); 
+                filter: blur(18px); 
+            }
         }
 
         .logo-img {
@@ -146,32 +159,29 @@
             z-index: 1;
         }
 
-        /* ПРОКАЧАННАЯ МГЛА */
+        /* МАГИЯ ТУМАНА ИЗ ГИФКИ */
         .mist-overlay {
             position: absolute;
-            inset: 0;
-            /* Более агрессивный контраст черного и неоново-фиолетового */
-            background-image: 
-                radial-gradient(circle at 70% 80%, rgba(180, 0, 255, 0.5) 0%, rgba(0, 0, 0, 0.9) 50%, transparent 80%),
-                radial-gradient(circle at 30% 40%, rgba(120, 20, 200, 0.6) 0%, rgba(10, 0, 20, 0.9) 60%, transparent 90%);
-            background-size: 200% 200%;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: 5;
-            /* Ускоренная анимация переливов */
-            animation: drift-fast 4s infinite alternate ease-in-out;
-            mix-blend-mode: hard-light;
+            pointer-events: none;
+            /* Выворачиваем цвета: белый туман -> черный туман, черный фон -> белый фон */
+            /* Добавляем легкий фиолетовый оттенок через sepia и hue-rotate */
+            filter: invert(1) sepia(0.5) hue-rotate(240deg) saturate(3) opacity(0.85);
+            /* Умножение: белый фон гифки становится прозрачным, а черный туман затемняет карту */
+            mix-blend-mode: multiply;
+            
+            /* Плавное, мягкое появление и исчезновение тумана (2.5 секунды) */
+            opacity: 0;
+            transition: opacity 2.5s ease-in-out;
         }
 
         .mist-overlay.active {
             opacity: 1;
-        }
-
-        @keyframes drift-fast {
-            0% { background-position: 0% 0%; filter: blur(5px) brightness(1); }
-            50% { background-position: 100% 50%; filter: blur(10px) brightness(1.2); }
-            100% { background-position: 50% 100%; filter: blur(15px) brightness(0.8); }
         }
 
         .map-pin {
@@ -200,7 +210,7 @@
             100% { box-shadow: 0 0 10px 2px rgba(138, 43, 226, 0.4); }
         }
 
-        /* --- БОКОВАЯ ПАНЕЛЬ (ВЫНЕСЕНА В КОРЕНЬ) --- */
+        /* --- БОКОВАЯ ПАНЕЛЬ --- */
         .sidebar {
             position: fixed;
             top: 0;
@@ -212,7 +222,7 @@
             box-shadow: -15px 0 50px rgba(0,0,0,0.9);
             transition: right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
             overflow-y: auto;
-            z-index: 9999; /* Поверх всего */
+            z-index: 9999;
             padding: 60px 45px;
             box-sizing: border-box;
         }
@@ -469,7 +479,8 @@
         <div class="map-container">
             <img src="map.jpg" alt="Карта Этернии" class="map-image">
             
-            <div class="mist-overlay" id="mist-layer"></div>
+            <!-- ГИФКА ТУМАНА (поверх карты) -->
+            <img src="fog.gif" alt="Туман" class="mist-overlay" id="mist-layer">
 
             <div class="map-pin" style="left: 38%; top: 21%;" onclick="openSidebar('valoria')"></div>
             <div class="map-pin" style="left: 58%; top: 22%;" onclick="openSidebar('rusty')"></div>
@@ -488,7 +499,6 @@
     <main id="page-chars" class="page">
         <div class="characters-grid">
             
-            <!-- Малакор -->
             <div class="char-card" id="card-malakor" onclick="toggleRuler('malakor')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -509,7 +519,6 @@
                 <div class="decor-corner corner-br"></div>
             </div>
 
-            <!-- Элара -->
             <div class="char-card" id="card-elara" onclick="toggleRuler('elara')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -530,7 +539,6 @@
                 <div class="decor-corner corner-br"></div>
             </div>
 
-            <!-- Кассиан -->
             <div class="char-card" id="card-cassian" onclick="toggleRuler('cassian')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -551,7 +559,6 @@
                 <div class="decor-corner corner-br"></div>
             </div>
 
-            <!-- Амон -->
             <div class="char-card" id="card-amon" onclick="toggleRuler('amon')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -575,7 +582,7 @@
         </div>
     </main>
 
-    <!-- БОКОВАЯ ПАНЕЛЬ ВЫНЕСЕНА В КОРЕНЬ BODY -->
+    <!-- БОКОВАЯ ПАНЕЛЬ -->
     <div class="sidebar" id="sidebar">
         <button class="close-btn" onclick="closeSidebar()">✖</button>
         <div class="decor-corner corner-tl"></div>
