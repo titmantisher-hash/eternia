@@ -34,25 +34,53 @@
             font-weight: normal;
         }
 
-        /* --- ШАПКА --- */
+        /* --- ШАПКА С ЭФФЕКТОМ --- */
         header {
             text-align: center;
-            padding: 30px 0 10px 0;
+            padding: 40px 0 10px 0;
             position: relative;
             z-index: 50;
         }
 
-        .logo-img {
-            max-width: 350px;
-            height: auto;
-            filter: drop-shadow(0 0 20px var(--glow));
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
         }
 
+        /* Эффект дыма/сияния за логотипом */
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%; 
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(138, 43, 226, 0.4) 0%, rgba(20, 5, 40, 0.2) 50%, transparent 70%);
+            filter: blur(25px);
+            animation: pulse-logo-glow 4s infinite alternate ease-in-out;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-logo-glow {
+            0% { opacity: 0.5; filter: blur(20px) scale(0.9); }
+            100% { opacity: 1; filter: blur(35px) scale(1.1); }
+        }
+
+        .logo-img {
+            max-width: 500px; /* Увеличили лого */
+            height: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Разделители стали крупнее */
         .decor-divider-thin {
             width: 100%;
-            max-width: 600px;
-            height: 15px;
-            margin: 15px auto;
+            max-width: 700px;
+            height: 25px;
+            margin: 20px auto;
             background-image: url('divider2.png');
             background-size: contain;
             background-position: center;
@@ -63,7 +91,7 @@
         .nav-links {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 50px;
         }
 
         .nav-btn {
@@ -71,9 +99,9 @@
             border: none;
             color: var(--text-main);
             font-family: 'Cinzel', serif;
-            font-size: 18px;
+            font-size: 20px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             cursor: pointer;
             padding-bottom: 5px;
             border-bottom: 1px solid transparent;
@@ -83,10 +111,9 @@
         .nav-btn:hover, .nav-btn.active {
             color: var(--text-accent);
             border-bottom: 1px solid var(--text-accent);
-            text-shadow: 0 0 10px var(--glow);
+            text-shadow: 0 0 15px var(--glow);
         }
 
-        /* Контейнеры страниц */
         .page {
             display: none;
             animation: fadeIn 0.6s ease;
@@ -101,22 +128,50 @@
         /* --- СТРАНИЦА: КАРТА --- */
         .map-container {
             position: relative;
-            width: 90%;
-            max-width: 1000px;
-            margin: 30px auto 60px auto;
+            width: 95%;
+            max-width: 1300px; /* Сделали карту побольше */
+            margin: 40px auto 80px auto;
             border: 2px solid var(--border-color);
-            box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(138, 43, 226, 0.15);
+            box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(138, 43, 226, 0.2);
+            overflow: hidden; /* Чтобы туман не выходил за рамки карты */
         }
 
         .map-image {
             width: 100%;
             display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* СЛОЙ ТУМАНА (МГЛА) */
+        .mist-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 70% 80%, rgba(50, 0, 90, 0.7) 0%, transparent 60%),
+                radial-gradient(circle at 30% 40%, rgba(10, 0, 20, 0.9) 0%, transparent 70%);
+            background-size: 150% 150%;
+            opacity: 0;
+            pointer-events: none; /* Чтобы клики проходили сквозь туман */
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+            animation: drift 8s infinite alternate ease-in-out;
+            mix-blend-mode: hard-light;
+        }
+
+        .mist-overlay.active {
+            opacity: 1; /* Появление тумана */
+        }
+
+        @keyframes drift {
+            0% { background-position: 0% 0%; filter: blur(5px); }
+            100% { background-position: 100% 100%; filter: blur(15px); }
         }
 
         .map-pin {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             background-color: #0d0a14;
             border-radius: 50% 50% 50% 0;
             transform: translate(-50%, -100%) rotate(-45deg);
@@ -139,7 +194,7 @@
             100% { box-shadow: 0 0 10px 2px rgba(138, 43, 226, 0.4); }
         }
 
-        /* Боковая панель */
+        /* --- БОКОВАЯ ПАНЕЛЬ И УГОЛКИ --- */
         .sidebar {
             position: fixed;
             top: 0;
@@ -148,12 +203,13 @@
             height: 100vh;
             background: var(--panel-bg);
             border-left: 2px solid var(--border-color);
-            box-shadow: -15px 0 40px rgba(0,0,0,0.9);
+            box-shadow: -15px 0 50px rgba(0,0,0,0.9);
             transition: right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
             overflow-y: auto;
             z-index: 100;
-            padding: 50px 45px;
+            padding: 60px 45px;
             box-sizing: border-box;
+            position: relative;
         }
         .sidebar.active { right: 0; }
 
@@ -171,42 +227,66 @@
         }
         .close-btn:hover { color: var(--text-accent); }
 
+        /* Уголки стали больше и прижаты вплотную к краям */
         .decor-corner {
             position: absolute;
-            width: 70px;
-            height: 70px;
+            width: 100px; 
+            height: 100px;
             background-image: url('corner.png');
             background-size: contain;
             background-repeat: no-repeat;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.7;
+            z-index: 0;
         }
-        .corner-tl { top: 8px; left: 8px; }
-        .corner-tr { top: 8px; right: 8px; transform: scaleX(-1); }
-        .corner-bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
-        .corner-br { bottom: 8px; right: 8px; transform: scale(-1, -1); }
+        /* Прижаты строго к границам (0px) */
+        .corner-tl { top: 0; left: 0; }
+        .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+        .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+        .corner-br { bottom: 0; right: 0; transform: scale(-1, -1); }
 
         .decor-divider {
             width: 100%;
-            height: 20px;
+            height: 30px;
             background-image: url('divider.png');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             margin: 25px 0;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .sidebar-title {
             text-align: center;
-            font-size: 34px;
+            font-size: 36px;
             margin-top: 0;
             color: var(--text-silver);
-            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+            text-shadow: 0 0 15px rgba(179, 136, 255, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Картинка региона в панели */
+        .region-bg-image {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Контент поверх уголков */
+        .content-section {
+            position: relative;
+            z-index: 2;
         }
 
         .content-section h3 {
-            font-size: 22px;
+            font-size: 24px;
             color: var(--text-accent);
             border-bottom: 1px dashed var(--border-color);
             padding-bottom: 8px;
@@ -254,11 +334,13 @@
             border: 1px solid var(--text-accent);
             cursor: pointer;
             font-family: 'Cinzel', serif;
-            font-size: 16px;
+            font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-top: 40px;
             transition: all 0.4s;
+            position: relative;
+            z-index: 2;
         }
         .btn-person:hover {
             background: var(--text-accent);
@@ -268,7 +350,7 @@
 
         /* --- СТРАНИЦА: ЛИЧНОСТИ --- */
         .characters-grid {
-            max-width: 1400px;
+            max-width: 1500px;
             margin: 20px auto 60px auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -280,7 +362,7 @@
         .char-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
-            padding: 20px;
+            padding: 25px;
             position: relative;
             cursor: pointer;
             transition: all 0.4s ease;
@@ -302,6 +384,8 @@
             background-position: center;
             filter: brightness(0.3) grayscale(0.8) contrast(1.2);
             transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
         }
         
         .char-card:hover .char-portrait,
@@ -317,11 +401,13 @@
         #img-amon { background-image: url('amon.jpg'); }
 
         .char-name {
-            font-size: 20px;
+            font-size: 22px;
             text-align: center;
             margin: 10px 0;
             line-height: 1.3;
             transition: color 0.3s;
+            position: relative;
+            z-index: 2;
         }
 
         .char-card:hover .char-name,
@@ -335,6 +421,8 @@
             overflow: hidden;
             transition: max-height 0.6s ease, opacity 0.6s ease;
             font-size: 16px;
+            position: relative;
+            z-index: 2;
         }
 
         .char-card.expanded .char-details {
@@ -364,7 +452,9 @@
 <body>
 
     <header>
-        <img src="logo.png" alt="Этерния" class="logo-img">
+        <div class="logo-wrapper">
+            <img src="logo.png" alt="Этерния" class="logo-img">
+        </div>
         <div class="decor-divider-thin"></div>
         <nav class="nav-links">
             <button class="nav-btn active" id="btn-map" onclick="switchPage('map')">Карта Мира</button>
@@ -377,6 +467,11 @@
     <main id="page-map" class="page active">
         <div class="map-container">
             <img src="map.jpg" alt="Карта Этернии" class="map-image">
+            
+            <!-- Слой тумана (активируется при наведении на метки Бездны или Топей) -->
+            <div class="mist-overlay" id="mist-layer"></div>
+
+            <!-- Метки карты -->
             <div class="map-pin" style="left: 38%; top: 21%;" onclick="openSidebar('valoria')"></div>
             <div class="map-pin" style="left: 58%; top: 22%;" onclick="openSidebar('rusty')"></div>
             <div class="map-pin" style="left: 81%; top: 22%;" onclick="openSidebar('sylvaria')"></div>
@@ -384,10 +479,13 @@
             <div class="map-pin" style="left: 15.5%; top: 45%;" onclick="openSidebar('khor_tul')"></div>
             <div class="map-pin" style="left: 49%; top: 61%;" onclick="openSidebar('aquilla')"></div>
             <div class="map-pin" style="left: 13.5%; top: 72%;" onclick="openSidebar('pilgrim')"></div>
-            <div class="map-pin" style="left: 85%; top: 66%;" onclick="openSidebar('misty')"></div>
-            <div class="map-pin" style="left: 49%; top: 83%;" onclick="openSidebar('abyss')"></div>
+            
+            <!-- Метки с анимацией тумана при наведении -->
+            <div class="map-pin" style="left: 85%; top: 66%;" onclick="openSidebar('misty')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+            <div class="map-pin" style="left: 49%; top: 83%;" onclick="openSidebar('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
         </div>
 
+        <!-- БОКОВАЯ ПАНЕЛЬ -->
         <div class="sidebar" id="sidebar">
             <button class="close-btn" onclick="closeSidebar()">✖</button>
             <div class="decor-corner corner-tl"></div>
@@ -396,12 +494,14 @@
             <div class="decor-corner corner-br"></div>
 
             <h1 class="sidebar-title" id="r-title">Название</h1>
-            <div class="decor-divider"></div>
             
+            <!-- Картинка региона -->
+            <div class="region-bg-image" id="r-image"></div>
+            
+            <div class="decor-divider"></div>
             <div class="content-section" id="r-desc"></div>
             <div class="content-section" id="r-society"></div>
             <div class="content-section" id="r-rule"></div>
-            
             <div id="r-action"></div>
         </div>
     </main>
@@ -498,7 +598,6 @@
     </main>
 
     <script>
-        // Использование шаблонных строк (бэктиков `) предотвращает поломку кода из-за кавычек
         const regionsData = {
             valoria: {
                 title: "Валория",
@@ -560,6 +659,10 @@
             }
         };
 
+        // Функции для тумана
+        function showMist() { document.getElementById('mist-layer').classList.add('active'); }
+        function hideMist() { document.getElementById('mist-layer').classList.remove('active'); }
+
         function switchPage(page) {
             document.getElementById('page-map').classList.remove('active');
             document.getElementById('page-chars').classList.remove('active');
@@ -579,6 +682,10 @@
         function openSidebar(id) {
             const region = regionsData[id];
             document.getElementById('r-title').innerHTML = region.title;
+            
+            // Загружаем картинку региона (формат id-bg.jpg)
+            document.getElementById('r-image').style.backgroundImage = `url('${id}-bg.jpg')`;
+            
             document.getElementById('r-desc').innerHTML = region.desc;
             document.getElementById('r-society').innerHTML = region.society;
             document.getElementById('r-rule').innerHTML = region.rule;
