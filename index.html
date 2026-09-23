@@ -17,7 +17,6 @@
             --glow: rgba(138, 43, 226, 0.6);
         }
 
-        /* Убиваем горизонтальный скролл */
         html, body {
             margin: 0;
             padding: 0;
@@ -27,23 +26,29 @@
 
         body {
             background-color: var(--bg-dark);
-            /* Твоя гифка для фона будет грузиться отсюда */
-            background-image: url('bg.gif'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            
             color: var(--text-main);
             font-family: 'Cormorant Garamond', serif;
             font-size: 18px;
         }
 
-        /* Затемняющий слой поверх гифки фона */
+        /* --- ФОНОВОЕ ВИДЕО --- */
+        #bg-video {
+            position: fixed;
+            top: 0; 
+            left: 0;
+            width: 100vw; 
+            height: 100vh;
+            object-fit: cover;
+            z-index: -20;
+            pointer-events: none;
+        }
+
+        /* Затемняющий слой поверх видео */
         .body-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(8, 5, 12, 0.85); /* Слегка фиолетово-черный полупрозрачный мрак */
+            background: rgba(8, 5, 12, 0.75); /* Идеальное затемнение, чтобы видео читалось, но не отвлекало */
             z-index: -10;
             pointer-events: none;
         }
@@ -149,7 +154,6 @@
             width: 95%;
             max-width: 1300px;
             margin: 40px auto 80px auto;
-            /* УБРАЛИ РАМКУ */
             border: none;
             box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(138, 43, 226, 0.2);
             overflow: hidden;
@@ -162,7 +166,7 @@
             z-index: 1;
         }
 
-        /* МАГИЯ ТУМАНА ИЗ ГИФКИ */
+        /* МАГИЯ ТУМАНА ИЗ ГИФКИ ПОВЕРХ КАРТЫ */
         .mist-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -203,7 +207,7 @@
             100% { box-shadow: 0 0 10px 2px rgba(138, 43, 226, 0.4); }
         }
 
-        /* --- БОКОВАЯ ПАНЕЛЬ (ИДЕАЛЬНАЯ ВЕРСТКА УГОЛКОВ) --- */
+        /* --- БОКОВАЯ ПАНЕЛЬ --- */
         .sidebar {
             position: fixed;
             top: 0;
@@ -215,7 +219,6 @@
             box-shadow: -15px 0 50px rgba(0,0,0,0.9);
             transition: right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
             z-index: 9999;
-            /* Панель теперь не скроллится сама, скроллится контент внутри */
             overflow: hidden; 
         }
         .sidebar.active { right: 0; }
@@ -250,7 +253,6 @@
         .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
         .corner-br { bottom: 0; right: 0; transform: scale(-1, -1); }
 
-        /* Внутренний контейнер для текста (он прокручивается, а уголки стоят) */
         .sidebar-content {
             width: 100%;
             height: 100%;
@@ -261,7 +263,6 @@
             z-index: 2;
         }
 
-        /* --- Стилизация ползунка скролла (для красоты) --- */
         .sidebar-content::-webkit-scrollbar { width: 6px; }
         .sidebar-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
         .sidebar-content::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
@@ -498,7 +499,11 @@
 </head>
 <body>
 
-    <!-- Затемняющий слой для гифки на фоне -->
+    <!-- ФОНОВОЕ ВИДЕО -->
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+    <!-- Затемняющий слой поверх видео -->
     <div class="body-overlay"></div>
 
     <!-- Модальное окно для полного размера картинок регионов -->
@@ -523,19 +528,17 @@
     <main id="page-map" class="page active">
         <div class="map-container">
             <img src="map.jpg" alt="Карта Этернии" class="map-image">
-            
             <img src="fog.gif" alt="Туман" class="mist-overlay" id="mist-layer">
 
             <div class="map-pin" style="left: 38%; top: 21%;" onclick="openSidebar('valoria')"></div>
-            <div class="map-pin" style="left: 58%; top: 22%;" onclick="openSidebar('rusty')"></div>
-            <div class="map-pin" style="left: 81%; top: 22%;" onclick="openSidebar('sylvaria')"></div>
-            <div class="map-pin" style="left: 57.5%; top: 35.5%;" onclick="openSidebar('ashen')"></div>
+            <div class="map-pin" style="left: 60%; top: 24%;" onclick="openSidebar('rusty')"></div>
+            <div class="map-pin" style="left: 85%; top: 19%;" onclick="openSidebar('sylvaria')"></div>
+            <div class="map-pin" style="left: 58%; top: 34%;" onclick="openSidebar('ashen')"></div>
             <div class="map-pin" style="left: 15.5%; top: 45%;" onclick="openSidebar('khor_tul')"></div>
-            <div class="map-pin" style="left: 49%; top: 61%;" onclick="openSidebar('aquilla')"></div>
+            <div class="map-pin" style="left: 56%; top: 60%;" onclick="openSidebar('aquilla')"></div>
             <div class="map-pin" style="left: 13.5%; top: 72%;" onclick="openSidebar('pilgrim')"></div>
-            
-            <div class="map-pin" style="left: 85%; top: 66%;" onclick="openSidebar('misty')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
-            <div class="map-pin" style="left: 49%; top: 83%;" onclick="openSidebar('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+            <div class="map-pin" style="left: 88%; top: 64%;" onclick="openSidebar('misty')"></div>
+            <div class="map-pin" style="left: 56%; top: 83%;" onclick="openSidebar('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
         </div>
     </main>
 
@@ -543,7 +546,6 @@
     <main id="page-chars" class="page">
         <div class="characters-grid">
             
-            <!-- Малакор -->
             <div class="char-card" id="card-malakor" onclick="toggleRuler('malakor')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -564,7 +566,6 @@
                 <div class="decor-corner corner-br"></div>
             </div>
 
-            <!-- Элара -->
             <div class="char-card" id="card-elara" onclick="toggleRuler('elara')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -585,7 +586,6 @@
                 <div class="decor-corner corner-br"></div>
             </div>
 
-            <!-- Кассиан -->
             <div class="char-card" id="card-cassian" onclick="toggleRuler('cassian')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -606,7 +606,6 @@
                 <div class="decor-corner corner-br"></div>
             </div>
 
-            <!-- Амон -->
             <div class="char-card" id="card-amon" onclick="toggleRuler('amon')">
                 <div class="decor-corner corner-tl"></div>
                 <div class="decor-corner corner-tr"></div>
@@ -630,21 +629,17 @@
         </div>
     </main>
 
-    <!-- БОКОВАЯ ПАНЕЛЬ С ВНУТРЕННИМ СКРОЛЛОМ -->
+    <!-- БОКОВАЯ ПАНЕЛЬ -->
     <div class="sidebar" id="sidebar">
-        <!-- Эти элементы намертво зафиксированы относительно самой панели -->
         <button class="close-btn" onclick="closeSidebar()">✖</button>
         <div class="decor-corner corner-tl"></div>
         <div class="decor-corner corner-tr"></div>
         <div class="decor-corner corner-bl"></div>
         <div class="decor-corner corner-br"></div>
 
-        <!-- А вот этот блок прокручивается, оставляя уголки на месте -->
         <div class="sidebar-content">
             <h1 class="sidebar-title" id="r-title">Название</h1>
-            
             <div class="region-bg-image" id="r-image" onclick="openImageModal(this)"></div>
-            
             <div class="decor-divider"></div>
             <div class="content-section" id="r-desc"></div>
             <div class="content-section" id="r-society"></div>
@@ -654,7 +649,6 @@
     </div>
 
     <script>
-        // База данных без cite
         const regionsData = {
             valoria: {
                 title: "Валория",
@@ -719,20 +713,16 @@
         function showMist() { document.getElementById('mist-layer').classList.add('active'); }
         function hideMist() { document.getElementById('mist-layer').classList.remove('active'); }
 
-        // Логика модального окна для картинок
         function openImageModal(element) {
             const modal = document.getElementById('image-modal');
             const modalImg = document.getElementById('modal-img');
-            // Достаем url картинки из background-image
             const bgImage = element.style.backgroundImage;
             const url = bgImage.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
-            
             modalImg.src = url;
             modal.classList.add('active');
         }
 
         function closeModal(e) {
-            // Закрываем, если кликнули на крестик или на темный фон (но не на саму картинку)
             if (e.target.id === 'image-modal' || e.target.classList.contains('modal-close')) {
                 document.getElementById('image-modal').classList.remove('active');
             }
@@ -757,9 +747,7 @@
         function openSidebar(id) {
             const region = regionsData[id];
             document.getElementById('r-title').innerHTML = region.title;
-            
             document.getElementById('r-image').style.backgroundImage = `url('${id}-bg.jpg')`;
-            
             document.getElementById('r-desc').innerHTML = region.desc;
             document.getElementById('r-society').innerHTML = region.society;
             document.getElementById('r-rule').innerHTML = region.rule;
@@ -791,11 +779,9 @@
                 if(card) {
                     document.querySelectorAll('.char-card').forEach(c => c.classList.remove('expanded'));
                     card.classList.add('expanded');
-                    
                     card.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     card.style.boxShadow = "0 0 30px rgba(179, 136, 255, 0.8)";
                     card.style.borderColor = "#b388ff";
-                    
                     setTimeout(() => { 
                         card.style.boxShadow = "0 10px 30px rgba(0,0,0,0.8)"; 
                         card.style.borderColor = "var(--border-color)";
