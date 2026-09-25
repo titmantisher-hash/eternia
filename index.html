@@ -156,25 +156,29 @@
         .styled-list li::before { content: '♦'; position: absolute; left: 0; color: var(--text-accent); font-size: 14px; top: 2px; }
         .quote-block { border-left: 2px solid var(--text-accent); padding-left: 15px; margin: 15px 0; font-style: italic; color: #999; }
 
-        /* МИНИ-ПОРТРЕТЫ */
-        .loc-characters-title { font-size: 20px; color: var(--text-silver); margin: 30px 0 15px 0; text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px; font-family: 'Cinzel', serif; }
-        .mini-chars-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 20px; }
-        .mini-char-wrap { text-align: center; cursor: pointer; width: 80px; }
-        .mini-char-img {
-            width: 70px; height: 70px; border-radius: 6px; border: 2px solid var(--border-color); 
-            background-size: cover; background-position: center; margin: 0 auto 5px auto;
-            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        /* Кнопки в боковой панели (в ряд) */
+        .sidebar-buttons-grid {
+            display: flex; gap: 15px; margin-top: 35px; position: relative; z-index: 2;
         }
-        .mini-char-wrap:hover .mini-char-img { border-color: var(--text-accent); transform: scale(1.1); box-shadow: 0 0 15px var(--glow); }
-        .mini-char-name { font-size: 14px; color: var(--text-main); font-style: italic; transition: color 0.3s; }
-        .mini-char-wrap:hover .mini-char-name { color: var(--text-accent); }
-
         .btn-person {
-            display: block; width: 100%; background: rgba(20, 15, 30, 0.5); color: var(--text-silver);
-            padding: 15px 20px; border: 1px solid var(--text-accent); cursor: pointer; font-family: 'Cinzel', serif;
-            font-size: 18px; text-transform: uppercase; letter-spacing: 3px; margin-top: 40px; transition: all 0.4s;
+            display: block; flex: 1; background: rgba(20, 15, 30, 0.5); color: var(--text-silver);
+            padding: 15px 10px; border: 1px solid var(--text-accent); cursor: pointer; font-family: 'Cinzel', serif;
+            font-size: 15px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.4s; text-align: center;
         }
         .btn-person:hover { background: var(--text-accent); color: #000; box-shadow: 0 0 25px var(--glow); }
+
+        /* МИНИ-ПОРТРЕТЫ (Крупные квадраты) */
+        .loc-characters-title { font-size: 20px; color: var(--text-silver); margin: 35px 0 15px 0; text-align: center; border-top: 1px dashed var(--border-color); padding-top: 25px; font-family: 'Cinzel', serif; }
+        .mini-chars-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 20px; }
+        .mini-char-wrap { text-align: center; cursor: pointer; width: 105px; }
+        .mini-char-img {
+            width: 95px; height: 95px; border-radius: 0; border: 2px solid var(--border-color); 
+            background-size: cover; background-position: center; margin: 0 auto 8px auto;
+            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.5); filter: grayscale(0.3);
+        }
+        .mini-char-wrap:hover .mini-char-img { border-color: var(--text-accent); transform: scale(1.1); box-shadow: 0 0 15px var(--glow); filter: grayscale(0); }
+        .mini-char-name { font-size: 15px; color: var(--text-main); font-style: italic; transition: color 0.3s; }
+        .mini-char-wrap:hover .mini-char-name { color: var(--text-accent); }
 
         /* --- МОДАЛЬНОЕ ОКНО ПЕРСОНАЖА (ЦЕНТР ЭКРАНА) --- */
         .char-modal-wrapper {
@@ -193,7 +197,7 @@
         .cm-scroll-area::-webkit-scrollbar-thumb { background: var(--text-accent); }
         
         .char-modal-header { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; }
-        .cm-img { width: 180px; height: 180px; border: 2px solid var(--text-accent); background-size: cover; background-position: center; box-shadow: 0 0 20px rgba(138,43,226,0.3); flex-shrink: 0; border-radius: 4px;}
+        .cm-img { width: 180px; height: 180px; border: 2px solid var(--text-accent); background-size: cover; background-position: center; box-shadow: 0 0 20px rgba(138,43,226,0.3); flex-shrink: 0; border-radius: 0;}
         .cm-titles h2 { font-size: 32px; margin: 0 0 10px 0; color: var(--text-silver); text-shadow: 0 0 10px rgba(255,255,255,0.2); }
         .cm-titles h4 { font-size: 18px; margin: 0; color: var(--text-accent); font-family: 'Cormorant Garamond', serif; font-style: italic; letter-spacing: 1px; }
         .cm-text p { margin-bottom: 15px; line-height: 1.6; }
@@ -201,48 +205,48 @@
         /* Модалка для картинок */
         .image-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
         .image-modal.active { display: flex; opacity: 1; }
-        .modal-img { max-width: 90vw; max-height: 90vh; border: 2px solid var(--border-color); box-shadow: 0 0 40px rgba(138, 43, 226, 0.3); border-radius: 4px; }
+        .modal-img { max-width: 90vw; max-height: 90vh; border: 2px solid var(--border-color); box-shadow: 0 0 40px rgba(138, 43, 226, 0.3); border-radius: 0; }
         
         /* --- КАРТОЧКИ (ПРАВИТЕЛИ И БОТЫ) --- */
         .characters-grid { max-width: 1500px; margin: 20px auto 60px auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; padding: 0 30px; align-items: start; }
         .char-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 25px; position: relative; cursor: pointer; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .char-card:hover { border-color: var(--text-accent); transform: translateY(-5px); }
         
-        /* ИСПРАВЛЕНИЕ: Портреты больше не черные, они яркие сразу */
+        /* КОНТЕЙНЕР ПОРТРЕТА (ДЛЯ УВЕЛИЧЕНИЯ КАРТИНКИ) */
+        .portrait-container {
+            width: 100%; padding-top: 100%; position: relative; border: 1px solid #1a1525; margin-bottom: 15px;
+            overflow: hidden; z-index: 2; transition: padding-top 0.6s ease;
+        }
         .char-portrait { 
-            width: 100%; aspect-ratio: 1 / 1; background-color: #050505; border: 1px solid #1a1525; margin-bottom: 15px; 
-            background-size: cover; background-position: center; 
-            filter: brightness(0.85) contrast(1.05); /* Яркие по умолчанию */
-            transition: all 0.5s ease; position: relative; z-index: 2; border-radius: 4px;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #050505; 
+            background-size: cover; background-position: center; border-radius: 0;
+            filter: brightness(0.85) contrast(1.05); transition: all 0.6s ease; 
         }
-        .char-card:hover .char-portrait, .char-card.expanded .char-portrait { 
-            filter: brightness(1.1) contrast(1.1); /* Легкое свечение при наведении */
-            border-color: var(--text-accent); box-shadow: 0 0 20px rgba(138, 43, 226, 0.3); 
-        }
+        
+        /* Эффект увеличения самой картинки и окна портрета при раскрытии */
+        .char-card:hover .char-portrait { filter: brightness(1.1) contrast(1.1); transform: scale(1.05); }
+        .char-card.expanded .char-portrait { filter: brightness(1.1) contrast(1.1); transform: scale(1.1); }
+        .char-card.expanded .portrait-container { padding-top: 130%; /* Увеличиваем высоту картинки! */ border-color: var(--text-accent); box-shadow: 0 0 20px rgba(138, 43, 226, 0.3); }
+        .char-card:hover .portrait-container { border-color: var(--text-accent); box-shadow: 0 0 20px rgba(138, 43, 226, 0.3); }
         
         .char-name { font-size: 22px; text-align: center; margin: 10px 0; line-height: 1.3; transition: color 0.3s; position: relative; z-index: 2; }
         .char-card:hover .char-name, .char-card.expanded .char-name { color: var(--text-accent); }
-        .char-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s ease, opacity 0.6s ease; font-size: 16px; position: relative; z-index: 2; }
-        .char-card.expanded .char-details { max-height: 1000px; opacity: 1; margin-top: 15px; }
+        .char-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.8s ease, opacity 0.8s ease; font-size: 16px; position: relative; z-index: 2; }
+        .char-card.expanded .char-details { max-height: 1200px; opacity: 1; margin-top: 15px; }
         .char-details h4 { color: var(--text-silver); font-size: 18px; margin: 20px 0 5px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
         .hint-text { text-align: center; font-size: 14px; color: #666; margin-top: 10px; font-style: italic; }
         .char-card.expanded .hint-text { display: none; }
 
-        /* Заблокированные карточки для ботов */
         .char-card.locked { cursor: not-allowed; }
         .char-card.locked:hover { transform: none; border-color: var(--border-color); }
-        .char-card.locked .char-portrait { filter: brightness(0.2) blur(3px) grayscale(1); }
+        .char-card.locked .char-portrait { filter: brightness(0.2) blur(3px) grayscale(1); transform: scale(1); }
+        .char-card.locked:hover .char-portrait { filter: brightness(0.2) blur(3px) grayscale(1); transform: scale(1); }
+        .char-card.locked:hover .portrait-container { border-color: #1a1525; box-shadow: none; }
 
-        /* ИСПРАВЛЕНИЕ: Центрирование гиперссылок в карточках ботов */
+        /* ЦЕНТРИРОВАННЫЕ ГИПЕРССЫЛКИ В КАРТОЧКАХ БОТОВ */
         .bot-links { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 15px; 
-            margin-top: 25px; 
-            padding-top: 15px; 
-            border-top: 1px dashed var(--border-color); 
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 15px; 
+            margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--border-color); 
         }
         .bot-links a { 
             color: var(--text-accent); text-decoration: none; border-bottom: 1px dashed var(--text-accent); 
@@ -251,28 +255,15 @@
         }
         .bot-links a:hover { color: var(--text-silver); border-bottom-color: var(--text-silver); text-shadow: 0 0 10px var(--glow); }
         
-        .bots-footer { text-align: center; color: rgba(184, 184, 192, 0.3); font-style: italic; margin: 50px 0 80px 0; font-size: 26px; font-family: 'Cinzel', serif; letter-spacing: 2px;}
+        .bots-footer { text-align: center; color: rgba(184, 184, 192, 0.3); font-style: italic; margin: 50px 0 30px 0; font-size: 26px; font-family: 'Cinzel', serif; letter-spacing: 2px;}
 
-        /* --- ФУТЕР --- */
+        /* --- ПОДВАЛ --- */
         .global-footer {
-            text-align: center;
-            padding: 30px;
-            color: rgba(184, 184, 192, 0.5);
-            font-size: 15px;
-            font-family: 'Cormorant Garamond', serif;
-            letter-spacing: 1px;
-            width: 100%;
-            margin-top: auto;
+            text-align: center; padding: 20px; color: rgba(184, 184, 192, 0.4); font-size: 16px;
+            font-family: 'Cormorant Garamond', serif; letter-spacing: 1px; width: 100%; margin-top: auto;
         }
-        .global-footer a {
-            color: var(--text-accent);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .global-footer a:hover {
-            color: var(--text-silver);
-            text-shadow: 0 0 10px var(--glow);
-        }
+        .global-footer a { color: var(--text-accent); text-decoration: none; transition: color 0.3s; font-family: 'Cinzel', serif;}
+        .global-footer a:hover { color: var(--text-silver); text-shadow: 0 0 10px var(--glow); }
 
     </style>
 </head>
@@ -411,64 +402,72 @@
             
             <div class="char-card" id="card-malakor" onclick="toggleCard('card-malakor')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('char-malakor.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('char-malakor.jpg')"></div></div>
                 <h2 class="char-name">Малакор Торн</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Нажмите, чтобы раскрыть</div>
                 
                 <div class="char-details">
                     <p class="quote-block">«Плоть слаба. Шестерни вечны.»</p>
-                    <p><span class="accent-silver">Верховный Архонт Валории.</span> От живой плоти в нем осталось лишь сердце, всё остальное — шедевры из черной стали и мерцающих рун.</p>
+                    <p><span class="accent-silver">Верховный Архонт Валории.</span> От живой плоти в нем осталось лишь сердце, всё остальное — шедевры из черной стали и мерцающих рун[cite: 8].</p>
                     <h4>Характер</h4>
                     <p>Лишен человеческих страстей. Говорит <span class="accent-purple">рублеными фразами</span>, оценивая мир исключительно через призму железной логики и эффективности.</p>
+                    <h4>Слухи</h4>
+                    <p>Поговаривают, что Торн не спит уже десять лет, и его разум напрямую подключен к главной вычислительной машине столицы, что позволяет ему знать о каждой поломке в городе[cite: 8, 20].</p>
                 </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
 
             <div class="char-card" id="card-elara" onclick="toggleCard('card-elara')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('char-elara.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('char-elara.jpg')"></div></div>
                 <h2 class="char-name">Элара Глубокого Корня</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Нажмите, чтобы раскрыть</div>
                 
                 <div class="char-details">
                     <p class="quote-block">«Мы не спешим. Лес помнит всё.»</p>
-                    <p><span class="accent-silver">Матриарх Сильварии.</span> Древний Лесной Вечник. Её ноги превратились в корневую систему, навсегда связавшую её с живым троном-деревом.</p>
+                    <p><span class="accent-silver">Матриарх Сильварии.</span> Древний Лесной Вечник. Её ноги превратились в корневую систему, навсегда связавшую её с живым троном-деревом[cite: 8, 20].</p>
                     <h4>Характер</h4>
                     <p>Отстраненная и спокойная. Её голос звучит как <span class="accent-purple">шелест сухой листвы</span>, но за этим скрывается всеведающий разум, наблюдающий за миром глазами каждой птицы.</p>
+                    <h4>Слухи</h4>
+                    <p>Говорят, что если Матриарх разгневается, она может приказать лесу «забрать» человека — корни прорастут сквозь спящего гостя, и к утру на его месте будет стоять прекрасный, но неподвижный куст[cite: 8, 20].</p>
                 </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
 
             <div class="char-card" id="card-cassian" onclick="toggleCard('card-cassian')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('char-cassian.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('char-cassian.jpg')"></div></div>
                 <h2 class="char-name">Кассиан Вейн</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Нажмите, чтобы раскрыть</div>
                 
                 <div class="char-details">
                     <p class="quote-block">«У каждого секрета есть своя цена.»</p>
-                    <p><span class="accent-silver">Великий Дож Аквиллы.</span> Изысканный Ихорец, чье тело пропитано магией Бездны, отчего кожа кажется почти прозрачной на свету.</p>
+                    <p><span class="accent-silver">Великий Дож Аквиллы.</span> Изысканный Ихорец, чье тело пропитано магией Бездны, отчего кожа кажется почти прозрачной на свету[cite: 8, 20].</p>
                     <h4>Характер</h4>
                     <p>Воплощение изящества. <span class="accent-purple">Остроумен и коварен</span>, непревзойденный политик, способный продать человеку его же собственные ботинки.</p>
+                    <h4>Секрет</h4>
+                    <p>Одержим коллекционированием «запретных воспоминаний» о Серой Мгле. Он верит, что в прошлом люди нашли способ остановить тень, и этот секрет спрятан в голове какого-то безумца[cite: 8, 20].</p>
                 </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
 
             <div class="char-card" id="card-amon" onclick="toggleCard('card-amon')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('char-amon.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('char-amon.jpg')"></div></div>
                 <h2 class="char-name">Воскресший Амон</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Нажмите, чтобы раскрыть</div>
                 
                 <div class="char-details">
                     <p class="quote-block">«Ибо тьма очищается лишь огнем.»</p>
-                    <p><span class="accent-silver">Патриарх Кхор-Тула.</span> Старейший из Остогонов. Его рога давно срослись в пугающую корону, а закрытые глаза видят скрытую суть вещей.</p>
+                    <p><span class="accent-silver">Патриарх Кхор-Тула.</span> Старейший из Остогонов. Его рога давно срослись в пугающую корону, а закрытые глаза видят скрытую суть вещей[cite: 8, 20].</p>
                     <h4>Характер</h4>
                     <p>Суровый религиозный фанатик. Его голос гремит над скалами как <span class="accent-purple">раскат штормового грома</span>, направляя свой народ по пути бескомпромиссной веры.</p>
+                    <h4>Слухи</h4>
+                    <p>Амон верит, что Серая Мгла — это знак грядущего божественного суда, и он тайно готовит свой народ к "Крестовому Походу Чистоты", чтобы "очистить" другие королевства огнем и верой до того, как наступит конец света[cite: 8, 20].</p>
                 </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
@@ -482,16 +481,16 @@
             <!-- МЭРРИК (Активный) -->
             <div class="char-card" id="bot-merrick" onclick="toggleCard('bot-merrick')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('char-merrick.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('char-merrick.jpg')"></div></div>
                 <h2 class="char-name">Мэррик</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Нажмите, чтобы раскрыть</div>
                 
                 <div class="char-details">
-                    <p class="quote-block">«Даже в самом холодном металле можно сохранить искру человечности.»</p>
+                    <p class="quote-block">«Плоть слаба, но искра человечности горит жарче домны.»</p>
                     <p><span class="accent-silver">Страж-7. Живое оружие Стального Синода.</span></p>
                     <h4>Внешность и Суть</h4>
-                    <p>Рожденный в Ржавых трущобах, он спас Архонта ценой собственного тела. Теперь левая часть его фигуры сохранила человечность — бледная кожа и бугры старых шрамов. Правая же стала триумфом брутальной валорианской инженерии: тяжелая руническая сталь, мощные поршни и сплетение труб, по которым пульсирует Живое Серебро.</p>
+                    <p>Левая часть его фигуры сохранила человечность — бледная кожа и бугры старых шрамов. Правая же стала триумфом брутальной валорианской инженерии: тяжелая руническая сталь, мощные поршни и сплетение труб, по которым пульсирует Живое Серебро.</p>
                     <h4>Характер</h4>
                     <p>Мэррик — прагматик до мозга костей. Он выполняет приказы Синода с пугающей, хирургической точностью, не оставляя врагам ни единого шанса. Однако за фасадом безэмоциональной машины скрывается живая искра: он испытывает глубокое сострадание к жителям низин, тайно подкармливает редких лесных зверьков и обладает потрясающе сухим, метким сарказмом.</p>
                     
@@ -506,7 +505,7 @@
             <!-- ТРИ ЗАКРЫТЫХ БОТА -->
             <div class="char-card locked">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('placeholder.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('placeholder.jpg')"></div></div>
                 <h2 class="char-name">Скрыто Мглой</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Пока недоступно</div>
@@ -515,7 +514,7 @@
 
             <div class="char-card locked">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('placeholder.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('placeholder.jpg')"></div></div>
                 <h2 class="char-name">Скрыто Мглой</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Пока недоступно</div>
@@ -524,7 +523,7 @@
 
             <div class="char-card locked">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" style="background-image: url('placeholder.jpg')"></div>
+                <div class="portrait-container"><div class="char-portrait" style="background-image: url('placeholder.jpg')"></div></div>
                 <h2 class="char-name">Скрыто Мглой</h2>
                 <div class="decor-divider-thin" style="margin: 5px auto;"></div>
                 <div class="hint-text">Пока недоступно</div>
@@ -551,7 +550,6 @@
             <div class="content-section" id="r-society"></div>
             <div class="content-section" id="r-rule"></div>
             
-            <!-- Блок для мини-портретов (прячется если пуст) -->
             <div id="r-chars-container" style="display: none;">
                 <div class="loc-characters-title">Связанные Личности</div>
                 <div class="mini-chars-grid" id="r-chars-grid"></div>
@@ -583,13 +581,13 @@
             },
             vance: {
                 name: "Легат Вариан Вэнс", role: "Стальной Палач", img: "char-vance.jpg",
-                text: `<p><b>Внешность:</b> Идеальная осанка, строгий мундир и ни единого импланта в теле.</p>
-                       <p><b>Характер:</b> Фанатичный сторонник догмы «чистоты плоти». Ледяной офицер, воспринимающий подчиненных лишь как винтики в огромном механизме Оплота.</p>`
+                text: `<p><b>Внешность и Суть:</b> Не имеет имплантов, фанатичный сторонник «чистоты плоти». Презирает Слитых, считая их расходным материалом.</p>
+                       <p><b>Характер:</b> Ледяной офицер, воспринимающий подчиненных лишь как винтики в огромном механизме Оплота. Требует абсолютного повиновения.</p>`
             },
             lyra: {
                 name: "Лира «Флакон»", role: "Беглая алхимичка", img: "char-lyra.jpg",
-                text: `<p><b>Внешность:</b> Постоянно кутается в плотные шарфы, скрывая свое происхождение из Аквиллы.</p>
-                       <p><b>Связь:</b> Настоящий мастер перегонки редких зелий. Способна сварить любую микстуру в невыносимых условиях Ржавых трущоб, обменивая их на собственную безопасность.</p>`
+                text: `<p><b>Внешность:</b> Постоянно кутается в плотные шарфы, скрывая свое происхождение. Выживает в суровых Ржавых трущобах Оплота.</p>
+                       <p><b>Связь:</b> Настоящий мастер перегонки редких зелий. Способна сварить спасительную микстуру даже из мусора, обменивая таланты на собственную безопасность.</p>`
             },
             briona: {
                 name: "Бриона", role: "Хозяйка «Стального крюка»", img: "char-briona.jpg",
@@ -598,7 +596,7 @@
             },
             gideon: {
                 name: "Гидеон «Ржавый Нож»", role: "Лидер подполья", img: "char-gideon.jpg",
-                text: `<p><b>Характер:</b> Дьявольски харизматичный бунтарь, презирающий политику Валории. Его пламенные речи зажигают искру сопротивления даже в самых темных шахтах.</p>`
+                text: `<p><b>Характер:</b> Дьявольски харизматичный бунтарь, презирающий жесткую политику Валории. Его пламенные речи зажигают искру сопротивления даже в самых темных шахтах.</p>`
             },
             theron: {
                 name: "Тэрон", role: "Бродячий Клык", img: "char-theron.jpg",
@@ -633,12 +631,12 @@
             enerion: {
                 name: "Энерион", role: "Верховный Псаломщик", img: "char-enerion.jpg",
                 text: `<p><b>Внешность:</b> Остогон пугающей красоты. Красные, как ритуальный костер, волосы, изящные черные рога-лезвия и глаза без зрачков, излучающие мягкий лунный свет.</p>
-                       <p><b>Характер:</b> Утонченный манипулятор. Спокоен, милостив к пастве, но способен сокрушать врагов одной лишь магией тяжести, не поднимая руки.</p>`
+                       <p><b>Характер:</b> Утонченный манипулятор. Спокоен и милостив к пастве, но способен сокрушать волю врагов, искусно играя на их страхах.</p>`
             },
             amon: {
                 name: "Патриарх Амон", role: "Правитель Пиков", img: "char-amon.jpg",
                 text: `<p><b>Внешность:</b> Древнейший остогон. Его огромные рога срослись в каменную корону, а глаза вечно закрыты в немой молитве.</p>
-                       <p><b>Характер:</b> Абсолютный фанатик. Его голос гремит словно раскат горного грома, призывая народ к чистоте и искуплению.</p>`
+                       <p><b>Характер:</b> Абсолютный фанатик. Его голос гремит словно раскат горного грома, призывая народ к чистоте и суровому искуплению.</p>`
             },
             morvald: {
                 name: "Брат Морвальд", role: "Верховный Юстициар", img: "char-morvald.jpg",
@@ -647,18 +645,18 @@
             },
             neya: {
                 name: "Нея", role: "Слепая послушница", img: "char-neya.jpg",
-                text: `<p><b>Внешность:</b> Шестнадцатилетняя абсолютно слепая полукровка из низин.</p>
-                       <p><b>Характер:</b> Светлая, чистая душа, общающаяся с самыми страшными людьми просто, открыто и без малейшей дрожи в голосе.</p>`
+                text: `<p><b>Внешность:</b> Юная, абсолютно слепая полукровка из низин.</p>
+                       <p><b>Характер:</b> Светлая, чистая душа, общающаяся с самыми грозными и страшными фигурами королевства открыто, тепло и без малейшей дрожи в голосе.</p>`
             },
             valdis: {
                 name: "Сестра Вальдис", role: "Немая карательница", img: "char-valdis.jpg",
                 text: `<p><b>Внешность:</b> Сухая, высокая остогонка с наголо спиленными рогами — знак абсолютной преданности Ордену.</p>
-                       <p><b>Характер:</b> Бесшумная, идеальная тень, понимающая волю господина по малейшему движению пальцев.</p>`
+                       <p><b>Характер:</b> Бесшумная, идеальная тень, понимающая невысказанные приказы и выполняющая самую сложную работу.</p>`
             },
             nicodem: {
                 name: "Никодем «Нико»", role: "Призрак Зеркальных Вод", img: "char-nicodem.jpg",
                 text: `<p><b>Внешность:</b> Полуэльф с гибкостью уличного акробата. Иссиня-фиолетовые волосы и глаза цвета яркого аметиста.</p>
-                       <p><b>Характер:</b> Гедонист с ленивой полуулыбкой. В городе, где все прячут лица за масками, он открыто носит свою на затылке. Любит риск и мастерски вскрывает самые охраняемые тайны Аквиллы.</p>`
+                       <p><b>Характер:</b> Гедонист с ленивой полуулыбкой. В городе, где все прячут лица за масками, он открыто носит свою на затылке. Любит риск и мастерски вскрывает чужие тайны.</p>`
             },
             corvus: {
                 name: "Старик Корвус", role: "Слепой Гребец", img: "char-corvus.jpg",
@@ -678,65 +676,74 @@
             kaeli: {
                 name: "Каэли «Пустая Склянка»", role: "Стеклодув", img: "char-kaeli.jpg",
                 text: `<p><b>Внешность:</b> Хрупкая девушка с затуманенным, отрешенным взглядом.</p>
-                       <p><b>Особенности:</b> Ее прошлое было стерто по жестоким законам Домов Памяти. Теперь она существует как идеальный мастер, способный создавать тончайшие сосуды для чужих эмоций.</p>`
+                       <p><b>Особенности:</b> Обладает невероятным даром выдувать тончайшие стеклянные сосуды, способные веками хранить чистую, первозданную человеческую память.</p>`
             }
         };
 
-        // База Главных Регионов (ПОЛНАЯ, КАК РАНЬШЕ)
+        // База Главных Регионов с добавленной Властью
         const mainRegionsDB = {
             valoria: {
+                hasImage: true, mapPage: "valoria",
                 title: "Валория",
                 desc: `<h3>Мрачная Кузница</h3><p>Циклопический конгломерат из черного гранита и чугуна, стиснутый в ледяных каньонах севера. Здесь нет поэзии, только гул заводов. Буры Оплота <span class="accent-purple">высасывают магическую сущность</span> мира, оставляя мертвый монолит.</p>`,
                 society: `<h3>Шестерни Общества</h3><ul class="styled-list"><li><span class="accent-silver">Первородные:</span> Аристократы, хранящие чистоту плоти.</li><li><span class="accent-silver">Сплавленные:</span> Элита с имплантами из Живого серебра.</li><li><span class="accent-silver">Ржавые:</span> Бедняки, гниющие от металлической лихорадки.</li></ul>`,
-                rule: `<h3>Власть Синода</h3><p>Управляется <span class="accent-silver">Стальным Синодом</span> — решения лишены эмоций и строятся на холодном расчете.</p>`,
+                rule: `<h3>Власть Синода</h3><p>Управляется <span class="accent-silver">Стальным Синодом</span> — советом из семи высших чинов. Решения лишены чувств и принимаются исходя из того, сколько ресурсов это принесет Оплоту.</p>`,
                 personId: "malakor"
             },
             sylvaria: {
+                hasImage: true, mapPage: "sylvaria",
                 title: "Сильвария",
                 desc: `<h3>Изумрудная Колыбель</h3><p>Древний лес на востоке. Столица Эльвейн — это единый организм из <span class="accent-purple">колоссальных деревьев-небоскребов</span>. Ночью лес вспыхивает неоновым свечением биолюминесцентных грибов.</p>`,
                 society: `<h3>Дети Леса</h3><ul class="styled-list"><li><span class="accent-silver">Лесные Вечники:</span> Бессмертные хранители памяти с кожей-берестой.</li><li><span class="accent-silver">Звероусты:</span> Полулюди с чертами зверей.</li></ul><p class="quote-block">Здесь не ценят золото, лишь умение слышать Шепот Леса.</p>`,
-                rule: `<h3>Власть Сезонов</h3><p>Направляется <span class="accent-silver">Кругом Сезонов</span>, медитирующим у корней Великого Древа.</p>`,
+                rule: `<h3>Круг Сезонов</h3><p>Управляется советом четырех старейшин:</p><ul class="styled-list"><li><span class="accent-silver">Мать Ива:</span> Пробуждение (рождение, лечебная магия).</li><li><span class="accent-silver">Гром «Золотая Грива»:</span> Цвет (воевода, охота).</li><li><span class="accent-silver">Старец Орис:</span> Увядание (хранитель памяти и алхимии).</li><li><span class="accent-silver">Владыка Хорн «Снежная Кора»:</span> Сон (очищение и выбраковка).</li></ul>`,
                 personId: "elara"
             },
             aquilla: {
+                hasImage: true, mapPage: "aquilla",
                 title: "Аквилла",
                 desc: `<h3>Город над Бездной</h3><p>Жемчужина юга в стиле Dark Deco, выстроенная над <span class="accent-purple">чудовищным разломом</span>. Элегантные белые башни отражаются в бирюзовых водах.</p>`,
                 society: `<h3>Рынок Секретов</h3><ul class="styled-list"><li><span class="accent-silver">Ихорцы:</span> Бледные аристократы с жабрами.</li><li><span class="accent-silver">Рынок Воспоминаний:</span> Место, где алхимики продают чужую память во флаконах.</li></ul>`,
-                rule: `<h3>Власть Масок</h3><p>Управляется <span class="accent-silver">Советом Десяти Масок</span>, где воюют ядами и слухами.</p>`,
+                rule: `<h3>Совет Десяти Масок</h3><p>Главы купеческих домов. Известные члены:</p><ul class="styled-list"><li><span class="accent-silver">Доминик Вальтер:</span> Маска Абсолютной Памяти.</li><li><span class="accent-silver">Аугуст Варен:</span> Зеркальная Маска.</li><li><span class="accent-silver">Кассиопея Бельмонт:</span> Маска Золотых Слез.</li><li><span class="accent-silver">Тиберий Галл:</span> Железная Маска.</li><li><span class="accent-silver">Селеста Моро:</span> Маска Ночной Орхидеи.</li><li><span class="accent-silver">Витторио Фалько:</span> Маска Морского Грифа.</li><li><span class="accent-silver">Октавиан Леван:</span> Хрустальная Маска.</li><li><span class="accent-silver">Джулия Наварро:</span> Маска Безмолвной Скорби.</li><li><span class="accent-silver">Бальтазар Коэн:</span> Кожаная Маска.</li><li><span class="accent-silver">«Эхо»:</span> Маска Треснувшего Обсидиана.</li></ul>`,
                 personId: "cassian"
             },
             khor_tul: {
+                hasImage: true, mapPage: "khortul",
                 title: "Кхор-Тул (Пики)",
                 desc: `<h3>Порог Небес</h3><p>Монастыри, вырубленные в скалах над облаками. Храмы соединены жуткими мостами из <span class="accent-purple">костей и цепей</span>, а вершины купаются в ослепительном эфирном свете.</p>`,
                 society: `<h3>Путь Искупления</h3><p>Родина <span class="accent-silver">Остогонов</span> — рогатых гуманоидов. Их жизнь — изнурительная аскеза и молитвы, искупающие демонический вид.</p>`,
-                rule: `<h3>Власть Вере</h3><p>Теократия <span class="accent-silver">Синода Небесного Света</span>, толкующего знамения в облаках.</p>`,
+                rule: `<h3>Синод Небесного Света</h3><p>Теократический совет старейших патриархов. Состав:</p><ul class="styled-list"><li><span class="accent-silver">Энерион:</span> Верховный Псаломщик (безопасность, цензура).</li><li><span class="accent-silver">Брат Морвальд «Железный Бич»:</span> Верховный Юстициар (военное крыло).</li><li><span class="accent-silver">Матриарх Ваэла:</span> Великий Оссификатор (строительство).</li><li><span class="accent-silver">Прелат Корвин «Взвешивающий Прах»:</span> Эконом Низменностей (снабжение).</li></ul>`,
                 personId: "amon"
             },
             rusty: {
+                hasImage: false, mapPage: null,
                 title: "Ржавые Сады",
                 desc: `<h3>Механическое Кладбище</h3><p>Техногенная свалка на окраинах Валории. Горы бракованных машин <span class="accent-purple">ожили</span> под воздействием магии.</p>`,
                 society: `<h3>Изгои</h3><p>Убежище для изгнанных Сплавленных и механических паразитов, охотящихся на теплую кровь.</p>`,
                 rule: ``
             },
             ashen: {
+                hasImage: false, mapPage: null,
                 title: "Пепельная Пустошь",
                 desc: `<h3>Разорванная Земля</h3><p>Мертвая граница, где вместо песка хрустит <span class="accent-purple">пепел сожженных эпох</span>. Время и гравитация здесь нестабильны.</p>`,
                 society: `<h3>Эхо Прошлого</h3><p>Главная угроза — призрачные проекции древних битв, способные нанести реальную рану случайному путнику.</p>`,
                 rule: ``
             },
             pilgrim: {
+                hasImage: false, mapPage: null,
                 title: "Приют Пилигрима",
                 desc: `<h3>Костяные Врата</h3><p>Поселение у подножия Пиков, вырезанное внутри <span class="accent-purple">исполинского скелета</span> существа, рухнувшего с небес.</p>`,
                 society: `<h3>Покаяние</h3><p>Любой смех чужака может закончиться публичной поркой. Сюда приходят лишь за священной солью и искуплением.</p>`,
                 rule: ``
             },
             misty: {
+                hasImage: false, mapPage: null,
                 title: "Туманные Топи",
                 desc: `<h3>Шепчущие Болота</h3><p>Сеть топких равнин в белом тумане. Стоячие воды источают аромат <span class="accent-purple">гнили и дорогих духов</span>.</p>`,
                 society: `<h3>Узел Безмолвия</h3><p>Идеальный каменный круг в центре топей, где полностью исчезают звуки. Путь к нему преграждают «Шептуны», крадущие голоса любимых.</p>`,
                 rule: ``
             },
             abyss: {
+                hasImage: false, mapPage: null,
                 title: "Бездна",
                 desc: `<h3>Дыхание Тьмы</h3><p>Необъятный подводный разлом под Аквиллой. Раз в столетие Бездна делает <span class="accent-purple">«выдох»</span>, срывая магические замки.</p>`,
                 society: `<h3>Серая Мгла</h3><p>Мелкодисперсная тьма поднимается из океана, материализуя призраков. Ни один смертный не смеет спуститься в её глубины.</p>`,
@@ -744,7 +751,6 @@
             }
         };
 
-        // База Локаций внутри Королевств (ПОДРОБНАЯ И БЕЗОПАСНАЯ)
         const locationsDB = {
             // ВАЛОРИЯ
             citadel: { 
@@ -1029,9 +1035,36 @@
 
         function openMainRegion(id) {
             const reg = mainRegionsDB[id];
-            document.getElementById('r-image').style.display = 'block';
-            document.getElementById('r-divider-top').style.display = 'block';
-            fillSidebar(reg.title, id, reg.desc, reg.society, reg.rule, null);
+            
+            if (reg.hasImage) {
+                document.getElementById('r-image').style.display = 'block';
+                document.getElementById('r-divider-top').style.display = 'block';
+            } else {
+                document.getElementById('r-image').style.display = 'none';
+                document.getElementById('r-divider-top').style.display = 'none';
+            }
+
+            document.getElementById('r-title').innerHTML = reg.title;
+            document.getElementById('r-image').style.backgroundImage = `url('${id}-bg.jpg')`;
+            document.getElementById('r-desc').innerHTML = reg.desc;
+            document.getElementById('r-society').innerHTML = reg.society;
+            document.getElementById('r-rule').innerHTML = reg.rule;
+
+            const actionDiv = document.getElementById('r-action');
+            let btnsHtml = `<div class="sidebar-buttons-grid">`;
+            
+            if (reg.personId) {
+                btnsHtml += `<button class="btn-person" onclick="goToPerson('${reg.personId}')">Правитель</button>`;
+            }
+            if (reg.mapPage) {
+                btnsHtml += `<button class="btn-person" onclick="switchPage('${reg.mapPage}')">Карта Локации</button>`;
+            }
+            
+            btnsHtml += `</div>`;
+            actionDiv.innerHTML = (reg.personId || reg.mapPage) ? btnsHtml : '';
+
+            document.getElementById('r-chars-container').style.display = "none";
+            document.getElementById('sidebar').classList.add('active');
         }
 
         function openLocation(locId) {
@@ -1042,20 +1075,17 @@
             
             document.getElementById('r-image').style.display = 'none';
             document.getElementById('r-divider-top').style.display = 'none';
-            fillSidebar(loc.title, 'loc-' + locId, desc, society, rule, loc.chars);
-        }
-
-        function fillSidebar(title, imgId, desc, soc, rule, charsList) {
-            document.getElementById('r-title').innerHTML = title;
-            document.getElementById('r-image').style.backgroundImage = `url('${imgId}-bg.jpg')`;
+            
+            document.getElementById('r-title').innerHTML = loc.title;
             document.getElementById('r-desc').innerHTML = desc;
-            document.getElementById('r-society').innerHTML = soc;
+            document.getElementById('r-society').innerHTML = society;
             document.getElementById('r-rule').innerHTML = rule;
+            document.getElementById('r-action').innerHTML = '';
 
             const charsContainer = document.getElementById('r-chars-container');
             const grid = document.getElementById('r-chars-grid');
             
-            const validChars = charsList ? charsList.filter(cId => charsDB[cId]) : [];
+            const validChars = loc.chars ? loc.chars.filter(cId => charsDB[cId]) : [];
             
             if (validChars.length > 0) {
                 let html = '';
@@ -1087,6 +1117,24 @@
             if(clicked && !clicked.classList.contains('locked')) {
                 clicked.classList.toggle('expanded');
             }
+        }
+
+        function goToPerson(personId) {
+            switchPage('chars');
+            setTimeout(() => {
+                const card = document.getElementById(`card-${personId}`);
+                if(card) {
+                    document.querySelectorAll('.char-card').forEach(c => c.classList.remove('expanded'));
+                    card.classList.add('expanded');
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.style.boxShadow = "0 0 30px rgba(179, 136, 255, 0.8)";
+                    card.style.borderColor = "#b388ff";
+                    setTimeout(() => { 
+                        card.style.boxShadow = "0 10px 30px rgba(0,0,0,0.8)"; 
+                        card.style.borderColor = "var(--border-color)";
+                    }, 2000);
+                }
+            }, 150);
         }
     </script>
 </body>
