@@ -17,12 +17,7 @@
             --glow: rgba(138, 43, 226, 0.6);
         }
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden; 
-        }
+        html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
 
         body {
             background-color: var(--bg-dark);
@@ -31,176 +26,73 @@
             font-size: 18px;
         }
 
-        /* --- ФОНОВОЕ ВИДЕО --- */
         #bg-video {
-            position: fixed;
-            top: 0; 
-            left: 0;
-            width: 100vw; 
-            height: 100vh;
-            object-fit: cover;
-            z-index: -20;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            object-fit: cover; z-index: -20; pointer-events: none;
         }
 
-        /* Затемняющий слой поверх видео */
         .body-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(8, 5, 12, 0.75); /* Идеальное затемнение, чтобы видео читалось, но не отвлекало */
-            z-index: -10;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(8, 5, 12, 0.75); z-index: -10; pointer-events: none;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Cinzel', serif;
-            color: var(--text-silver);
-            font-weight: normal;
-        }
+        h1, h2, h3, h4 { font-family: 'Cinzel', serif; color: var(--text-silver); font-weight: normal; }
 
         /* --- ШАПКА --- */
-        header {
-            text-align: center;
-            padding: 40px 0 10px 0;
-            position: relative;
-            z-index: 50;
-        }
-
-        .logo-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
+        header { text-align: center; padding: 40px 0 10px 0; position: relative; z-index: 50; }
+        .logo-wrapper { position: relative; display: inline-block; }
         .logo-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 50%; 
-            left: 50%;
-            width: 110%; 
-            height: 140%;
+            content: ''; position: absolute; top: 50%; left: 50%; width: 110%; height: 140%;
             background: radial-gradient(ellipse, rgba(160, 50, 255, 0.7) 0%, rgba(90, 10, 200, 0.3) 40%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-            animation: smooth-smoke-glow 6s infinite ease-in-out;
+            z-index: -1; pointer-events: none; animation: smooth-smoke-glow 6s infinite ease-in-out;
         }
-
         @keyframes smooth-smoke-glow {
             0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); filter: blur(18px); }
             35% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.05); filter: blur(25px); }
             65% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.98); filter: blur(20px); }
             100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); filter: blur(18px); }
         }
-
-        .logo-img {
-            max-width: 500px;
-            height: auto;
-            position: relative;
-            z-index: 2;
-        }
-
+        .logo-img { max-width: 500px; height: auto; position: relative; z-index: 2; }
         .decor-divider-thin {
-            width: 100%;
-            max-width: 700px;
-            height: 25px;
-            margin: 20px auto;
-            background-image: url('divider2.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.8;
+            width: 100%; max-width: 700px; height: 25px; margin: 20px auto;
+            background-image: url('divider2.png'); background-size: contain;
+            background-position: center; background-repeat: no-repeat; opacity: 0.8;
         }
 
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-        }
-
+        /* Навигация */
+        .nav-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
         .nav-btn {
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-family: 'Cinzel', serif;
-            font-size: 20px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            cursor: pointer;
-            padding-bottom: 5px;
-            border-bottom: 1px solid transparent;
-            transition: all 0.4s;
+            background: none; border: none; color: var(--text-main); font-family: 'Cinzel', serif;
+            font-size: 18px; text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
+            padding-bottom: 5px; border-bottom: 1px solid transparent; transition: all 0.4s;
         }
+        .nav-btn:hover, .nav-btn.active { color: var(--text-accent); border-bottom: 1px solid var(--text-accent); text-shadow: 0 0 15px var(--glow); }
 
-        .nav-btn:hover, .nav-btn.active {
-            color: var(--text-accent);
-            border-bottom: 1px solid var(--text-accent);
-            text-shadow: 0 0 15px var(--glow);
-        }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.6s ease;
-        }
+        .page { display: none; animation: fadeIn 0.6s ease; }
         .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- СТРАНИЦА: КАРТА --- */
+        /* --- КАРТЫ --- */
         .map-container {
-            position: relative;
-            width: 95%;
-            max-width: 1300px;
-            margin: 40px auto 80px auto;
-            border: none;
-            box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(138, 43, 226, 0.2);
-            overflow: hidden;
+            position: relative; width: 95%; max-width: 1300px; margin: 40px auto 80px auto;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(138, 43, 226, 0.2); overflow: hidden;
         }
+        .map-image { width: 100%; display: block; position: relative; z-index: 1; }
 
-        .map-image {
-            width: 100%;
-            display: block;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* МАГИЯ ТУМАНА ИЗ ГИФКИ ПОВЕРХ КАРТЫ */
         .mist-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 5;
-            pointer-events: none;
-            filter: invert(1) sepia(0.5) hue-rotate(240deg) saturate(3) opacity(0.85);
-            mix-blend-mode: multiply;
-            opacity: 0;
-            transition: opacity 2.5s ease-in-out;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+            z-index: 5; pointer-events: none; filter: invert(1) sepia(0.5) hue-rotate(240deg) saturate(3) opacity(0.85);
+            mix-blend-mode: multiply; opacity: 0; transition: opacity 2.5s ease-in-out;
         }
-
         .mist-overlay.active { opacity: 1; }
 
         .map-pin {
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            background-color: #0d0a14;
-            border-radius: 50% 50% 50% 0;
-            transform: translate(-50%, -100%) rotate(-45deg);
-            cursor: pointer;
-            border: 1px solid var(--text-accent);
-            box-shadow: 0 0 15px 5px var(--glow);
-            animation: pulse-purple 2s infinite;
-            z-index: 10;
-            transition: all 0.3s;
+            position: absolute; width: 22px; height: 22px; background-color: #0d0a14;
+            border-radius: 50% 50% 50% 0; transform: translate(-50%, -100%) rotate(-45deg);
+            cursor: pointer; border: 1px solid var(--text-accent); box-shadow: 0 0 15px 5px var(--glow);
+            animation: pulse-purple 2s infinite; z-index: 10; transition: all 0.3s;
         }
-
-        .map-pin:hover {
-            transform: translate(-50%, -100%) rotate(-45deg) scale(1.3);
-            background-color: var(--text-accent);
-        }
-
+        .map-pin:hover { transform: translate(-50%, -100%) rotate(-45deg) scale(1.3); background-color: var(--text-accent); }
         @keyframes pulse-purple {
             0% { box-shadow: 0 0 10px 2px rgba(138, 43, 226, 0.4); }
             50% { box-shadow: 0 0 20px 8px rgba(138, 43, 226, 0.8); }
@@ -209,585 +101,557 @@
 
         /* --- БОКОВАЯ ПАНЕЛЬ --- */
         .sidebar {
-            position: fixed;
-            top: 0;
-            right: -600px;
-            width: 550px;
-            height: 100vh;
-            background: var(--panel-bg);
-            border-left: 2px solid var(--border-color);
-            box-shadow: -15px 0 50px rgba(0,0,0,0.9);
-            transition: right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            z-index: 9999;
-            overflow: hidden; 
+            position: fixed; top: 0; right: -600px; width: 550px; height: 100vh;
+            background: var(--panel-bg); border-left: 2px solid var(--border-color);
+            box-shadow: -15px 0 50px rgba(0,0,0,0.9); transition: right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 9999; overflow: hidden; 
         }
         .sidebar.active { right: 0; }
-
         .close-btn {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            font-size: 32px;
-            color: #777;
-            cursor: pointer;
-            border: none;
-            background: none;
-            z-index: 101;
-            transition: color 0.3s;
+            position: absolute; top: 25px; right: 25px; font-size: 32px; color: #777;
+            cursor: pointer; border: none; background: none; z-index: 101; transition: color 0.3s;
         }
         .close-btn:hover { color: var(--text-accent); }
 
         .decor-corner {
-            position: absolute;
-            width: 100px; 
-            height: 100px;
-            background-image: url('corner.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none;
-            opacity: 0.8;
-            z-index: 5;
+            position: absolute; width: 100px; height: 100px; background-image: url('corner.png');
+            background-size: contain; background-repeat: no-repeat; pointer-events: none; opacity: 0.8; z-index: 5;
         }
-        .corner-tl { top: 0; left: 0; }
-        .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
-        .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
-        .corner-br { bottom: 0; right: 0; transform: scale(-1, -1); }
+        .corner-tl { top: 0; left: 0; } .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+        .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); } .corner-br { bottom: 0; right: 0; transform: scale(-1, -1); }
 
         .sidebar-content {
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 60px 45px 80px 45px;
-            box-sizing: border-box;
-            position: relative;
-            z-index: 2;
+            width: 100%; height: 100%; overflow-y: auto; padding: 60px 45px 80px 45px;
+            box-sizing: border-box; position: relative; z-index: 2;
         }
-
         .sidebar-content::-webkit-scrollbar { width: 6px; }
         .sidebar-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
         .sidebar-content::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
         .sidebar-content::-webkit-scrollbar-thumb:hover { background: var(--text-accent); }
 
         .decor-divider {
-            width: 100%;
-            height: 30px;
-            background-image: url('divider.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 25px 0;
-            opacity: 0.9;
+            width: 100%; height: 30px; background-image: url('divider.png'); background-size: contain;
+            background-position: center; background-repeat: no-repeat; margin: 25px 0; opacity: 0.9;
         }
-
-        .sidebar-title {
-            text-align: center;
-            font-size: 36px;
-            margin-top: 0;
-            color: var(--text-silver);
-            text-shadow: 0 0 15px rgba(179, 136, 255, 0.3);
-        }
-
+        .sidebar-title { text-align: center; font-size: 36px; margin-top: 0; color: var(--text-silver); text-shadow: 0 0 15px rgba(179, 136, 255, 0.3); }
+        
         .region-bg-image {
-            width: 100%;
-            height: 220px;
-            background-size: cover;
-            background-position: center;
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-            cursor: zoom-in;
-            transition: border-color 0.3s;
+            width: 100%; height: 220px; background-size: cover; background-position: center; background-color: #000;
+            border: 1px solid var(--border-color); margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            cursor: zoom-in; transition: border-color 0.3s;
         }
         .region-bg-image:hover { border-color: var(--text-accent); }
 
-        .content-section h3 {
-            font-size: 24px;
-            color: var(--text-accent);
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            text-align: left;
-        }
+        .content-section { position: relative; z-index: 2; }
+        .content-section h3 { font-size: 24px; color: var(--text-accent); border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; margin-bottom: 15px; text-align: left; }
         
         .accent-silver { color: var(--text-silver); font-weight: bold; }
         .accent-purple { color: var(--text-accent); font-style: italic; }
         
-        .styled-list {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 10px;
-        }
-        .styled-list li {
-            padding-left: 22px;
-            position: relative;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        .styled-list li::before {
-            content: '♦';
-            position: absolute;
-            left: 0;
-            color: var(--text-accent);
-            font-size: 14px;
-            top: 2px;
-        }
+        .styled-list { list-style: none; padding-left: 0; margin-top: 10px; }
+        .styled-list li { padding-left: 22px; position: relative; margin-bottom: 12px; line-height: 1.5; }
+        .styled-list li::before { content: '♦'; position: absolute; left: 0; color: var(--text-accent); font-size: 14px; top: 2px; }
+        .quote-block { border-left: 2px solid var(--text-accent); padding-left: 15px; margin: 15px 0; font-style: italic; color: #999; }
 
-        .quote-block {
-            border-left: 2px solid var(--text-accent);
-            padding-left: 15px;
-            margin: 15px 0;
-            font-style: italic;
-            color: #999;
+        /* МИНИ-ПОРТРЕТЫ ПЕРСОНАЖЕЙ В ПАНЕЛИ ЛОКАЦИИ */
+        .loc-characters-title { font-size: 20px; color: var(--text-silver); margin: 30px 0 15px 0; text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px; font-family: 'Cinzel', serif; }
+        .mini-chars-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 20px; }
+        .mini-char-wrap { text-align: center; cursor: pointer; width: 80px; }
+        .mini-char-img {
+            width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--border-color);
+            background-size: cover; background-position: center; margin: 0 auto 5px auto;
+            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.5); filter: grayscale(0.3);
         }
+        .mini-char-wrap:hover .mini-char-img { border-color: var(--text-accent); transform: scale(1.1); box-shadow: 0 0 15px var(--glow); filter: grayscale(0); }
+        .mini-char-name { font-size: 14px; color: var(--text-main); font-style: italic; transition: color 0.3s; }
+        .mini-char-wrap:hover .mini-char-name { color: var(--text-accent); }
 
-        .btn-person {
-            display: block;
-            width: 100%;
-            background: rgba(20, 15, 30, 0.5);
-            color: var(--text-silver);
-            padding: 15px 20px;
-            border: 1px solid var(--text-accent);
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 40px;
-            transition: all 0.4s;
+        /* --- МОДАЛЬНОЕ ОКНО ПЕРСОНАЖА (ЦЕНТР ЭКРАНА) --- */
+        .char-modal-wrapper {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.9); z-index: 100000; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.4s ease;
         }
-        .btn-person:hover {
-            background: var(--text-accent);
-            color: #000;
-            box-shadow: 0 0 25px var(--glow);
+        .char-modal-wrapper.active { display: flex; opacity: 1; }
+        .char-modal-content {
+            width: 90%; max-width: 800px; max-height: 90vh; background: var(--panel-bg);
+            border: 2px solid var(--border-color); position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 20px var(--glow);
+            display: flex; flex-direction: column; overflow: hidden;
         }
-
-        /* --- МОДАЛЬНОЕ ОКНО ДЛЯ КАРТИНКИ --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.85);
-            z-index: 100000;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .modal.active {
-            display: flex;
-            opacity: 1;
-        }
-        .modal-img {
-            max-width: 90vw;
-            max-height: 90vh;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 0 40px rgba(138, 43, 226, 0.3);
-            border-radius: 4px;
-        }
-        .modal-close {
-            position: absolute;
-            top: 30px; right: 40px;
-            font-size: 50px;
-            color: #888;
-            cursor: pointer;
-            transition: color 0.3s;
-            font-family: 'Roboto', sans-serif;
-        }
-        .modal-close:hover { color: var(--text-accent); }
-
-        /* --- СТРАНИЦА: ЛИЧНОСТИ --- */
-        .characters-grid {
-            max-width: 1500px;
-            margin: 20px auto 60px auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            padding: 0 30px;
-            align-items: start;
-        }
-
-        .char-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-
-        .char-card:hover {
-            border-color: var(--text-accent);
-            transform: translateY(-5px);
-        }
-
-        .char-portrait {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background-color: #050505;
-            border: 1px solid #1a1525;
-            margin-bottom: 15px;
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.3) grayscale(0.8) contrast(1.2);
-            transition: all 0.5s ease;
-            position: relative;
-            z-index: 2;
-        }
+        .cm-scroll-area { overflow-y: auto; padding: 40px; box-sizing: border-box; }
+        .cm-scroll-area::-webkit-scrollbar { width: 6px; }
+        .cm-scroll-area::-webkit-scrollbar-thumb { background: var(--text-accent); }
         
-        .char-card:hover .char-portrait,
-        .char-card.expanded .char-portrait {
-            filter: brightness(1) grayscale(0) contrast(1);
-            border-color: var(--text-accent);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-        }
-
-        #img-malakor { background-image: url('malakor.jpg'); }
-        #img-elara { background-image: url('elara.jpg'); }
-        #img-cassian { background-image: url('cassian.jpg'); }
-        #img-amon { background-image: url('amon.jpg'); }
-
-        .char-name {
-            font-size: 22px;
-            text-align: center;
-            margin: 10px 0;
-            line-height: 1.3;
-            transition: color 0.3s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .char-card:hover .char-name,
-        .char-card.expanded .char-name {
-            color: var(--text-accent);
-        }
-
-        .char-details {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.6s ease, opacity 0.6s ease;
-            font-size: 16px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .char-card.expanded .char-details {
-            max-height: 800px;
-            opacity: 1;
-            margin-top: 15px;
-        }
-
-        .char-details h4 {
-            color: var(--text-silver);
-            font-size: 18px;
-            margin: 20px 0 5px 0;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
-
-        .hint-text {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-top: 10px;
-            font-style: italic;
-        }
+        .char-modal-header { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; }
+        .cm-img { width: 180px; height: 180px; border: 2px solid var(--text-accent); background-size: cover; background-position: center; box-shadow: 0 0 20px rgba(138,43,226,0.3); flex-shrink: 0; }
+        .cm-titles h2 { font-size: 32px; margin: 0 0 10px 0; color: var(--text-silver); text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .cm-titles h4 { font-size: 18px; margin: 0; color: var(--text-accent); font-family: 'Cormorant Garamond', serif; font-style: italic; letter-spacing: 1px; }
+        .cm-text p { margin-bottom: 15px; line-height: 1.6; }
+        
+        /* Модалка для картинок */
+        .image-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .image-modal.active { display: flex; opacity: 1; }
+        .modal-img { max-width: 90vw; max-height: 90vh; border: 2px solid var(--border-color); box-shadow: 0 0 40px rgba(138, 43, 226, 0.3); border-radius: 4px; }
+        
+        /* СТРАНИЦА ПРАВИТЕЛЕЙ (Старая) */
+        .characters-grid { max-width: 1500px; margin: 20px auto 60px auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; padding: 0 30px; align-items: start; }
+        .char-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 25px; position: relative; cursor: pointer; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .char-card:hover { border-color: var(--text-accent); transform: translateY(-5px); }
+        .char-portrait { width: 100%; aspect-ratio: 1 / 1; background-color: #050505; border: 1px solid #1a1525; margin-bottom: 15px; background-size: cover; background-position: center; filter: brightness(0.3) grayscale(0.8) contrast(1.2); transition: all 0.5s ease; position: relative; z-index: 2; }
+        .char-card:hover .char-portrait, .char-card.expanded .char-portrait { filter: brightness(1) grayscale(0) contrast(1); border-color: var(--text-accent); box-shadow: 0 0 20px rgba(138, 43, 226, 0.3); }
+        .char-name { font-size: 22px; text-align: center; margin: 10px 0; line-height: 1.3; transition: color 0.3s; position: relative; z-index: 2; }
+        .char-card:hover .char-name, .char-card.expanded .char-name { color: var(--text-accent); }
+        .char-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s ease, opacity 0.6s ease; font-size: 16px; position: relative; z-index: 2; }
+        .char-card.expanded .char-details { max-height: 800px; opacity: 1; margin-top: 15px; }
+        .char-details h4 { color: var(--text-silver); font-size: 18px; margin: 20px 0 5px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        .hint-text { text-align: center; font-size: 14px; color: #666; margin-top: 10px; font-style: italic; }
         .char-card.expanded .hint-text { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- ФОНОВОЕ ВИДЕО -->
     <video id="bg-video" autoplay loop muted playsinline>
         <source src="bg.mp4" type="video/mp4">
     </video>
-    <!-- Затемняющий слой поверх видео -->
     <div class="body-overlay"></div>
 
-    <!-- Модальное окно для полного размера картинок регионов -->
-    <div id="image-modal" class="modal" onclick="closeModal(event)">
-        <span class="modal-close" onclick="closeModal(event)">✖</span>
-        <img id="modal-img" class="modal-img" src="" alt="Full size image">
+    <div id="image-modal" class="image-modal" onclick="closeImgModal(event)">
+        <span class="close-btn" style="z-index: 100001;" onclick="closeImgModal(event)">✖</span>
+        <img id="modal-img" class="modal-img" src="" alt="Image">
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ПЕРСОНАЖА -->
+    <div id="char-modal" class="char-modal-wrapper" onclick="closeCharModal(event)">
+        <div class="char-modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeCharModal(event)">✖</span>
+            <div class="decor-corner corner-tl"></div>
+            <div class="decor-corner corner-tr"></div>
+            <div class="decor-corner corner-bl"></div>
+            <div class="decor-corner corner-br"></div>
+            
+            <div class="cm-scroll-area">
+                <div class="char-modal-header">
+                    <div class="cm-img" id="cm-img"></div>
+                    <div class="cm-titles">
+                        <h2 id="cm-name">Имя Персонажа</h2>
+                        <h4 id="cm-role">Роль</h4>
+                    </div>
+                </div>
+                <div class="decor-divider"></div>
+                <div class="cm-text content-section" id="cm-text"></div>
+            </div>
+        </div>
     </div>
 
     <header>
-        <div class="logo-wrapper">
-            <img src="logo.png" alt="Этерния" class="logo-img">
-        </div>
+        <div class="logo-wrapper"><img src="logo.png" alt="Этерния" class="logo-img"></div>
         <div class="decor-divider-thin"></div>
         <nav class="nav-links">
             <button class="nav-btn active" id="btn-map" onclick="switchPage('map')">Карта Мира</button>
+            <button class="nav-btn" id="btn-valoria" onclick="switchPage('valoria')">Валория</button>
+            <button class="nav-btn" id="btn-sylvaria" onclick="switchPage('sylvaria')">Сильвария</button>
+            <button class="nav-btn" id="btn-aquilla" onclick="switchPage('aquilla')">Аквилла</button>
+            <button class="nav-btn" id="btn-khortul" onclick="switchPage('khortul')">Кхор-Тул</button>
             <button class="nav-btn" id="btn-chars" onclick="switchPage('chars')">Правители</button>
         </nav>
         <div class="decor-divider-thin"></div>
     </header>
 
-    <!-- СТРАНИЦА 1: КАРТА -->
+    <!-- СТРАНИЦА: ГЛАВНАЯ КАРТА -->
     <main id="page-map" class="page active">
         <div class="map-container">
             <img src="map.jpg" alt="Карта Этернии" class="map-image">
             <img src="fog.gif" alt="Туман" class="mist-overlay" id="mist-layer">
 
-            <div class="map-pin" style="left: 38%; top: 21%;" onclick="openSidebar('valoria')"></div>
-            <div class="map-pin" style="left: 60%; top: 21%;" onclick="openSidebar('rusty')"></div>
-            <div class="map-pin" style="left: 83%; top: 24%;" onclick="openSidebar('sylvaria')"></div>
-            <div class="map-pin" style="left: 59%; top: 36%;" onclick="openSidebar('ashen')"></div>
-            <div class="map-pin" style="left: 15.5%; top: 45%;" onclick="openSidebar('khor_tul')"></div>
-            <div class="map-pin" style="left: 51.5%; top: 62%;" onclick="openSidebar('aquilla')"></div>
-            <div class="map-pin" style="left: 13.5%; top: 72%;" onclick="openSidebar('pilgrim')"></div>
-            <div class="map-pin" style="left: 86%; top: 67%;" onclick="openSidebar('misty')"></div>
-            <div class="map-pin" style="left: 52%; top: 85%;" onclick="openSidebar('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+            <!-- Клик по главной карте открывает Регион -->
+            <div class="map-pin" style="left: 38%; top: 21%;" onclick="openRegion('valoria')"></div>
+            <div class="map-pin" style="left: 58%; top: 22%;" onclick="openRegion('rusty')"></div>
+            <div class="map-pin" style="left: 81%; top: 22%;" onclick="openRegion('sylvaria')"></div>
+            <div class="map-pin" style="left: 57.5%; top: 35.5%;" onclick="openRegion('ashen')"></div>
+            <div class="map-pin" style="left: 15.5%; top: 45%;" onclick="openRegion('khor_tul')"></div>
+            <div class="map-pin" style="left: 49%; top: 61%;" onclick="openRegion('aquilla')"></div>
+            <div class="map-pin" style="left: 13.5%; top: 72%;" onclick="openRegion('pilgrim')"></div>
+            <div class="map-pin" style="left: 85%; top: 66%;" onclick="openRegion('misty')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+            <div class="map-pin" style="left: 49%; top: 83%;" onclick="openRegion('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
         </div>
     </main>
 
-    <!-- СТРАНИЦА 2: ЛИЧНОСТИ -->
+    <!-- СТРАНИЦА: ВАЛОРИЯ -->
+    <main id="page-valoria" class="page">
+        <div class="map-container">
+            <img src="map-valoria.jpg" alt="Карта Валории" class="map-image">
+            <!-- Клик по локации внутри королевства -->
+            <div class="map-pin" style="left: 40%; top: 20%;" onclick="openLocation('citadel')"></div>
+            <div class="map-pin" style="left: 50%; top: 35%;" onclick="openLocation('garrison')"></div>
+            <div class="map-pin" style="left: 65%; top: 45%;" onclick="openLocation('workshop')"></div>
+            <div class="map-pin" style="left: 45%; top: 60%;" onclick="openLocation('forge')"></div>
+            <div class="map-pin" style="left: 55%; top: 80%;" onclick="openLocation('bazaar')"></div>
+            <div class="map-pin" style="left: 35%; top: 75%;" onclick="openLocation('block14')"></div>
+            <div class="map-pin" style="left: 20%; top: 50%;" onclick="openLocation('bastion')"></div>
+            <div class="map-pin" style="left: 60%; top: 65%;" onclick="openLocation('tavern')"></div>
+        </div>
+    </main>
+
+    <!-- СТРАНИЦА: СИЛЬВАРИЯ -->
+    <main id="page-sylvaria" class="page">
+        <div class="map-container">
+            <img src="map-sylvaria.jpg" alt="Карта Сильварии" class="map-image">
+            <div class="map-pin" style="left: 50%; top: 40%;" onclick="openLocation('vault')"></div>
+            <div class="map-pin" style="left: 60%; top: 30%;" onclick="openLocation('grove')"></div>
+            <div class="map-pin" style="left: 40%; top: 50%;" onclick="openLocation('pharmacy')"></div>
+            <div class="map-pin" style="left: 65%; top: 60%;" onclick="openLocation('market')"></div>
+            <div class="map-pin" style="left: 75%; top: 70%;" onclick="openLocation('span')"></div>
+            <div class="map-pin" style="left: 30%; top: 65%;" onclick="openLocation('post')"></div>
+            <div class="map-pin" style="left: 20%; top: 80%;" onclick="openLocation('camp')"></div>
+            <div class="map-pin" style="left: 85%; top: 50%;" onclick="openLocation('outpost')"></div>
+        </div>
+    </main>
+
+    <!-- СТРАНИЦА: АКВИЛЛА -->
+    <main id="page-aquilla" class="page">
+        <div class="map-container">
+            <img src="map-aquilla.jpg" alt="Карта Аквиллы" class="map-image">
+            <div class="map-pin" style="left: 50%; top: 30%;" onclick="openLocation('palace')"></div>
+            <div class="map-pin" style="left: 65%; top: 40%;" onclick="openLocation('archive')"></div>
+            <div class="map-pin" style="left: 35%; top: 45%;" onclick="openLocation('salon')"></div>
+            <div class="map-pin" style="left: 55%; top: 60%;" onclick="openLocation('cabaret')"></div>
+            <div class="map-pin" style="left: 45%; top: 65%;" onclick="openLocation('passage')"></div>
+            <div class="map-pin" style="left: 25%; top: 55%;" onclick="openLocation('citadel_guard')"></div>
+            <div class="map-pin" style="left: 60%; top: 80%;" onclick="openLocation('lair')"></div>
+            <div class="map-pin" style="left: 40%; top: 85%;" onclick="openLocation('pier')"></div>
+            <div class="map-pin" style="left: 50%; top: 95%;" onclick="openLocation('monoliths')"></div>
+        </div>
+    </main>
+
+    <!-- СТРАНИЦА: КХОР-ТУЛ -->
+    <main id="page-khortul" class="page">
+        <div class="map-container">
+            <img src="map-khortul.jpg" alt="Карта Кхор-Тул" class="map-image">
+            <div class="map-pin" style="left: 40%; top: 70%;" onclick="openLocation('ossuary')"></div>
+            <div class="map-pin" style="left: 50%; top: 60%;" onclick="openLocation('bridge')"></div>
+            <div class="map-pin" style="left: 60%; top: 55%;" onclick="openLocation('honeycombs')"></div>
+            <div class="map-pin" style="left: 30%; top: 50%;" onclick="openLocation('plaza')"></div>
+            <div class="map-pin" style="left: 70%; top: 65%;" onclick="openLocation('wells')"></div>
+            <div class="map-pin" style="left: 45%; top: 40%;" onclick="openLocation('court')"></div>
+            <div class="map-pin" style="left: 65%; top: 25%;" onclick="openLocation('spire')"></div>
+            <div class="map-pin" style="left: 50%; top: 15%;" onclick="openLocation('sanctuary')"></div>
+        </div>
+    </main>
+
+    <!-- СТРАНИЦА: ПРАВИТЕЛИ -->
     <main id="page-chars" class="page">
         <div class="characters-grid">
-            
             <div class="char-card" id="card-malakor" onclick="toggleRuler('malakor')">
-                <div class="decor-corner corner-tl"></div>
-                <div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" id="img-malakor"></div>
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('char-malakor.jpg')"></div>
                 <h2 class="char-name">Малакор Торн</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
-                <div class="hint-text">Нажмите, чтобы раскрыть</div>
-                
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
                 <div class="char-details">
                     <p class="quote-block">«Плоть слаба. Шестерни вечны.»</p>
-                    <p><span class="accent-silver">Верховный Архонт Валории</span>. От живой плоти в нем осталось лишь сердце, всё остальное — шедевры из черной стали и мерцающих рун.</p>
-                    <h4>Характер</h4>
-                    <p>Лишен человеческих страстей. Говорит <span class="accent-purple">рублеными фразами</span>, оценивая мир через призму эффективности.</p>
-                    <h4>Слухи</h4>
-                    <p>Не спит уже 10 лет, его разум интегрирован в вычислительную машину Оплота.</p>
+                    <p><span class="accent-silver">Верховный Архонт Валории</span>.</p>
                 </div>
-                <div class="decor-corner corner-bl"></div>
-                <div class="decor-corner corner-br"></div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
-
+            <!-- (Остальные 3 правителя по аналогии, сжаты для компактности) -->
             <div class="char-card" id="card-elara" onclick="toggleRuler('elara')">
-                <div class="decor-corner corner-tl"></div>
-                <div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" id="img-elara"></div>
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('char-elara.jpg')"></div>
                 <h2 class="char-name">Элара Глубокого Корня</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
-                <div class="hint-text">Нажмите, чтобы раскрыть</div>
-                
-                <div class="char-details">
-                    <p class="quote-block">«Мы не спешим. Лес помнит всё.»</p>
-                    <p><span class="accent-silver">Матриарх Сильварии</span>. Древний Лесной Вечник. Её ноги превратились в корневую систему, навсегда связавшую её с живым троном-деревом.</p>
-                    <h4>Характер</h4>
-                    <p>Отстраненная, голос звучит как <span class="accent-purple">шелест листвы</span>. Видит мир глазами каждой птицы леса.</p>
-                    <h4>Гнев Леса</h4>
-                    <p>В гневе может приказать лесу прорасти сквозь врага, оставив на его месте цветущий куст.</p>
-                </div>
-                <div class="decor-corner corner-bl"></div>
-                <div class="decor-corner corner-br"></div>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
+                <div class="char-details"><p class="quote-block">«Мы не спешим. Лес помнит всё.»</p><p><span class="accent-silver">Матриарх Сильварии</span>.</p></div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
-
             <div class="char-card" id="card-cassian" onclick="toggleRuler('cassian')">
-                <div class="decor-corner corner-tl"></div>
-                <div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" id="img-cassian"></div>
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('char-cassian.jpg')"></div>
                 <h2 class="char-name">Кассиан Вейн</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
-                <div class="hint-text">Нажмите, чтобы раскрыть</div>
-                
-                <div class="char-details">
-                    <p class="quote-block">«У каждого секрета есть своя цена.»</p>
-                    <p><span class="accent-silver">Великий Дож Аквиллы</span>. Аристократ Ихорец, чье тело пропитано магией Бездны, отчего кожа кажется почти прозрачной.</p>
-                    <h4>Характер</h4>
-                    <p>Воплощение изящества. <span class="accent-purple">Остроумен и коварен</span>, способен продать человеку его же ботинки.</p>
-                    <h4>Одержимость</h4>
-                    <p>Фанатично ищет воспоминания о Серой Мгле, коллекционируя чужую память.</p>
-                </div>
-                <div class="decor-corner corner-bl"></div>
-                <div class="decor-corner corner-br"></div>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
+                <div class="char-details"><p class="quote-block">«У каждого секрета есть своя цена.»</p><p><span class="accent-silver">Великий Дож Аквиллы</span>.</p></div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
-
             <div class="char-card" id="card-amon" onclick="toggleRuler('amon')">
-                <div class="decor-corner corner-tl"></div>
-                <div class="decor-corner corner-tr"></div>
-                <div class="char-portrait" id="img-amon"></div>
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('char-amon.jpg')"></div>
                 <h2 class="char-name">Воскресший Амон</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
-                <div class="hint-text">Нажмите, чтобы раскрыть</div>
-                
-                <div class="char-details">
-                    <p class="quote-block">«Ибо тьма очищается лишь огнем.»</p>
-                    <p><span class="accent-silver">Патриарх Кхор-Тула</span>. Старейший Остогон. Его рога срослись в корону, а закрытые глаза видят скрытую суть.</p>
-                    <h4>Характер</h4>
-                    <p>Религиозный фанатик. Голос гремит как шторм. Считает, что <span class="accent-purple">слышит сердце богов</span>.</p>
-                    <h4>Крестовый Поход</h4>
-                    <p>Готовит свой народ к походу, чтобы выжечь ересь в мире до прихода Мглы.</p>
-                </div>
-                <div class="decor-corner corner-bl"></div>
-                <div class="decor-corner corner-br"></div>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
+                <div class="char-details"><p class="quote-block">«Ибо тьма очищается лишь огнем.»</p><p><span class="accent-silver">Патриарх Кхор-Тула</span>.</p></div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
-
         </div>
     </main>
 
     <!-- БОКОВАЯ ПАНЕЛЬ -->
     <div class="sidebar" id="sidebar">
         <button class="close-btn" onclick="closeSidebar()">✖</button>
-        <div class="decor-corner corner-tl"></div>
-        <div class="decor-corner corner-tr"></div>
-        <div class="decor-corner corner-bl"></div>
-        <div class="decor-corner corner-br"></div>
+        <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+        <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
 
         <div class="sidebar-content">
             <h1 class="sidebar-title" id="r-title">Название</h1>
             <div class="region-bg-image" id="r-image" onclick="openImageModal(this)"></div>
             <div class="decor-divider"></div>
+            
             <div class="content-section" id="r-desc"></div>
             <div class="content-section" id="r-society"></div>
             <div class="content-section" id="r-rule"></div>
+            
+            <!-- Блок для мини-портретов -->
+            <div id="r-chars-container" style="display: none;">
+                <div class="loc-characters-title">Связанные Личности</div>
+                <div class="mini-chars-grid" id="r-chars-grid"></div>
+            </div>
+            
             <div id="r-action"></div>
         </div>
     </div>
 
+    <!-- МАССИВ ДАННЫХ И ЛОГИКА -->
     <script>
-        const regionsData = {
-            valoria: {
-                title: "Валория",
-                desc: `<h3>Мрачная Кузница</h3><p>Циклопический конгломерат из черного гранита и чугуна, стиснутый в ледяных каньонах севера. Здесь нет поэзии, только гул заводов. Буры Оплота <span class="accent-purple">высасывают магическую сущность</span> мира, оставляя мертвый монолит.</p>`,
-                society: `<h3>Шестерни Общества</h3><ul class="styled-list"><li><span class="accent-silver">Первородные:</span> Аристократы, хранящие чистоту плоти.</li><li><span class="accent-silver">Сплавленные:</span> Элита с имплантами из Живого серебра.</li><li><span class="accent-silver">Ржавые:</span> Бедняки, гниющие от металлической лихорадки.</li></ul>`,
-                rule: `<h3>Власть Синода</h3><p>Управляется <span class="accent-silver">Стальным Синодом</span> — решения лишены эмоций и строятся на холодном расчете.</p>`,
-                personId: "malakor"
+        // База Персонажей
+        const charsDB = {
+            merrick: {
+                name: "Мэррик", role: "Страж-7, Прагматик до мозга костей", img: "char-merrick.jpg",
+                text: `<p><b>Внешность:</b> Рост — более 190 см. Левая сторона тела человеческая, в шрамах, а правая заменена массивными протезами из рунической стали с Живым Серебром. Волосы седые, глаза холодные голубые.</p><p><b>Характер:</b> Выполняет приказы с хирургической точностью, но в душе питает сострадание к беднякам. Уважает честных солдат, питает слабость к мелким животным.</p><p><b>Секрет:</b> Страдает от «Скорбной хватки» — организм отторгает Живое Серебро, которое медленно захватывает его тело.</p>`
             },
-            sylvaria: {
-                title: "Сильвария",
-                desc: `<h3>Изумрудная Колыбель</h3><p>Древний лес на востоке. Столица Эльвейн — это единый организм из <span class="accent-purple">колоссальных деревьев-небоскребов</span>. Ночью лес вспыхивает неоновым свечением биолюминесцентных грибов.</p>`,
-                society: `<h3>Дети Леса</h3><ul class="styled-list"><li><span class="accent-silver">Лесные Вечники:</span> Бессмертные хранители памяти с кожей-берестой.</li><li><span class="accent-silver">Звероусты:</span> Полулюди с чертами зверей.</li></ul><p class="quote-block">Здесь не ценят золото, лишь умение слышать Шепот Леса.</p>`,
-                rule: `<h3>Власть Сезонов</h3><p>Направляется <span class="accent-silver">Кругом Сезонов</span>, медитирующим у корней Великого Древа.</p>`,
-                personId: "elara"
+            silas: {
+                name: "Мастер Сайлас", role: "Главный медик-инженер Стражи", img: "char-silas.jpg",
+                text: `<p><b>Внешность:</b> Старик со связкой линз вместо глаза, от которого пахнет машинным маслом.</p><p><b>Отношение:</b> Относится к Мэррику как к сыну. Рискует жизнью, скрывая от Синода процент повреждений в его теле и пытаясь найти противоядие от Живого Серебра.</p>`
             },
-            aquilla: {
-                title: "Аквилла",
-                desc: `<h3>Город над Бездной</h3><p>Жемчужина юга в стиле Dark Deco, выстроенная над <span class="accent-purple">чудовищным разломом</span>. Элегантные белые башни отражаются в бирюзовых водах.</p>`,
-                society: `<h3>Рынок Секретов</h3><ul class="styled-list"><li><span class="accent-silver">Ихорцы:</span> Бледные аристократы с жабрами.</li><li><span class="accent-silver">Рынок Воспоминаний:</span> Место, где алхимики продают чужую память во флаконах.</li></ul>`,
-                rule: `<h3>Власть Масок</h3><p>Управляется <span class="accent-silver">Советом Десяти Масок</span>, где воюют ядами и слухами.</p>`,
-                personId: "cassian"
+            vance: {
+                name: "Легат Вариан Вэнс", role: "Стальной Палач", img: "char-vance.jpg",
+                text: `<p><b>Характер:</b> Фанатичный сторонник «чистоты плоти». Не имеет имплантов и презирает Слитых.</p><p><b>Отношение:</b> С нетерпением ждет, когда Мэррик потеряет разум, чтобы переплавить его в бездумного сервитора.</p>`
             },
-            khor_tul: {
-                title: "Кхор-Тул (Пики)",
-                desc: `<h3>Порог Небес</h3><p>Монастыри, вырубленные в скалах над облаками. Храмы соединены жуткими мостами из <span class="accent-purple">костей и цепей</span>, а вершины купаются в ослепительном эфирном свете.</p>`,
-                society: `<h3>Путь Искупления</h3><p>Родина <span class="accent-silver">Остогонов</span> — рогатых гуманоидов. Их жизнь — изнурительная аскеза и молитвы, искупающие демонический вид.</p>`,
-                rule: `<h3>Власть Вере</h3><p>Теократия <span class="accent-silver">Синода Небесного Света</span>, толкующего знамения в облаках.</p>`,
-                personId: "amon"
+            lyra: {
+                name: "Лира «Флакон»", role: "Беглая алхимичка из Аквиллы", img: "char-lyra.jpg",
+                text: `<p><b>Внешность:</b> Скрывает жабры под плотными шарфами. Живет в Ржавых трущобах.</p><p><b>Связь:</b> Поставляет Мэррику «Эфирное масло», которое глушит фантомные боли. Взамен он закрывает глаза на её контрабанду.</p>`
             },
-            rusty: {
-                title: "Ржавые Сады",
-                desc: `<h3>Механическое Кладбище</h3><p>Техногенная свалка на окраинах Валории. Горы бракованных машин <span class="accent-purple">ожили</span> под воздействием магии.</p>`,
-                society: `<h3>Изгои</h3><p>Убежище для изгнанных Сплавленных и механических паразитов, охотящихся на теплую кровь.</p>`,
-                rule: ``, personId: ""
+            briona: {
+                name: "Бриона", role: "Хозяйка таверны «Стальной крюк»", img: "char-briona.jpg",
+                text: `<p><b>Внешность:</b> Женщина из низов, лицо в шрамах от угольной пыли.</p><p><b>Связь:</b> Знает Мэррика с детства. Она единственная, кто называет его по имени, напоминая ему, каково быть человеком.</p>`
             },
-            ashen: {
-                title: "Пепельная Пустошь",
-                desc: `<h3>Разорванная Земля</h3><p>Мертвая граница, где вместо песка хрустит <span class="accent-purple">пепел сожженных эпох</span>. Время и гравитация здесь нестабильны.</p>`,
-                society: `<h3>Эхо Прошлого</h3><p>Главная угроза — призрачные проекции древних битв, способные нанести реальную рану случайному путнику.</p>`,
-                rule: ``, personId: ""
+            gideon: {
+                name: "Гидеон «Ржавый Нож»", role: "Лидер подполья «Освобождение плоти»", img: "char-gideon.jpg",
+                text: `<p><b>Характер:</b> Безумный, но харизматичный мятежник с Базара.</p><p><b>Связь:</b> Ненавидит Мэррика, считая его символом валорийского режима. Поклялся захватить его живым и вырвать все винты.</p>`
             },
-            pilgrim: {
-                title: "Приют Пилигрима",
-                desc: `<h3>Костяные Врата</h3><p>Поселение у подножия Пиков, вырезанное внутри <span class="accent-purple">исполинского скелета</span> существа, рухнувшего с небес.</p>`,
-                society: `<h3>Покаяние</h3><p>Любой смех чужака может закончиться публичной поркой. Сюда приходят лишь за священной солью и искуплением.</p>`,
-                rule: ``, personId: ""
+            theron: {
+                name: "Тэрон", role: "Бродячий Клык", img: "char-theron.jpg",
+                text: `<p><b>Внешность:</b> 22 года, изумрудные глаза с вертикальными зрачками, волчьи уши и пушистый хвост. На шее носит латунную шестеренку из Валории.</p><p><b>Характер:</b> Мастерски прячет звериную хватку за маской лодыря. Саркастичен, но в критический момент бросится в пасть чудовищу.</p><p><b>Травма:</b> Из-за его любопытства погибла его сестра в Топях. Изгнан из клана, боится привязываться к людям, но отчаянно хочет увидеть мир за лесом.</p>`
             },
-            misty: {
-                title: "Туманные Топи",
-                desc: `<h3>Шепчущие Болота</h3><p>Сеть топких равнин в белом тумане. Стоячие воды источают аромат <span class="accent-purple">гнили и дорогих духов</span>.</p>`,
-                society: `<h3>Узел Безмолвия</h3><p>Идеальный каменный круг в центре топей, где полностью исчезают звуки. Путь к нему преграждают «Шептуны», крадущие голоса любимых.</p>`,
-                rule: ``, personId: ""
+            pykh: {
+                name: "Пых", role: "Аномально ленивый Люм", img: "char-pykh.jpg",
+                text: `<p><b>Внешность:</b> Крупный, теплый, как свежий хлеб. Пульсирует мятно-золотым светом.</p><p><b>Связь:</b> Верный и единственный друг Тэрона. Слишком ленив для перелетов.</p>`
             },
-            abyss: {
-                title: "Бездна",
-                desc: `<h3>Дыхание Тьмы</h3><p>Необъятный подводный разлом под Аквиллой. Раз в столетие Бездна делает <span class="accent-purple">«выдох»</span>, срывая магические замки.</p>`,
-                society: `<h3>Серая Мгла</h3><p>Мелкодисперсная тьма поднимается из океана, материализуя призраков. Ни один смертный не смеет спуститься в её глубины.</p>`,
-                rule: ``, personId: ""
+            bran: {
+                name: "Бран «Чернозуб»", role: "Вожак Клана Хвойного Клыка", img: "char-bran.jpg",
+                text: `<p><b>Характер:</b> Суровый волк с седой холкой.</p><p><b>Связь:</b> Презирает Тэрона за гибель сестры. Запретил ему приближаться к родовым курганам под угрозой смерти.</p>`
+            },
+            tiss: {
+                name: "Матушка Тисс", role: "Старая травница Звероуст-сыч", img: "char-tiss.jpg",
+                text: `<p><b>Внешность:</b> Пышное оперение, круглые очки, острый клюв.</p><p><b>Связь:</b> Подкармливает Тэрона и разрешает спать в своей лавке, хотя регулярно бьет его деревянной ложкой за наглость.</p>`
+            },
+            yvain: {
+                name: "Ивейн «Шелест Иглы»", role: "Вестник Старца Ориса", img: "char-yvain.jpg",
+                text: `<p><b>Внешность:</b> Молодой Вечник с хвоей вместо волос.</p><p><b>Связь:</b> Тайно платит Тэрону за разведку, используя его феноменальный слух для защиты границ от Мглы.</p>`
+            },
+            rix: {
+                name: "Рикс «Сорока»", role: "Контрабандист Звероуст-сорока", img: "char-rix.jpg",
+                text: `<p><b>Характер:</b> Вертлявый, ходит в жилете с тайными карманами.</p><p><b>Связь:</b> Подарил Тэрону шестеренку. Травит байки о внешнем мире, подначивая парня уйти из леса.</p>`
+            },
+            enerion: {
+                name: "Энерион", role: "Верховный Псаломщик, Кукловод", img: "char-enerion.jpg",
+                text: `<p><b>Внешность:</b> Остогон пугающей красоты. Красные волосы, изящные черные бритвенные рога. Глаза — ослепительно-белые колодцы без зрачков.</p><p><b>Характер:</b> Утонченный манипулятор и расчетливый собственник. Ломает людей психологически.</p><p><b>Секрет:</b> Управляет колоссальной гравитацией. Ненавидит абсолютную тишину из-за детской травмы изоляции.</p>`
+            },
+            amon: {
+                name: "Патриарх Амон", role: "Абсолютный Правитель Кхор-Тула", img: "char-amon.jpg",
+                text: `<p><b>Внешность:</b> Древнейший остогон, чьи рога срослись в корону.</p><p><b>Связь:</b> Для Энериона — токсичная фигура отца. Они ведут шахматную партию, где Амон держит инквизитора на коротком поводке.</p>`
+            },
+            morvald: {
+                name: "Брат Морвальд", role: "Верховный Юстициар", img: "char-morvald.jpg",
+                text: `<p><b>Характер:</b> Суровый ветеран, спящий на камнях в веригах.</p><p><b>Связь:</b> Ненавидит Энериона, считая его слащавым еретиком. Мечтает сбросить его со скалы.</p>`
+            },
+            neya: {
+                name: "Нея", role: "Слепая послушница", img: "char-neya.jpg",
+                text: `<p><b>Внешность:</b> 16-летняя слепая полукровка из низин.</p><p><b>Связь:</b> Единственное существо, при виде которого Энерион становится уязвимым. Она общается с ним просто и без страха.</p>`
+            },
+            valdis: {
+                name: "Сестра Вальдис", role: "Немая карательница", img: "char-valdis.jpg",
+                text: `<p><b>Внешность:</b> Высокая остогонка со спиленными рогами.</p><p><b>Связь:</b> Абсолютная тень Энериона, выполняющая самую грязную работу без лишних вопросов.</p>`
+            },
+            nicodem: {
+                name: "Никодем «Нико»", role: "Призрак Зеркальных Вод", img: "char-nicodem.jpg",
+                text: `<p><b>Внешность:</b> Полуэльф-гедонист, фиалковые глаза со щелями, иссиня-фиолетовые волосы. Носит чернильную шелковую рубаху.</p><p><b>Характер:</b> Дерзок, жаден до роскоши, играет на пороках знати. Мастерски держит дистанцию с помощью шуток.</p><p><b>Секрет:</b> Упал в Бездну и вернулся. Теперь Бездна зовет его обратно. Ему нужны материальные ценности (золото, чужая память) как «якоря», чтобы не раствориться во тьме.</p>`
+            },
+            corvus: {
+                name: "Старик Корвус", role: "Слепой Гребец", img: "char-corvus.jpg",
+                text: `<p><b>Внешность:</b> Лодочник с побелевшими от ядов глазами.</p><p><b>Связь:</b> Спас Нико из воды в младенчестве, а потом вытащил из Бездны. Варит ему отвары, глушащие зов тьмы. Единственный якорь, ради которого Нико убьет.</p>`
+            },
+            violetta: {
+                name: "Мадам Виолетта", role: "Хозяйка кабаре-аукциона", img: "char-violetta.jpg",
+                text: `<p><b>Внешность:</b> Глухая фарфоровая маска, шелка цвета увядшей розы.</p><p><b>Связь:</b> Скупает добычу Нико, расплачиваясь тяжелым золотом, чтобы удержать его в материальном мире. Их общение — циничный торг.</p>`
+            },
+            varen: {
+                name: "Магистрат Аугуст Варен", role: "Верховный дознаватель", img: "char-varen.jpg",
+                text: `<p><b>Внешность:</b> Зеркальная маска вместо лица.</p><p><b>Связь:</b> Заклятый враг Нико. Мечтает вскрыть череп вора живьем, чтобы извлечь тайну Бездны.</p>`
+            },
+            kaeli: {
+                name: "Каэли «Пустая Склянка»", role: "Стеклодув без личности", img: "char-kaeli.jpg",
+                text: `<p><b>Внешность:</b> 18 лет. Ее личность полностью стерли («зачистили») за долги.</p><p><b>Связь:</b> Нико тайно оплачивает ее жилье. Глядя на ее пустой взгляд, он видит свое будущее, если Бездна его поглотит.</p>`
             }
         };
 
+        // База Главных Регионов (для главной карты)
+        const mainRegionsDB = {
+            valoria: { title: "Валория", desc: "<h3>Мрачная Кузница</h3><p>Циклопический конгломерат из черного гранита и чугуна. Здесь нет поэзии, только гул заводов. Буры Оплота высасывают магическую сущность мира.</p>", society: "<h3>Общество</h3><p>Жесткая кастовая система: Аристократы, Сплавленные (элита с имплантами) и Ржавые бедняки.</p>", rule: "<h3>Власть Синода</h3><p>Управляется Стальным Синодом.</p>" },
+            sylvaria: { title: "Сильвария", desc: "<h3>Изумрудная Колыбель</h3><p>Древний лес на востоке. Столица Эльвейн — это единый организм из колоссальных деревьев-небоскребов.</p>", society: "<h3>Общество</h3><p>Лесные Вечники и Звероусты. Здесь не ценят золото, лишь умение слышать Шепот Леса.</p>", rule: "<h3>Круг Сезонов</h3><p>Управляется советом четырех старейшин.</p>" },
+            aquilla: { title: "Аквилла", desc: "<h3>Город над Бездной</h3><p>Жемчужина юга в стиле Dark Deco, выстроенная над чудовищным разломом.</p>", society: "<h3>Рынок Секретов</h3><p>Ихорцы-аристократы и алхимики, продающие чужую память во флаконах.</p>", rule: "<h3>Совет Десяти Масок</h3><p>Управляется Советом, где воюют ядами и слухами.</p>" },
+            khor_tul: { title: "Кхор-Тул (Пики)", desc: "<h3>Порог Небес</h3><p>Монастыри, вырубленные в скалах над облаками, соединенные мостами из костей.</p>", society: "<h3>Путь Искупления</h3><p>Родина Остогонов — рогатых гуманоидов, живущих в суровой аскезе.</p>", rule: "<h3>Синод Небесного Света</h3><p>Теократия, толкующая знамения в облаках.</p>" },
+            rusty: { title: "Ржавые Сады", desc: "<h3>Механическое Кладбище</h3><p>Техногенная свалка на окраинах Валории, где ожили кучи металла.</p>", society: "", rule: "" },
+            ashen: { title: "Пепельная Пустошь", desc: "<h3>Разорванная Земля</h3><p>Мертвая граница. Время и гравитация здесь нестабильны, по равнине бродят призраки битв (Эхо).</p>", society: "", rule: "" },
+            pilgrim: { title: "Приют Пилигрима", desc: "<h3>Костяные Врата</h3><p>Поселение, вырезанное внутри исполинского скелета рухнувшего существа.</p>", society: "", rule: "" },
+            misty: { title: "Туманные Топи", desc: "<h3>Шепчущие Болота</h3><p>Топкие равнины, где твари «Шептуны» крадут голоса любимых.</p>", society: "", rule: "" },
+            abyss: { title: "Бездна", desc: "<h3>Дыхание Тьмы</h3><p>Подводный разлом под Аквиллой, исторгающий Серую Мглу.</p>", society: "", rule: "" }
+        };
+
+        // База Локаций внутри Королевств
+        const locationsDB = {
+            // ВАЛОРИЯ
+            citadel: { title: "Цитадель Легата", what: "Военно-административный центр Валории.", where: "Верхний ярус (Стальной Пик).", look: "Монументальный бастион с полированной сталью, тактическими картами и панорамными окнами на дымящийся город.", chars: ["vance"] },
+            garrison: { title: "Гарнизон «Седьмого Протокола»", what: "База киборгов-гвардейцев.", where: "Стык Верхнего и Среднего ярусов.", look: "Ряд бронированных ангаров. Пахнет озоном и оружейным маслом.", chars: ["merrick"] },
+            workshop: { title: "Мастерская Силаса «Ржавый Шприц»", what: "Нелегальный хирургический кабинет.", where: "Паровой Пояс, заброшенный тупик.", look: "Тесное, пропахшее гарью помещение с гидравлическим столом и банками дефектного Серебра.", chars: ["silas"] },
+            forge: { title: "Комбинат «Титан»", what: "Крупнейший завод по выплавке брони.", where: "Средний ярус.", look: "Циклопический цех с белыми вспышками расплавленного металла и грохочущими молотами.", chars: ["briona"] },
+            bazaar: { title: "Базар «Шлаковое Дно»", what: "Черный рынок вторсырья и контрабанды.", where: "Нижний ярус, у главной шахты отходов.", look: "Трущобный лабиринт из ржавых контейнеров, освещаемый бочками с мазутом.", chars: ["gideon"] },
+            block14: { title: "Жилой блок 14-Б", what: "Типовой рабочий барак для низших каст.", where: "Нижний ярус у паропровода.", look: "Крошечный неотапливаемый куб. Тепло идет только от гудящей трубы в стене.", chars: ["lyra"] },
+            bastion: { title: "Бастион «Ледяной Засов»", what: "Опорный узел внешней стены.", where: "Внешний периметр Валории.", look: "Стальная стена с бойницами, покрытая метром наледи.", chars: [] },
+            tavern: { title: "Таверна «Стальной Крюк»", what: "Подвальная дыра для ветеранов и работяг.", where: "Основание балки грузового лифта №4.", look: "Густой сизый дым, запах масла и кислого спирта. Столы намертво прикручены к полу.", chars: ["briona", "merrick"] },
+            
+            // СИЛЬВАРИЯ
+            vault: { title: "Тронный Свод Древа-Матери", what: "Сакральное сердце королевства.", where: "Внутри полого ствола Первородного Исполина.", look: "Грандиозный зал из живой древесины. Стены пульсируют бирюзовым соком.", chars: ["elara"] },
+            grove: { title: "Роща Четырех Сезонов", what: "Место медитаций Старейшин.", where: "Верхний ярус ветвей.", look: "Круглая платформа, разделенная на 4 сектора (весна, лето, осень, зима).", chars: [] },
+            pharmacy: { title: "Аптека Матушки Тисс", what: "Лавка травницы и убежище Тэрона.", where: "Ствол плакучей ивы.", look: "Уютное дупло. Пахнет мелиссой и светящимися спорами.", chars: ["tiss", "theron"] },
+            market: { title: "Базар «Переплетенные Лианы»", what: "Шумный торговый перекресток.", where: "Развилка между древними дубами.", look: "Лабиринт из навесов. Пахнет жареными орехами и пряностями.", chars: ["rix"] },
+            span: { title: "Заброшенный пролет", what: "Излюбленная точка отдыха Тэрона.", where: "Край Ивовых Крон над подлеском.", look: "Старый настил, где натянут вылинявший гамак прямо над темной бездной.", chars: ["theron", "pykh"] },
+            post: { title: "Пост Слухачей", what: "Тайная резиденция Ивейна.", where: "Обособленная высокая пихта.", look: "Аскетичное жилище, оплетенное лозами-«слухачами», улавливающими шорохи границ.", chars: ["yvain"] },
+            camp: { title: "Стойбище Клана", what: "Укрепленный лагерь волчьих Звероустов.", where: "Скалистая гряда на опушке.", look: "Палисад с черепами, полуземлянки и дымный костер из торфа.", chars: ["bran"] },
+            outpost: { title: "Застава «Зеленый Рубеж»", what: "Оборонительная вышка Следопытов.", where: "Граница с Пепельной Пустошью.", look: "Платформа на трех исполинских лиственницах с метателями ядовитых шипов.", chars: [] },
+            
+            // АКВИЛЛА
+            palace: { title: "Дворец Дожей", what: "Резиденция Кассиана и зал Совета.", where: "Высшая терраса Зеркального Венца.", look: "Дворец из белого мрамора и хрусталя в стиле арт-деко.", chars: ["cassian"] },
+            archive: { title: "Великий Архив Памяти", what: "Секретное хранилище воспоминаний.", where: "Центральный остров Венца.", look: "Монолитное здание со стеллажами мерцающих колб: золотых, багровых, голубых.", chars: [] },
+            salon: { title: "Салон «Ночная Орхидея»", what: "Элитный светский центр шпионажа.", where: "Павильон с видом на лагуну.", look: "Мраморные террасы, увитые черными орхидеями. Слуги в масках разносят вино.", chars: [] },
+            cabaret: { title: "Кабаре «Утонувшая Лилия»", what: "Полузатопленный клуб-аукцион.", where: "Перекресток Квартала Шепотов.", look: "Трехэтажное палаццо, уходящее фундаментом в воду. Внутри полумрак и бархат.", chars: ["violetta", "nicodem"] },
+            passage: { title: "Пассаж Стеклодувов", what: "Рынок Воспоминаний.", where: "Крытая набережная Большого Канала.", look: "Шумный коридор с жаром от печей. В витринах — тысячи изящных флаконов памяти.", chars: ["kaeli"] },
+            citadel_guard: { title: "Цитадель Зеркальной Стражи", what: "Штаб тайной полиции и лаборатории «зачистки».", where: "Граница Квартала Шепотов.", look: "Мрачное здание из темного камня с зеркальными окнами.", chars: ["varen"] },
+            lair: { title: "Заброшенный Часовой Шпиль", what: "Убежище Никодема.", where: "Нижний ярус, накренившийся над Бездной.", look: "Огромный циферблат без стрелок. Внутри — шелковые ковры и ворованные сокровища.", chars: ["nicodem"] },
+            pier: { title: "Причал «Мертвая Зыбь»", what: "Тайная стоянка и дом лодочника.", where: "На самом дне города.", look: "Сырые деревянные мостки над жирной водой. Пахнет тиной и ядами Бездны.", chars: ["corvus"] },
+            monoliths: { title: "Якорные Монолиты", what: "Инженерный комплекс, удерживающий город.", where: "Основание над воронкой Бездны.", look: "Колоссальные зубчатые передачи и цепи толщиной с корабельную мачту.", chars: [] },
+            
+            // КХОР-ТУЛ
+            ossuary: { title: "Оссификаторий", what: "Костяные мастерские.", where: "Скальный карниз.", look: "Полуоткрытая пещера со штабелями отбеленных черепов и костей.", chars: [] },
+            bridge: { title: "Мост Первого Предка", what: "Колоссальный висячий мост.", where: "Над пропастью.", look: "Настил из отшлифованных гигантских ребер без перил.", chars: [] },
+            honeycombs: { title: "Соты Братства", what: "Кельи монахов.", where: "Отвесная стена центрального утеса.", look: "Скалы, пронизанные сотнями круглых нор, к которым ведут железные скобы.", chars: [] },
+            plaza: { title: "Плац Непоколебимых", what: "Казармы храмовой стражи.", where: "Базальтовый выступ.", look: "Продуваемая плита без навесов. Воины спят на мерзлом граните.", chars: ["morvald"] },
+            wells: { title: "Колодцы Дознания", what: "Пыточный комплекс инквизиции.", where: "Шахты в толще скалы.", look: "Колодцы из обсидиана, где искусственно увеличивают гравитацию.", chars: ["enerion"] },
+            court: { title: "Двор Безмолвных Теней", what: "Казармы немых карателей.", where: "Внутренний двор инквизиции.", look: "Мертвое пространство из белого мрамора, где нет ни единого звука.", chars: ["valdis"] },
+            spire: { title: "Шпиль Белого Эха", what: "Личные покои Энериона.", where: "Башня над морем облаков.", look: "Декадентская роскошь: шелка, шкуры барсов и никаких перил.", chars: ["enerion", "neya"] },
+            sanctuary: { title: "Святилище Немого Камня", what: "Тронный зал Синода.", where: "Самый Высокий Пик.", look: "Монолитный трон, вокруг которого вмонтированы гигантские медные громоотводы.", chars: ["amon"] }
+        };
+
+        // ТУМАН
         function showMist() { document.getElementById('mist-layer').classList.add('active'); }
         function hideMist() { document.getElementById('mist-layer').classList.remove('active'); }
 
+        // МОДАЛКА КАРТИНОК
         function openImageModal(element) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('modal-img');
-            const bgImage = element.style.backgroundImage;
-            const url = bgImage.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
-            modalImg.src = url;
-            modal.classList.add('active');
+            const url = element.style.backgroundImage.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+            document.getElementById('modal-img').src = url;
+            document.getElementById('image-modal').classList.add('active');
         }
-
-        function closeModal(e) {
-            if (e.target.id === 'image-modal' || e.target.classList.contains('modal-close')) {
+        function closeImgModal(e) {
+            if (e.target.id === 'image-modal' || e.target.classList.contains('close-btn')) {
                 document.getElementById('image-modal').classList.remove('active');
             }
         }
 
-        function switchPage(page) {
-            document.getElementById('page-map').classList.remove('active');
-            document.getElementById('page-chars').classList.remove('active');
-            document.getElementById('btn-map').classList.remove('active');
-            document.getElementById('btn-chars').classList.remove('active');
-
-            if(page === 'map') {
-                document.getElementById('page-map').classList.add('active');
-                document.getElementById('btn-map').classList.add('active');
-            } else {
-                document.getElementById('page-chars').classList.add('active');
-                document.getElementById('btn-chars').classList.add('active');
-                closeSidebar();
+        // МОДАЛКА ПЕРСОНАЖЕЙ
+        function openCharModal(charId) {
+            const char = charsDB[charId];
+            if(!char) return;
+            document.getElementById('cm-img').style.backgroundImage = `url('${char.img}')`;
+            document.getElementById('cm-name').innerHTML = char.name;
+            document.getElementById('cm-role').innerHTML = char.role;
+            document.getElementById('cm-text').innerHTML = char.text;
+            document.getElementById('char-modal').classList.add('active');
+        }
+        function closeCharModal(e) {
+            if (e.target.id === 'char-modal' || e.target.classList.contains('close-btn')) {
+                document.getElementById('char-modal').classList.remove('active');
             }
         }
 
-        function openSidebar(id) {
-            const region = regionsData[id];
-            document.getElementById('r-title').innerHTML = region.title;
-            document.getElementById('r-image').style.backgroundImage = `url('${id}-bg.jpg')`;
-            document.getElementById('r-desc').innerHTML = region.desc;
-            document.getElementById('r-society').innerHTML = region.society;
-            document.getElementById('r-rule').innerHTML = region.rule;
+        // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+        function switchPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
 
-            const actionDiv = document.getElementById('r-action');
-            if (region.personId) {
-                actionDiv.innerHTML = `<button class="btn-person" onclick="goToPerson('${region.personId}')">Личность Правителя</button>`;
+            document.getElementById('page-' + page).classList.add('active');
+            const btn = document.getElementById('btn-' + page);
+            if(btn) btn.classList.add('active');
+            
+            closeSidebar();
+        }
+
+        // ОТКРЫТИЕ ПАНЕЛИ
+        function openRegion(id) {
+            const reg = mainRegionsDB[id];
+            fillSidebar(reg.title, id, reg.desc, reg.society, reg.rule, null);
+        }
+
+        function openLocation(locId) {
+            const loc = locationsDB[locId];
+            const desc = `<h3>Что это</h3><p>${loc.what}</p>`;
+            const society = `<h3>Где находится</h3><p>${loc.where}</p>`;
+            const rule = `<h3>Как выглядит</h3><p>${loc.look}</p>`;
+            fillSidebar(loc.title, 'loc-' + locId, desc, society, rule, loc.chars);
+        }
+
+        function fillSidebar(title, imgId, desc, soc, rule, charsList) {
+            document.getElementById('r-title').innerHTML = title;
+            document.getElementById('r-image').style.backgroundImage = `url('${imgId}.jpg')`;
+            document.getElementById('r-desc').innerHTML = desc;
+            document.getElementById('r-society').innerHTML = soc;
+            document.getElementById('r-rule').innerHTML = rule;
+
+            const charsContainer = document.getElementById('r-chars-container');
+            const grid = document.getElementById('r-chars-grid');
+            
+            if (charsList && charsList.length > 0) {
+                let html = '';
+                charsList.forEach(cId => {
+                    const char = charsDB[cId];
+                    if(char) {
+                        html += `
+                        <div class="mini-char-wrap" onclick="openCharModal('${cId}')">
+                            <div class="mini-char-img" style="background-image: url('${char.img}')"></div>
+                            <div class="mini-char-name">${char.name}</div>
+                        </div>`;
+                    }
+                });
+                grid.innerHTML = html;
+                charsContainer.style.display = "block";
             } else {
-                actionDiv.innerHTML = '';
+                charsContainer.style.display = "none";
+                grid.innerHTML = '';
             }
+
             document.getElementById('sidebar').classList.add('active');
         }
 
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('active');
-        }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
 
+        // ДЛЯ СТАРОЙ СТРАНИЦЫ ПРАВИТЕЛЕЙ
         function toggleRuler(id) {
-            document.querySelectorAll('.char-card').forEach(card => {
-                if(card.id !== 'card-' + id) card.classList.remove('expanded');
-            });
+            document.querySelectorAll('.char-card').forEach(card => { if(card.id !== 'card-' + id) card.classList.remove('expanded'); });
             document.getElementById('card-' + id).classList.toggle('expanded');
-        }
-
-        function goToPerson(personId) {
-            switchPage('chars');
-            setTimeout(() => {
-                const card = document.getElementById(`card-${personId}`);
-                if(card) {
-                    document.querySelectorAll('.char-card').forEach(c => c.classList.remove('expanded'));
-                    card.classList.add('expanded');
-                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    card.style.boxShadow = "0 0 30px rgba(179, 136, 255, 0.8)";
-                    card.style.borderColor = "#b388ff";
-                    setTimeout(() => { 
-                        card.style.boxShadow = "0 10px 30px rgba(0,0,0,0.8)"; 
-                        card.style.borderColor = "var(--border-color)";
-                    }, 2000);
-                }
-            }, 150);
         }
     </script>
 </body>
