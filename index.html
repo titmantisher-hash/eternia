@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мир Этернии</title>
+    <!-- Иконка вкладки браузера -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
 
@@ -262,11 +264,46 @@
         }
         .global-footer a { color: var(--text-accent); text-decoration: none; transition: color 0.3s; font-family: 'Cinzel', serif;}
         .global-footer a:hover { color: var(--text-silver); text-shadow: 0 0 10px var(--glow); }
+        /* --- Кнопка музыки --- */
+        #music-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 8, 14, 0.6);
+            color: var(--text-silver);
+            border: 1px solid var(--text-accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            letter-spacing: 1px;
+        }
+        #music-btn:hover {
+            background: rgba(138, 43, 226, 0.4);
+            color: #fff;
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        /* --- Рамки для локальных карт --- */
+        .region-map-border {
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+        }
 
     </style>
 </head>
 <body>
 
+    <!-- Музыка на фоне -->
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <!-- Кнопка управления звуком -->
+    <button id="music-btn" onclick="toggleMusic()">🔇 Музыка</button>
     <video id="bg-video" autoplay loop muted playsinline>
         <source src="bg.mp4" type="video/mp4">
     </video>
@@ -335,7 +372,7 @@
 
     <!-- СТРАНИЦА: ВАЛОРИЯ -->
     <main id="page-valoria" class="page">
-        <div class="map-container">
+        <div class="map-container region-map-border">
             <img src="map-valoria.jpg" alt="Карта Валории" class="map-image">
             <div class="map-pin" style="left: 54%; top: 29.5%;" onclick="openLocation('citadel')"></div>
             <div class="map-pin" style="left: 48%; top: 48%;" onclick="openLocation('garrison')"></div>
@@ -350,7 +387,7 @@
 
     <!-- СТРАНИЦА: СИЛЬВАРИЯ -->
     <main id="page-sylvaria" class="page">
-        <div class="map-container">
+        <div class="map-container region-map-border">
             <img src="map-sylvaria.jpg" alt="Карта Сильварии" class="map-image">
             <div class="map-pin" style="left: 52%; top: 50.5%;" onclick="openLocation('vault')"></div>
             <div class="map-pin" style="left: 52%; top: 69%;" onclick="openLocation('grove')"></div>
@@ -365,7 +402,7 @@
 
     <!-- СТРАНИЦА: АКВИЛЛА -->
     <main id="page-aquilla" class="page">
-        <div class="map-container">
+        <div class="map-container region-map-border">
             <img src="map-aquilla.jpg" alt="Карта Аквиллы" class="map-image">
             <div class="map-pin" style="left: 54.5%; top: 45%;" onclick="openLocation('palace')"></div>
             <div class="map-pin" style="left: 36%; top: 29.5%;" onclick="openLocation('archive')"></div>
@@ -380,7 +417,7 @@
 
     <!-- СТРАНИЦА: КХОР-ТУЛ -->
     <main id="page-khortul" class="page">
-        <div class="map-container">
+        <div class="map-container region-map-border">
             <img src="map-khortul.jpg" alt="Карта Кхор-Тул" class="map-image">
             <div class="map-pin" style="left: 64%; top: 87%;" onclick="openLocation('ossuary')"></div>
             <div class="map-pin" style="left: 23%; top: 50.5%;" onclick="openLocation('bridge')"></div>
@@ -564,6 +601,24 @@
 
     <!-- МАССИВ ДАННЫХ И ЛОГИКА -->
     <script>
+        // Логика музыки (громкость 20%, чтобы не орало)
+        const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        bgMusic.volume = 0.2; 
+
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicBtn.innerHTML = '🔊 Музыка';
+                musicBtn.style.borderColor = 'var(--text-silver)';
+                musicBtn.style.boxShadow = '0 0 10px var(--glow)';
+            } else {
+                bgMusic.pause();
+                musicBtn.innerHTML = '🔇 Музыка';
+                musicBtn.style.borderColor = 'var(--text-accent)';
+                musicBtn.style.boxShadow = 'none';
+            }
+        }
         // База Персонажей (Без спойлеров, чистый лор)
         const charsDB = {
             merrick: {
