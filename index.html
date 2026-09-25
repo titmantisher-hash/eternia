@@ -60,7 +60,7 @@
         }
 
         /* Навигация */
-        .nav-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+        .nav-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
         .nav-btn {
             background: none; border: none; color: var(--text-main); font-family: 'Cinzel', serif;
             font-size: 18px; text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
@@ -153,18 +153,25 @@
         .styled-list li::before { content: '♦'; position: absolute; left: 0; color: var(--text-accent); font-size: 14px; top: 2px; }
         .quote-block { border-left: 2px solid var(--text-accent); padding-left: 15px; margin: 15px 0; font-style: italic; color: #999; }
 
-        /* МИНИ-ПОРТРЕТЫ ПЕРСОНАЖЕЙ В ПАНЕЛИ ЛОКАЦИИ */
+        /* МИНИ-ПОРТРЕТЫ (ТЕПЕРЬ КВАДРАТЫ) */
         .loc-characters-title { font-size: 20px; color: var(--text-silver); margin: 30px 0 15px 0; text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px; font-family: 'Cinzel', serif; }
         .mini-chars-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 20px; }
         .mini-char-wrap { text-align: center; cursor: pointer; width: 80px; }
         .mini-char-img {
-            width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--border-color);
+            width: 70px; height: 70px; border-radius: 6px; border: 2px solid var(--border-color); /* Слегка скругленный квадрат */
             background-size: cover; background-position: center; margin: 0 auto 5px auto;
             transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.5); filter: grayscale(0.3);
         }
         .mini-char-wrap:hover .mini-char-img { border-color: var(--text-accent); transform: scale(1.1); box-shadow: 0 0 15px var(--glow); filter: grayscale(0); }
         .mini-char-name { font-size: 14px; color: var(--text-main); font-style: italic; transition: color 0.3s; }
         .mini-char-wrap:hover .mini-char-name { color: var(--text-accent); }
+
+        .btn-person {
+            display: block; width: 100%; background: rgba(20, 15, 30, 0.5); color: var(--text-silver);
+            padding: 15px 20px; border: 1px solid var(--text-accent); cursor: pointer; font-family: 'Cinzel', serif;
+            font-size: 18px; text-transform: uppercase; letter-spacing: 3px; margin-top: 40px; transition: all 0.4s;
+        }
+        .btn-person:hover { background: var(--text-accent); color: #000; box-shadow: 0 0 25px var(--glow); }
 
         /* --- МОДАЛЬНОЕ ОКНО ПЕРСОНАЖА (ЦЕНТР ЭКРАНА) --- */
         .char-modal-wrapper {
@@ -183,7 +190,7 @@
         .cm-scroll-area::-webkit-scrollbar-thumb { background: var(--text-accent); }
         
         .char-modal-header { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; }
-        .cm-img { width: 180px; height: 180px; border: 2px solid var(--text-accent); background-size: cover; background-position: center; box-shadow: 0 0 20px rgba(138,43,226,0.3); flex-shrink: 0; }
+        .cm-img { width: 180px; height: 180px; border: 2px solid var(--text-accent); background-size: cover; background-position: center; box-shadow: 0 0 20px rgba(138,43,226,0.3); flex-shrink: 0; border-radius: 4px;}
         .cm-titles h2 { font-size: 32px; margin: 0 0 10px 0; color: var(--text-silver); text-shadow: 0 0 10px rgba(255,255,255,0.2); }
         .cm-titles h4 { font-size: 18px; margin: 0; color: var(--text-accent); font-family: 'Cormorant Garamond', serif; font-style: italic; letter-spacing: 1px; }
         .cm-text p { margin-bottom: 15px; line-height: 1.6; }
@@ -193,19 +200,32 @@
         .image-modal.active { display: flex; opacity: 1; }
         .modal-img { max-width: 90vw; max-height: 90vh; border: 2px solid var(--border-color); box-shadow: 0 0 40px rgba(138, 43, 226, 0.3); border-radius: 4px; }
         
-        /* СТРАНИЦА ПРАВИТЕЛЕЙ (Старая) */
+        /* --- КАРТОЧКИ (ПРАВИТЕЛИ И БОТЫ) --- */
         .characters-grid { max-width: 1500px; margin: 20px auto 60px auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; padding: 0 30px; align-items: start; }
         .char-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 25px; position: relative; cursor: pointer; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .char-card:hover { border-color: var(--text-accent); transform: translateY(-5px); }
-        .char-portrait { width: 100%; aspect-ratio: 1 / 1; background-color: #050505; border: 1px solid #1a1525; margin-bottom: 15px; background-size: cover; background-position: center; filter: brightness(0.3) grayscale(0.8) contrast(1.2); transition: all 0.5s ease; position: relative; z-index: 2; }
+        .char-portrait { width: 100%; aspect-ratio: 1 / 1; background-color: #050505; border: 1px solid #1a1525; margin-bottom: 15px; background-size: cover; background-position: center; filter: brightness(0.3) grayscale(0.8) contrast(1.2); transition: all 0.5s ease; position: relative; z-index: 2; border-radius: 4px;}
         .char-card:hover .char-portrait, .char-card.expanded .char-portrait { filter: brightness(1) grayscale(0) contrast(1); border-color: var(--text-accent); box-shadow: 0 0 20px rgba(138, 43, 226, 0.3); }
         .char-name { font-size: 22px; text-align: center; margin: 10px 0; line-height: 1.3; transition: color 0.3s; position: relative; z-index: 2; }
         .char-card:hover .char-name, .char-card.expanded .char-name { color: var(--text-accent); }
         .char-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s ease, opacity 0.6s ease; font-size: 16px; position: relative; z-index: 2; }
-        .char-card.expanded .char-details { max-height: 800px; opacity: 1; margin-top: 15px; }
+        .char-card.expanded .char-details { max-height: 1000px; opacity: 1; margin-top: 15px; }
         .char-details h4 { color: var(--text-silver); font-size: 18px; margin: 20px 0 5px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
         .hint-text { text-align: center; font-size: 14px; color: #666; margin-top: 10px; font-style: italic; }
         .char-card.expanded .hint-text { display: none; }
+
+        /* Заблокированные карточки для ботов */
+        .char-card.locked { cursor: not-allowed; filter: grayscale(1) brightness(0.5); }
+        .char-card.locked:hover { transform: none; border-color: var(--border-color); }
+        .char-card.locked .char-portrait { filter: brightness(0.2) blur(3px); }
+
+        /* Гиперссылки и футер на странице ботов */
+        .bot-links { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--border-color); }
+        .bot-links a { color: var(--text-accent); text-decoration: none; border-bottom: 1px dashed var(--text-accent); font-family: 'Cinzel', serif; margin: 0 10px; transition: all 0.3s; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;}
+        .bot-links a:hover { color: var(--text-silver); border-bottom-color: var(--text-silver); text-shadow: 0 0 10px var(--glow); }
+        
+        .bots-footer { text-align: center; color: rgba(184, 184, 192, 0.3); font-style: italic; margin: 50px 0 80px 0; font-size: 26px; font-family: 'Cinzel', serif; letter-spacing: 2px;}
+
     </style>
 </head>
 <body>
@@ -253,6 +273,7 @@
             <button class="nav-btn" id="btn-aquilla" onclick="switchPage('aquilla')">Аквилла</button>
             <button class="nav-btn" id="btn-khortul" onclick="switchPage('khortul')">Кхор-Тул</button>
             <button class="nav-btn" id="btn-chars" onclick="switchPage('chars')">Правители</button>
+            <button class="nav-btn" id="btn-bots" onclick="switchPage('bots')">Боты</button>
         </nav>
         <div class="decor-divider-thin"></div>
     </header>
@@ -263,16 +284,15 @@
             <img src="map.jpg" alt="Карта Этернии" class="map-image">
             <img src="fog.gif" alt="Туман" class="mist-overlay" id="mist-layer">
 
-            <!-- Клик по главной карте открывает Регион -->
-            <div class="map-pin" style="left: 38%; top: 21%;" onclick="openRegion('valoria')"></div>
-            <div class="map-pin" style="left: 58%; top: 22%;" onclick="openRegion('rusty')"></div>
-            <div class="map-pin" style="left: 81%; top: 22%;" onclick="openRegion('sylvaria')"></div>
-            <div class="map-pin" style="left: 57.5%; top: 35.5%;" onclick="openRegion('ashen')"></div>
-            <div class="map-pin" style="left: 15.5%; top: 45%;" onclick="openRegion('khor_tul')"></div>
-            <div class="map-pin" style="left: 49%; top: 61%;" onclick="openRegion('aquilla')"></div>
-            <div class="map-pin" style="left: 13.5%; top: 72%;" onclick="openRegion('pilgrim')"></div>
-            <div class="map-pin" style="left: 85%; top: 66%;" onclick="openRegion('misty')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
-            <div class="map-pin" style="left: 49%; top: 83%;" onclick="openRegion('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+            <div class="map-pin" style="left: 38%; top: 21%;" onclick="openMainRegion('valoria')"></div>
+            <div class="map-pin" style="left: 58%; top: 22%;" onclick="openMainRegion('rusty')"></div>
+            <div class="map-pin" style="left: 81%; top: 22%;" onclick="openMainRegion('sylvaria')"></div>
+            <div class="map-pin" style="left: 57.5%; top: 35.5%;" onclick="openMainRegion('ashen')"></div>
+            <div class="map-pin" style="left: 15.5%; top: 45%;" onclick="openMainRegion('khor_tul')"></div>
+            <div class="map-pin" style="left: 49%; top: 61%;" onclick="openMainRegion('aquilla')"></div>
+            <div class="map-pin" style="left: 13.5%; top: 72%;" onclick="openMainRegion('pilgrim')"></div>
+            <div class="map-pin" style="left: 85%; top: 66%;" onclick="openMainRegion('misty')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
+            <div class="map-pin" style="left: 49%; top: 83%;" onclick="openMainRegion('abyss')" onmouseenter="showMist()" onmouseleave="hideMist()"></div>
         </div>
     </main>
 
@@ -280,7 +300,6 @@
     <main id="page-valoria" class="page">
         <div class="map-container">
             <img src="map-valoria.jpg" alt="Карта Валории" class="map-image">
-            <!-- Клик по локации внутри королевства -->
             <div class="map-pin" style="left: 40%; top: 20%;" onclick="openLocation('citadel')"></div>
             <div class="map-pin" style="left: 50%; top: 35%;" onclick="openLocation('garrison')"></div>
             <div class="map-pin" style="left: 65%; top: 45%;" onclick="openLocation('workshop')"></div>
@@ -341,43 +360,140 @@
     <!-- СТРАНИЦА: ПРАВИТЕЛИ -->
     <main id="page-chars" class="page">
         <div class="characters-grid">
-            <div class="char-card" id="card-malakor" onclick="toggleRuler('malakor')">
+            
+            <div class="char-card" id="card-malakor" onclick="toggleCard('card-malakor')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
                 <div class="char-portrait" style="background-image: url('char-malakor.jpg')"></div>
                 <h2 class="char-name">Малакор Торн</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
                 <div class="char-details">
                     <p class="quote-block">«Плоть слаба. Шестерни вечны.»</p>
-                    <p><span class="accent-silver">Верховный Архонт Валории</span>.</p>
+                    <p><span class="accent-silver">Верховный Архонт Валории.</span> От живой плоти в нем осталось лишь сердце, всё остальное — шедевры из черной стали и мерцающих рун.</p>
+                    <h4>Характер</h4>
+                    <p>Лишен человеческих страстей. Говорит <span class="accent-purple">рублеными фразами</span>, оценивая мир через призму эффективности.</p>
+                    <h4>Слухи</h4>
+                    <p>Не спит уже 10 лет, его разум интегрирован в вычислительную машину Оплота.</p>
                 </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
-            <!-- (Остальные 3 правителя по аналогии, сжаты для компактности) -->
-            <div class="char-card" id="card-elara" onclick="toggleRuler('elara')">
+
+            <div class="char-card" id="card-elara" onclick="toggleCard('card-elara')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
                 <div class="char-portrait" style="background-image: url('char-elara.jpg')"></div>
                 <h2 class="char-name">Элара Глубокого Корня</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
-                <div class="char-details"><p class="quote-block">«Мы не спешим. Лес помнит всё.»</p><p><span class="accent-silver">Матриарх Сильварии</span>.</p></div>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«Мы не спешим. Лес помнит всё.»</p>
+                    <p><span class="accent-silver">Матриарх Сильварии.</span> Древний Лесной Вечник. Её ноги превратились в корневую систему, навсегда связавшую её с живым троном-деревом.</p>
+                    <h4>Характер</h4>
+                    <p>Отстраненная, голос звучит как <span class="accent-purple">шелест листвы</span>. Видит мир глазами каждой птицы леса.</p>
+                    <h4>Гнев Леса</h4>
+                    <p>В гневе может приказать лесу прорасти сквозь врага, оставив на его месте цветущий куст.</p>
+                </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
-            <div class="char-card" id="card-cassian" onclick="toggleRuler('cassian')">
+
+            <div class="char-card" id="card-cassian" onclick="toggleCard('card-cassian')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
                 <div class="char-portrait" style="background-image: url('char-cassian.jpg')"></div>
                 <h2 class="char-name">Кассиан Вейн</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
-                <div class="char-details"><p class="quote-block">«У каждого секрета есть своя цена.»</p><p><span class="accent-silver">Великий Дож Аквиллы</span>.</p></div>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«У каждого секрета есть своя цена.»</p>
+                    <p><span class="accent-silver">Великий Дож Аквиллы.</span> Аристократ Ихорец, чье тело пропитано магией Бездны, отчего кожа кажется почти прозрачной.</p>
+                    <h4>Характер</h4>
+                    <p>Воплощение изящества. <span class="accent-purple">Остроумен и коварен</span>, способен продать человеку его же ботинки.</p>
+                    <h4>Одержимость</h4>
+                    <p>Фанатично ищет воспоминания о Серой Мгле, коллекционируя чужую память.</p>
+                </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
-            <div class="char-card" id="card-amon" onclick="toggleRuler('amon')">
+
+            <div class="char-card" id="card-amon" onclick="toggleCard('card-amon')">
                 <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
                 <div class="char-portrait" style="background-image: url('char-amon.jpg')"></div>
                 <h2 class="char-name">Воскресший Амон</h2>
-                <div class="decor-divider-thin" style="margin: 5px auto;"></div><div class="hint-text">Нажмите, чтобы раскрыть</div>
-                <div class="char-details"><p class="quote-block">«Ибо тьма очищается лишь огнем.»</p><p><span class="accent-silver">Патриарх Кхор-Тула</span>.</p></div>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«Ибо тьма очищается лишь огнем.»</p>
+                    <p><span class="accent-silver">Патриарх Кхор-Тула.</span> Старейший Остогон. Его рога срослись в корону, а закрытые глаза видят скрытую суть.</p>
+                    <h4>Характер</h4>
+                    <p>Религиозный фанатик. Голос гремит как шторм. Считает, что <span class="accent-purple">слышит сердце богов</span>.</p>
+                    <h4>Крестовый Поход</h4>
+                    <p>Готовит свой народ к походу, чтобы выжечь ересь в мире до прихода Мглы.</p>
+                </div>
                 <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
             </div>
         </div>
+    </main>
+
+    <!-- СТРАНИЦА: БОТЫ -->
+    <main id="page-bots" class="page">
+        <div class="characters-grid">
+            
+            <!-- МЭРРИК (Активный) -->
+            <div class="char-card" id="bot-merrick" onclick="toggleCard('bot-merrick')">
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('char-merrick.jpg')"></div>
+                <h2 class="char-name">Мэррик</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Нажмите, чтобы раскрыть</div>
+                
+                <div class="char-details">
+                    <p class="quote-block">«Плоть слаба, но искра человечности горит жарче домны.»</p>
+                    <p><span class="accent-silver">Страж-7. Живое оружие Стального Синода.</span></p>
+                    <h4>Биография и Внешность</h4>
+                    <p>Рожденный в Ржавых трущобах, он спас Архонта ценой собственного тела. Теперь левая часть его фигуры сохранила человечность — бледная кожа и бугры шрамов. Правая же — триумф валорианской инженерии: массивная руническая сталь и сплетение трубок, по которым течет Живое Серебро.</p>
+                    <h4>Тень Металла</h4>
+                    <p>Мэррик страдает от <span class="accent-purple">Скорбной хватки</span>. Серебро медленно захватывает его разум. Он фаталист, прекрасно осознающий свой конец, но именно эта обреченность делает его живым. Он не жесток — под броней скрывается глубокое сострадание к слабым, нежность к мелким зверям и саркастичное чувство юмора.</p>
+                    
+                    <div class="bot-links">
+                        <a href="#" target="_blank">indamind ai bot</a>
+                        <a href="#" target="_blank">indamind ai site</a>
+                    </div>
+                </div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
+            </div>
+
+            <!-- ТРИ ЗАКРЫТЫХ БОТА -->
+            <div class="char-card locked">
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('placeholder.jpg')"></div>
+                <h2 class="char-name">Скрыто Мглой</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Пока недоступно</div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
+            </div>
+
+            <div class="char-card locked">
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('placeholder.jpg')"></div>
+                <h2 class="char-name">Скрыто Мглой</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Пока недоступно</div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
+            </div>
+
+            <div class="char-card locked">
+                <div class="decor-corner corner-tl"></div><div class="decor-corner corner-tr"></div>
+                <div class="char-portrait" style="background-image: url('placeholder.jpg')"></div>
+                <h2 class="char-name">Скрыто Мглой</h2>
+                <div class="decor-divider-thin" style="margin: 5px auto;"></div>
+                <div class="hint-text">Пока недоступно</div>
+                <div class="decor-corner corner-bl"></div><div class="decor-corner corner-br"></div>
+            </div>
+
+        </div>
+        
+        <div class="bots-footer">This story has yet to end..</div>
     </main>
 
     <!-- БОКОВАЯ ПАНЕЛЬ -->
@@ -407,162 +523,431 @@
 
     <!-- МАССИВ ДАННЫХ И ЛОГИКА -->
     <script>
-        // База Персонажей
+        // База Персонажей (подробная)
         const charsDB = {
             merrick: {
                 name: "Мэррик", role: "Страж-7, Прагматик до мозга костей", img: "char-merrick.jpg",
-                text: `<p><b>Внешность:</b> Рост — более 190 см. Левая сторона тела человеческая, в шрамах, а правая заменена массивными протезами из рунической стали с Живым Серебром. Волосы седые, глаза холодные голубые.</p><p><b>Характер:</b> Выполняет приказы с хирургической точностью, но в душе питает сострадание к беднякам. Уважает честных солдат, питает слабость к мелким животным.</p><p><b>Секрет:</b> Страдает от «Скорбной хватки» — организм отторгает Живое Серебро, которое медленно захватывает его тело.</p>`
+                text: `<p><b>Внешность:</b> Рост — более 190 см. Левая сторона тела человеческая, в шрамах, а правая заменена массивными протезами из рунической стали с Живым Серебром. Волосы седые, глаза холодные голубые.</p>
+                       <p><b>Характер:</b> Выполняет приказы с хирургической точностью, но в душе питает глубокое сострадание к беднякам. Уважает честных солдат, питает тайную слабость к мелким животным.</p>
+                       <p><b>Тайна:</b> Страдает от «Скорбной хватки» — организм воспринимает Живое Серебро как опухоль, которая медленно захватывает его тело. Он фаталист, спешащий взять от жизни всё.</p>`
             },
             silas: {
                 name: "Мастер Сайлас", role: "Главный медик-инженер Стражи", img: "char-silas.jpg",
-                text: `<p><b>Внешность:</b> Старик со связкой линз вместо глаза, от которого пахнет машинным маслом.</p><p><b>Отношение:</b> Относится к Мэррику как к сыну. Рискует жизнью, скрывая от Синода процент повреждений в его теле и пытаясь найти противоядие от Живого Серебра.</p>`
+                text: `<p><b>Внешность:</b> Старик со связкой линз вместо глаза, от которого пахнет машинным маслом и антисептиком.</p>
+                       <p><b>Связь с Мэрриком:</b> Относится к нему как к сыну. Рискует жизнью, постоянно ворчит, но скрывает от Синода процент повреждений в теле Мэррика и тайно ищет противоядие от Живого Серебра.</p>`
             },
             vance: {
                 name: "Легат Вариан Вэнс", role: "Стальной Палач", img: "char-vance.jpg",
-                text: `<p><b>Характер:</b> Фанатичный сторонник «чистоты плоти». Не имеет имплантов и презирает Слитых.</p><p><b>Отношение:</b> С нетерпением ждет, когда Мэррик потеряет разум, чтобы переплавить его в бездумного сервитора.</p>`
+                text: `<p><b>Внешность и Суть:</b> Не имеет имплантов, фанатичный сторонник «чистоты плоти». Презирает Слитых, считая их расходным материалом.</p>
+                       <p><b>Связь:</b> Видит в Мэррике опасный брак. С нетерпением ждет, когда металл поглотит его разум, чтобы переплавить героя в бездумного сервитора.</p>`
             },
             lyra: {
                 name: "Лира «Флакон»", role: "Беглая алхимичка из Аквиллы", img: "char-lyra.jpg",
-                text: `<p><b>Внешность:</b> Скрывает жабры под плотными шарфами. Живет в Ржавых трущобах.</p><p><b>Связь:</b> Поставляет Мэррику «Эфирное масло», которое глушит фантомные боли. Взамен он закрывает глаза на её контрабанду.</p>`
+                text: `<p><b>Внешность:</b> Скрывает жабры под плотными шарфами. Выживает в Ржавых трущобах Оплота.</p>
+                       <p><b>Связь:</b> Поставляет Мэррику «Эфирное масло», которое глушит жуткие фантомные боли. Взамен получает ценные сведения о графике патрулей и закрытые глаза на контрабанду.</p>`
             },
             briona: {
                 name: "Бриона", role: "Хозяйка таверны «Стальной крюк»", img: "char-briona.jpg",
-                text: `<p><b>Внешность:</b> Женщина из низов, лицо в шрамах от угольной пыли.</p><p><b>Связь:</b> Знает Мэррика с детства. Она единственная, кто называет его по имени, напоминая ему, каково быть человеком.</p>`
+                text: `<p><b>Внешность:</b> Женщина из низов, чье лицо покрыто шрамами от угольной пыли. Держит самую шумную дыру для шахтеров.</p>
+                       <p><b>Связь:</b> Знает Мэррика с детства, еще худым испуганным мальчишкой. Единственная во всем королевстве, кто называет его просто по имени, игнорируя титул Стража.</p>`
             },
             gideon: {
                 name: "Гидеон «Ржавый Нож»", role: "Лидер подполья «Освобождение плоти»", img: "char-gideon.jpg",
-                text: `<p><b>Характер:</b> Безумный, но харизматичный мятежник с Базара.</p><p><b>Связь:</b> Ненавидит Мэррика, считая его символом валорийского режима. Поклялся захватить его живым и вырвать все винты.</p>`
+                text: `<p><b>Характер:</b> Безумный, но дьявольски харизматичный мятежник. Уничтожает Слитых, считая их железными чудовищами.</p>
+                       <p><b>Связь:</b> Для него Мэррик — ненавистный символ Валории. Гидеон поклялся захватить его живым и вырвать каждый винт из его тела.</p>`
             },
             theron: {
                 name: "Тэрон", role: "Бродячий Клык", img: "char-theron.jpg",
-                text: `<p><b>Внешность:</b> 22 года, изумрудные глаза с вертикальными зрачками, волчьи уши и пушистый хвост. На шее носит латунную шестеренку из Валории.</p><p><b>Характер:</b> Мастерски прячет звериную хватку за маской лодыря. Саркастичен, но в критический момент бросится в пасть чудовищу.</p><p><b>Травма:</b> Из-за его любопытства погибла его сестра в Топях. Изгнан из клана, боится привязываться к людям, но отчаянно хочет увидеть мир за лесом.</p>`
+                text: `<p><b>Внешность:</b> 22 года, поджарый юноша. Изумрудные глаза с вертикальными зрачками, чуткие волчьи уши. На шее бережно носит латунную шестеренку из Валории.</p>
+                       <p><b>Характер:</b> Снаружи — насмешливый лодырь и разгильдяй. Внутри — травмированный, одинокий волк с феноменальным слухом. Если кто-то в беде, он бросится в пасть чудовищу без раздумий.</p>
+                       <p><b>Травма:</b> Из-за его любопытства сестра погибла в Топях. Изгнан из клана. Мечтает увидеть внешний мир, но скован паническим страхом потерять кого-то еще.</p>`
             },
             pykh: {
                 name: "Пых", role: "Аномально ленивый Люм", img: "char-pykh.jpg",
-                text: `<p><b>Внешность:</b> Крупный, теплый, как свежий хлеб. Пульсирует мятно-золотым светом.</p><p><b>Связь:</b> Верный и единственный друг Тэрона. Слишком ленив для перелетов.</p>`
+                text: `<p><b>Суть:</b> Крупный, пухлый и невероятно теплый. Переливается мятно-золотым светом.</p>
+                       <p><b>Связь:</b> Верный и единственный друг Тэрона. Слишком ленив для перелетов, поэтому предпочитает спать у него под боком.</p>`
             },
             bran: {
                 name: "Бран «Чернозуб»", role: "Вожак Клана Хвойного Клыка", img: "char-bran.jpg",
-                text: `<p><b>Характер:</b> Суровый волк с седой холкой.</p><p><b>Связь:</b> Презирает Тэрона за гибель сестры. Запретил ему приближаться к родовым курганам под угрозой смерти.</p>`
+                text: `<p><b>Внешность:</b> Суровый Звероуст-волк с седой холкой, ветеран Диколесья.</p>
+                       <p><b>Связь:</b> Люто презирает Тэрона за гибель его названой сестры. Обещал переломать парню ребра, если тот еще раз ступит на курганы предков.</p>`
             },
             tiss: {
                 name: "Матушка Тисс", role: "Старая травница Звероуст-сыч", img: "char-tiss.jpg",
-                text: `<p><b>Внешность:</b> Пышное оперение, круглые очки, острый клюв.</p><p><b>Связь:</b> Подкармливает Тэрона и разрешает спать в своей лавке, хотя регулярно бьет его деревянной ложкой за наглость.</p>`
+                text: `<p><b>Внешность:</b> Пышное серое оперение, круглые подслеповатые очки и острый клюв.</p>
+                       <p><b>Связь:</b> Видит Тэрона насквозь. Подкармливает его и пускает спать, хотя регулярно колотит деревянной ложкой за дерзкие шутки.</p>`
             },
             yvain: {
                 name: "Ивейн «Шелест Иглы»", role: "Вестник Старца Ориса", img: "char-yvain.jpg",
-                text: `<p><b>Внешность:</b> Молодой Вечник с хвоей вместо волос.</p><p><b>Связь:</b> Тайно платит Тэрону за разведку, используя его феноменальный слух для защиты границ от Мглы.</p>`
+                text: `<p><b>Внешность:</b> Молодой Вечник, чьи волосы сплетены из живых хвойных веток.</p>
+                       <p><b>Связь:</b> Тайно платит Тэрону за разведку. Понимает, что аномальный слух волка засекает Серую Мглу лучше любых официальных патрулей.</p>`
             },
             rix: {
-                name: "Рикс «Сорока»", role: "Контрабандист Звероуст-сорока", img: "char-rix.jpg",
-                text: `<p><b>Характер:</b> Вертлявый, ходит в жилете с тайными карманами.</p><p><b>Связь:</b> Подарил Тэрону шестеренку. Травит байки о внешнем мире, подначивая парня уйти из леса.</p>`
+                name: "Рикс «Сорока»", role: "Контрабандист", img: "char-rix.jpg",
+                text: `<p><b>Внешность:</b> Низкорослый Звероуст с иссиня-черными перьями. Ходит в жилете с тайными карманами.</p>
+                       <p><b>Связь:</b> Подарил Тэрону ту самую шестеренку. Травит байки о поездах Оплота и карнавалах Аквиллы, подначивая парня плюнуть на страх и уйти из леса.</p>`
             },
             enerion: {
                 name: "Энерион", role: "Верховный Псаломщик, Кукловод", img: "char-enerion.jpg",
-                text: `<p><b>Внешность:</b> Остогон пугающей красоты. Красные волосы, изящные черные бритвенные рога. Глаза — ослепительно-белые колодцы без зрачков.</p><p><b>Характер:</b> Утонченный манипулятор и расчетливый собственник. Ломает людей психологически.</p><p><b>Секрет:</b> Управляет колоссальной гравитацией. Ненавидит абсолютную тишину из-за детской травмы изоляции.</p>`
+                text: `<p><b>Внешность:</b> Остогон пугающей красоты. Красные волосы, изящные черные бритвенные рога. Глаза — ослепительно-белые колодцы без зрачков.</p>
+                       <p><b>Характер:</b> Для паствы — идеальный, всепрощающий пастырь. На деле — утонченный манипулятор и расчетливый кукловод, ломающий людей психологически.</p>
+                       <p><b>Тайна:</b> Способен расплющить врага колоссальной гравитацией не поднимая руки. Ненавидит абсолютную тишину из-за детской травмы ледяной изоляции.</p>`
             },
             amon: {
-                name: "Патриарх Амон", role: "Абсолютный Правитель Кхор-Тула", img: "char-amon.jpg",
-                text: `<p><b>Внешность:</b> Древнейший остогон, чьи рога срослись в корону.</p><p><b>Связь:</b> Для Энериона — токсичная фигура отца. Они ведут шахматную партию, где Амон держит инквизитора на коротком поводке.</p>`
+                name: "Патриарх Амон", role: "Абсолютный Правитель Пиков", img: "char-amon.jpg",
+                text: `<p><b>Внешность:</b> Древнейший остогон, чьи рога срослись в окаменевшую корону.</p>
+                       <p><b>Связь:</b> Токсичная фигура отца для Энериона. Их союз — шахматная партия. Амон держит инквизитора на поводке, а тот ждет, когда старик окончательно закостенеет.</p>`
             },
             morvald: {
                 name: "Брат Морвальд", role: "Верховный Юстициар", img: "char-morvald.jpg",
-                text: `<p><b>Характер:</b> Суровый ветеран, спящий на камнях в веригах.</p><p><b>Связь:</b> Ненавидит Энериона, считая его слащавым еретиком. Мечтает сбросить его со скалы.</p>`
+                text: `<p><b>Характер:</b> Ветеран монастырских войн, отвергающий роскошь. Спит на мерзлом граните в веригах.</p>
+                       <p><b>Связь:</b> Ненавидит Энериона, считая его слащавым еретиком с бесовскими рожками. Спит и видит, как уличит его в измене и сбросит со скалы.</p>`
             },
             neya: {
                 name: "Нея", role: "Слепая послушница", img: "char-neya.jpg",
-                text: `<p><b>Внешность:</b> 16-летняя слепая полукровка из низин.</p><p><b>Связь:</b> Единственное существо, при виде которого Энерион становится уязвимым. Она общается с ним просто и без страха.</p>`
+                text: `<p><b>Внешность:</b> 16-летняя абсолютно слепая полукровка из низин.</p>
+                       <p><b>Связь:</b> Единственное существо, при виде которого в Энерионе просыпается не хищник, а загнанный ребенок. Она общается с ним просто, без дрожи и раболепия.</p>`
             },
             valdis: {
                 name: "Сестра Вальдис", role: "Немая карательница", img: "char-valdis.jpg",
-                text: `<p><b>Внешность:</b> Высокая остогонка со спиленными рогами.</p><p><b>Связь:</b> Абсолютная тень Энериона, выполняющая самую грязную работу без лишних вопросов.</p>`
+                text: `<p><b>Внешность:</b> Сухая остогонка с наголо спиленными рогами — знак абсолютной жертвы.</p>
+                       <p><b>Связь:</b> Абсолютная тень Энериона. Понимает малейший жест его пальцев, выполняя самую грязную работу в Ордене.</p>`
             },
             nicodem: {
                 name: "Никодем «Нико»", role: "Призрак Зеркальных Вод", img: "char-nicodem.jpg",
-                text: `<p><b>Внешность:</b> Полуэльф-гедонист, фиалковые глаза со щелями, иссиня-фиолетовые волосы. Носит чернильную шелковую рубаху.</p><p><b>Характер:</b> Дерзок, жаден до роскоши, играет на пороках знати. Мастерски держит дистанцию с помощью шуток.</p><p><b>Секрет:</b> Упал в Бездну и вернулся. Теперь Бездна зовет его обратно. Ему нужны материальные ценности (золото, чужая память) как «якоря», чтобы не раствориться во тьме.</p>`
+                text: `<p><b>Внешность:</b> Полуэльф с жилистой пластикой акробата. Иссиня-фиолетовые волосы и глаза, светящиеся аметистовым огнем в темноте.</p>
+                       <p><b>Характер:</b> Гедонист с ленивой полуулыбкой. Обожает азарт, балансируя над смертью. Никого не подпускает близко, защищаясь едким сарказмом.</p>
+                       <p><b>Тайна:</b> Был сброшен в Бездну, но выжил. Тьма медленно зовет его обратно. Ему нужны материальные «якоря» (тяжелое золото, чужая память), чтобы не раствориться в гуле пустоты.</p>`
             },
             corvus: {
                 name: "Старик Корвус", role: "Слепой Гребец", img: "char-corvus.jpg",
-                text: `<p><b>Внешность:</b> Лодочник с побелевшими от ядов глазами.</p><p><b>Связь:</b> Спас Нико из воды в младенчестве, а потом вытащил из Бездны. Варит ему отвары, глушащие зов тьмы. Единственный якорь, ради которого Нико убьет.</p>`
+                text: `<p><b>Внешность:</b> Лодочник из доков с побелевшими от ядовитых испарений глазами.</p>
+                       <p><b>Связь:</b> Спас младенца-Нико из воды, а затем вытащил его же из Бездны. Варит отвары, глушащие зов тьмы. Единственный неоспоримый якорь, ради которого Нико перережет горло любому.</p>`
             },
             violetta: {
-                name: "Мадам Виолетта", role: "Хозяйка кабаре-аукциона", img: "char-violetta.jpg",
-                text: `<p><b>Внешность:</b> Глухая фарфоровая маска, шелка цвета увядшей розы.</p><p><b>Связь:</b> Скупает добычу Нико, расплачиваясь тяжелым золотом, чтобы удержать его в материальном мире. Их общение — циничный торг.</p>`
+                name: "Мадам Виолетта", role: "Хозяйка аукциона «Утонувшая Лилия»", img: "char-violetta.jpg",
+                text: `<p><b>Внешность:</b> Носит тяжелые шелка цвета увядшей розы и глухую фарфоровую маску.</p>
+                       <p><b>Связь:</b> Скупает артефакты у Нико, специально расплачиваясь старинным тяжелым золотом, чтобы физически привязать вора к реальности. Их общение — непрерывный циничный торг.</p>`
             },
             varen: {
-                name: "Магистрат Аугуст Варен", role: "Верховный дознаватель", img: "char-varen.jpg",
-                text: `<p><b>Внешность:</b> Зеркальная маска вместо лица.</p><p><b>Связь:</b> Заклятый враг Нико. Мечтает вскрыть череп вора живьем, чтобы извлечь тайну Бездны.</p>`
+                name: "Магистрат Аугуст Варен", role: "Верховный дознаватель Зеркальной Стражи", img: "char-varen.jpg",
+                text: `<p><b>Внешность:</b> Безупречный мундир. Вместо маски носит зеркальную пластину, отражающую ужас допрашиваемых.</p>
+                       <p><b>Связь:</b> Заклятый враг Никодема. Маниакально желает вскрыть череп вора живьем, чтобы извлечь тайну Бездны.</p>`
             },
             kaeli: {
                 name: "Каэли «Пустая Склянка»", role: "Стеклодув без личности", img: "char-kaeli.jpg",
-                text: `<p><b>Внешность:</b> 18 лет. Ее личность полностью стерли («зачистили») за долги.</p><p><b>Связь:</b> Нико тайно оплачивает ее жилье. Глядя на ее пустой взгляд, он видит свое будущее, если Бездна его поглотит.</p>`
+                text: `<p><b>Суть:</b> 18-летняя девушка. За долги Дома Памяти выкачали ее личность без остатка, превратив в безэмоциональную куклу.</p>
+                       <p><b>Связь:</b> Нико тайно оплачивает ее жилье. Глядя в ее пустые глаза, он видит собственное будущее, если Бездна однажды сожрет его душу.</p>`
             }
         };
 
-        // База Главных Регионов (для главной карты)
+        // База Главных Регионов (ПОЛНОЦЕННАЯ ВЕРСИЯ ДЛЯ ГЛАВНОЙ КАРТЫ)
         const mainRegionsDB = {
-            valoria: { title: "Валория", desc: "<h3>Мрачная Кузница</h3><p>Циклопический конгломерат из черного гранита и чугуна. Здесь нет поэзии, только гул заводов. Буры Оплота высасывают магическую сущность мира.</p>", society: "<h3>Общество</h3><p>Жесткая кастовая система: Аристократы, Сплавленные (элита с имплантами) и Ржавые бедняки.</p>", rule: "<h3>Власть Синода</h3><p>Управляется Стальным Синодом.</p>" },
-            sylvaria: { title: "Сильвария", desc: "<h3>Изумрудная Колыбель</h3><p>Древний лес на востоке. Столица Эльвейн — это единый организм из колоссальных деревьев-небоскребов.</p>", society: "<h3>Общество</h3><p>Лесные Вечники и Звероусты. Здесь не ценят золото, лишь умение слышать Шепот Леса.</p>", rule: "<h3>Круг Сезонов</h3><p>Управляется советом четырех старейшин.</p>" },
-            aquilla: { title: "Аквилла", desc: "<h3>Город над Бездной</h3><p>Жемчужина юга в стиле Dark Deco, выстроенная над чудовищным разломом.</p>", society: "<h3>Рынок Секретов</h3><p>Ихорцы-аристократы и алхимики, продающие чужую память во флаконах.</p>", rule: "<h3>Совет Десяти Масок</h3><p>Управляется Советом, где воюют ядами и слухами.</p>" },
-            khor_tul: { title: "Кхор-Тул (Пики)", desc: "<h3>Порог Небес</h3><p>Монастыри, вырубленные в скалах над облаками, соединенные мостами из костей.</p>", society: "<h3>Путь Искупления</h3><p>Родина Остогонов — рогатых гуманоидов, живущих в суровой аскезе.</p>", rule: "<h3>Синод Небесного Света</h3><p>Теократия, толкующая знамения в облаках.</p>" },
-            rusty: { title: "Ржавые Сады", desc: "<h3>Механическое Кладбище</h3><p>Техногенная свалка на окраинах Валории, где ожили кучи металла.</p>", society: "", rule: "" },
-            ashen: { title: "Пепельная Пустошь", desc: "<h3>Разорванная Земля</h3><p>Мертвая граница. Время и гравитация здесь нестабильны, по равнине бродят призраки битв (Эхо).</p>", society: "", rule: "" },
-            pilgrim: { title: "Приют Пилигрима", desc: "<h3>Костяные Врата</h3><p>Поселение, вырезанное внутри исполинского скелета рухнувшего существа.</p>", society: "", rule: "" },
-            misty: { title: "Туманные Топи", desc: "<h3>Шепчущие Болота</h3><p>Топкие равнины, где твари «Шептуны» крадут голоса любимых.</p>", society: "", rule: "" },
-            abyss: { title: "Бездна", desc: "<h3>Дыхание Тьмы</h3><p>Подводный разлом под Аквиллой, исторгающий Серую Мглу.</p>", society: "", rule: "" }
+            valoria: {
+                title: "Валория",
+                desc: `<h3>Мрачная Кузница</h3><p>Циклопический конгломерат из черного гранита и чугуна, стиснутый в ледяных каньонах севера. Здесь нет поэзии, только гул заводов. Буры Оплота <span class="accent-purple">высасывают магическую сущность</span> мира, оставляя мертвый монолит.</p>`,
+                society: `<h3>Шестерни Общества</h3><ul class="styled-list"><li><span class="accent-silver">Первородные:</span> Аристократы, хранящие чистоту плоти.</li><li><span class="accent-silver">Сплавленные:</span> Элита с имплантами из Живого серебра.</li><li><span class="accent-silver">Ржавые:</span> Бедняки, гниющие от металлической лихорадки.</li></ul>`,
+                rule: `<h3>Власть Синода</h3><p>Управляется <span class="accent-silver">Стальным Синодом</span> — решения лишены эмоций и строятся на холодном расчете.</p>`
+            },
+            sylvaria: {
+                title: "Сильвария",
+                desc: `<h3>Изумрудная Колыбель</h3><p>Древний лес на востоке. Столица Эльвейн — это единый организм из <span class="accent-purple">колоссальных деревьев-небоскребов</span>. Ночью лес вспыхивает неоновым свечением биолюминесцентных грибов.</p>`,
+                society: `<h3>Дети Леса</h3><ul class="styled-list"><li><span class="accent-silver">Лесные Вечники:</span> Бессмертные хранители памяти с кожей-берестой.</li><li><span class="accent-silver">Звероусты:</span> Полулюди с чертами зверей.</li></ul><p class="quote-block">Здесь не ценят золото, лишь умение слышать Шепот Леса.</p>`,
+                rule: `<h3>Власть Сезонов</h3><p>Направляется <span class="accent-silver">Кругом Сезонов</span>, медитирующим у корней Великого Древа.</p>`
+            },
+            aquilla: {
+                title: "Аквилла",
+                desc: `<h3>Город над Бездной</h3><p>Жемчужина юга в стиле Dark Deco, выстроенная над <span class="accent-purple">чудовищным разломом</span>. Элегантные белые башни отражаются в бирюзовых водах.</p>`,
+                society: `<h3>Рынок Секретов</h3><ul class="styled-list"><li><span class="accent-silver">Ихорцы:</span> Бледные аристократы с жабрами.</li><li><span class="accent-silver">Рынок Воспоминаний:</span> Место, где алхимики продают чужую память во флаконах.</li></ul>`,
+                rule: `<h3>Власть Масок</h3><p>Управляется <span class="accent-silver">Советом Десяти Масок</span>, где воюют ядами и слухами.</p>`
+            },
+            khor_tul: {
+                title: "Кхор-Тул (Пики)",
+                desc: `<h3>Порог Небес</h3><p>Монастыри, вырубленные в скалах над облаками. Храмы соединены жуткими мостами из <span class="accent-purple">костей и цепей</span>, а вершины купаются в ослепительном эфирном свете.</p>`,
+                society: `<h3>Путь Искупления</h3><p>Родина <span class="accent-silver">Остогонов</span> — рогатых гуманоидов. Их жизнь — изнурительная аскеза и молитвы, искупающие демонический вид.</p>`,
+                rule: `<h3>Власть Вере</h3><p>Теократия <span class="accent-silver">Синода Небесного Света</span>, толкующего знамения в облаках.</p>`
+            },
+            rusty: {
+                title: "Ржавые Сады",
+                desc: `<h3>Механическое Кладбище</h3><p>Техногенная свалка на окраинах Валории. Горы бракованных машин <span class="accent-purple">ожили</span> под воздействием магии.</p>`,
+                society: `<h3>Изгои</h3><p>Убежище для изгнанных Сплавленных и механических паразитов, охотящихся на теплую кровь.</p>`,
+                rule: ``
+            },
+            ashen: {
+                title: "Пепельная Пустошь",
+                desc: `<h3>Разорванная Земля</h3><p>Мертвая граница, где вместо песка хрустит <span class="accent-purple">пепел сожженных эпох</span>. Время и гравитация здесь нестабильны.</p>`,
+                society: `<h3>Эхо Прошлого</h3><p>Главная угроза — призрачные проекции древних битв, способные нанести реальную рану случайному путнику.</p>`,
+                rule: ``
+            },
+            pilgrim: {
+                title: "Приют Пилигрима",
+                desc: `<h3>Костяные Врата</h3><p>Поселение у подножия Пиков, вырезанное внутри <span class="accent-purple">исполинского скелета</span> существа, рухнувшего с небес.</p>`,
+                society: `<h3>Покаяние</h3><p>Любой смех чужака может закончиться публичной поркой. Сюда приходят лишь за священной солью и искуплением.</p>`,
+                rule: ``
+            },
+            misty: {
+                title: "Туманные Топи",
+                desc: `<h3>Шепчущие Болота</h3><p>Сеть топких равнин в белом тумане. Стоячие воды источают аромат <span class="accent-purple">гнили и дорогих духов</span>.</p>`,
+                society: `<h3>Узел Безмолвия</h3><p>Идеальный каменный круг в центре топей, где полностью исчезают звуки. Путь к нему преграждают «Шептуны», крадущие голоса любимых.</p>`,
+                rule: ``
+            },
+            abyss: {
+                title: "Бездна",
+                desc: `<h3>Дыхание Тьмы</h3><p>Необъятный подводный разлом под Аквиллой. Раз в столетие Бездна делает <span class="accent-purple">«выдох»</span>, срывая магические замки.</p>`,
+                society: `<h3>Серая Мгла</h3><p>Мелкодисперсная тьма поднимается из океана, материализуя призраков. Ни один смертный не смеет спуститься в её глубины.</p>`,
+                rule: ``
+            }
         };
 
-        // База Локаций внутри Королевств
+        // База Локаций внутри Королевств (ПОДРОБНАЯ)
         const locationsDB = {
             // ВАЛОРИЯ
-            citadel: { title: "Цитадель Легата", what: "Военно-административный центр Валории.", where: "Верхний ярус (Стальной Пик).", look: "Монументальный бастион с полированной сталью, тактическими картами и панорамными окнами на дымящийся город.", chars: ["vance"] },
-            garrison: { title: "Гарнизон «Седьмого Протокола»", what: "База киборгов-гвардейцев.", where: "Стык Верхнего и Среднего ярусов.", look: "Ряд бронированных ангаров. Пахнет озоном и оружейным маслом.", chars: ["merrick"] },
-            workshop: { title: "Мастерская Силаса «Ржавый Шприц»", what: "Нелегальный хирургический кабинет.", where: "Паровой Пояс, заброшенный тупик.", look: "Тесное, пропахшее гарью помещение с гидравлическим столом и банками дефектного Серебра.", chars: ["silas"] },
-            forge: { title: "Комбинат «Титан»", what: "Крупнейший завод по выплавке брони.", where: "Средний ярус.", look: "Циклопический цех с белыми вспышками расплавленного металла и грохочущими молотами.", chars: ["briona"] },
-            bazaar: { title: "Базар «Шлаковое Дно»", what: "Черный рынок вторсырья и контрабанды.", where: "Нижний ярус, у главной шахты отходов.", look: "Трущобный лабиринт из ржавых контейнеров, освещаемый бочками с мазутом.", chars: ["gideon"] },
-            block14: { title: "Жилой блок 14-Б", what: "Типовой рабочий барак для низших каст.", where: "Нижний ярус у паропровода.", look: "Крошечный неотапливаемый куб. Тепло идет только от гудящей трубы в стене.", chars: ["lyra"] },
-            bastion: { title: "Бастион «Ледяной Засов»", what: "Опорный узел внешней стены.", where: "Внешний периметр Валории.", look: "Стальная стена с бойницами, покрытая метром наледи.", chars: [] },
-            tavern: { title: "Таверна «Стальной Крюк»", what: "Подвальная дыра для ветеранов и работяг.", where: "Основание балки грузового лифта №4.", look: "Густой сизый дым, запах масла и кислого спирта. Столы намертво прикручены к полу.", chars: ["briona", "merrick"] },
+            citadel: { 
+                title: "Цитадель Легата", 
+                what: "Военно-административный центр Валории и резиденция легата Ванса.", 
+                where: "Находится на Верхнем ярусе (Стальной Пик), в самой высокой точке Оплота.", 
+                look: "Монументальный бастион бруталистской архитектуры. Внутри — залы из полированной вороненой стали, огромные светящиеся <span class="accent-purple">тактические карты</span> и бронированные панорамные окна с видом на вечно дымящийся город.", 
+                chars: ["vance"] 
+            },
+            garrison: { 
+                title: "Гарнизон «Седьмого Протокола»", 
+                what: "База дислокации элитных киборгов-гвардейцев и место постоянной приписки Мэррика.", 
+                where: "Стык Верхнего и Среднего ярусов, у главных подъемных шахт.", 
+                look: "Длинные бронированные ангары с железными боксами для сна. Вдоль стен размещены гидравлические стойки для калибровки протезов и оружейные стенды. Воздух густо пахнет <span class="accent-purple">озоном и оружейным маслом</span>.", 
+                chars: ["merrick"] 
+            },
+            workshop: { 
+                title: "Мастерская «Ржавый Шприц»", 
+                what: "Нелегальный хирургический кабинет по кустарной аугментации.", 
+                where: "Средний ярус (Паровой Пояс), в заброшенном техническом тупике за вентиляцией.", 
+                look: "Тесное, пропахшее спиртом и гарью помещение с низкими потолками. В центре — операционный стол со следами окислов, вокруг стоят стеллажи с банками дефектного <span class="accent-silver">Живого Серебра</span> и мотки проводов.", 
+                chars: ["silas"] 
+            },
+            forge: { 
+                title: "Комбинат «Титан»", 
+                what: "Крупнейший завод Валории по выплавке брони и очистке металлов.", 
+                where: "Промышленная зона внутреннего кольца Среднего яруса.", 
+                look: "Циклопический цех под закопченными сводами. Озаряется белыми вспышками расплавленного металла, вдоль стен грохочут пневматические молоты, а воздух перенасыщен <span class="accent-purple">горячим паром и угольной пылью</span>.", 
+                chars: ["briona"] 
+            },
+            bazaar: { 
+                title: "Базар «Шлаковое Дно»", 
+                what: "Черный рынок вторсырья, ворованных патронов и списанных деталей.", 
+                where: "Нижний ярус, у основания главной шахты сброса отходов.", 
+                look: "Трущобный лабиринт из ржавых грузовых контейнеров. Освещается чадящими бочками с мазутом, под ногами хрустит <span class="accent-silver">замерзший шлак</span>.", 
+                chars: ["gideon"] 
+            },
+            block14: { 
+                title: "Жилой блок 14-Б", 
+                what: "Типовой рабочий барак для низших каст заводских механиков.", 
+                where: "Нижний ярус, жилые соты рядом с магистральным паропроводом.", 
+                look: "Крошечный неотапливаемый куб из клепаной стали. Единственный источник тепла — гудящая труба отопления, идущая сквозь стену. Освещается тусклой керосиновой лампой.", 
+                chars: ["lyra"] 
+            },
+            bastion: { 
+                title: "Бастион «Ледяной Засов»", 
+                what: "Опорный узел внешней оборонительной стены.", 
+                where: "Внешний периметр Валории, фасадная сторона железного вала.", 
+                look: "Стоящая на морозе многоярусная стальная стена с тяжелыми паровыми пушками. Бронеплиты покрыты метровым слоем наледи, выходы перекрыты <span class="accent-silver">пятитонными гермоворотами</span>.", 
+                chars: [] 
+            },
+            tavern: { 
+                title: "Таверна «Стальной Крюк»", 
+                what: "Культовая подвальная дыра для ветеранов-инвалидов и работяг.", 
+                where: "Граница Среднего и Нижнего ярусов, в основании опоры грузового лифта.", 
+                look: "Полумрак, густой сизый дым от дешевого табака и тяжелый запах кислого спирта. Столы и лавки намертво прикручены болтами к вибрирующему металлическому полу.", 
+                chars: ["briona", "merrick"] 
+            },
             
             // СИЛЬВАРИЯ
-            vault: { title: "Тронный Свод Древа-Матери", what: "Сакральное сердце королевства.", where: "Внутри полого ствола Первородного Исполина.", look: "Грандиозный зал из живой древесины. Стены пульсируют бирюзовым соком.", chars: ["elara"] },
-            grove: { title: "Роща Четырех Сезонов", what: "Место медитаций Старейшин.", where: "Верхний ярус ветвей.", look: "Круглая платформа, разделенная на 4 сектора (весна, лето, осень, зима).", chars: [] },
-            pharmacy: { title: "Аптека Матушки Тисс", what: "Лавка травницы и убежище Тэрона.", where: "Ствол плакучей ивы.", look: "Уютное дупло. Пахнет мелиссой и светящимися спорами.", chars: ["tiss", "theron"] },
-            market: { title: "Базар «Переплетенные Лианы»", what: "Шумный торговый перекресток.", where: "Развилка между древними дубами.", look: "Лабиринт из навесов. Пахнет жареными орехами и пряностями.", chars: ["rix"] },
-            span: { title: "Заброшенный пролет", what: "Излюбленная точка отдыха Тэрона.", where: "Край Ивовых Крон над подлеском.", look: "Старый настил, где натянут вылинявший гамак прямо над темной бездной.", chars: ["theron", "pykh"] },
-            post: { title: "Пост Слухачей", what: "Тайная резиденция Ивейна.", where: "Обособленная высокая пихта.", look: "Аскетичное жилище, оплетенное лозами-«слухачами», улавливающими шорохи границ.", chars: ["yvain"] },
-            camp: { title: "Стойбище Клана", what: "Укрепленный лагерь волчьих Звероустов.", where: "Скалистая гряда на опушке.", look: "Палисад с черепами, полуземлянки и дымный костер из торфа.", chars: ["bran"] },
-            outpost: { title: "Застава «Зеленый Рубеж»", what: "Оборонительная вышка Следопытов.", where: "Граница с Пепельной Пустошью.", look: "Платформа на трех исполинских лиственницах с метателями ядовитых шипов.", chars: [] },
+            vault: { 
+                title: "Тронный Свод Древа-Матери", 
+                what: "Политическое и сакральное сердце королевства.", 
+                where: "Самый центр Сердцелесья, внутри колоссального полого ствола.", 
+                look: "Грандиозный зал, выращенный из живой древесины. Стены пульсируют мягким <span class="accent-purple">бирюзовым соком</span>, а в центре возвышается трон, в который намертво вросли корни Матриарха.", 
+                chars: ["elara"] 
+            },
+            grove: { 
+                title: "Роща Четырех Сезонов", 
+                what: "Место медитаций и тайных совещаний четырех Старейшин.", 
+                where: "Верхний ярус ветвей Древа-Матери, открытая площадка.", 
+                look: "Круглая живая платформа, четко разделенная на четыре сектора по состояниям леса: от плакучих ветвей весны до скованной морозным инеем площадки зимы.", 
+                chars: [] 
+            },
+            pharmacy: { 
+                title: "Аптека-дупло Матушки Тисс", 
+                what: "Старейшая лавка травницы и безопасное убежище Тэрона.", 
+                where: "Узловой ствол гигантской плакучей ивы в Среднем Кольце.", 
+                look: "Уютное круглое дупло. Внутри густо пахнет сушеной мелиссой, можжевельником и <span class="accent-purple">светящимися спорами</span>. С потолка гроздьями свисают банки с целебными настоями.", 
+                chars: ["tiss", "theron", "pykh"] 
+            },
+            market: { 
+                title: "Базар «Переплетенные Лианы»", 
+                what: "Шумный торговый перекресток, где ремесленники сбывают эссенции.", 
+                where: "Широкая развилка между тремя древними дубами на высоте 15 метров.", 
+                look: "Лабиринт из навесов коры и прилавков. Вместо фонарей висят плетеные клети со светящимися Люмами. Пахнет <span class="accent-silver">жареными орехами и пряностями</span>.", 
+                chars: ["rix"] 
+            },
+            span: { 
+                title: "Заброшенный пролет", 
+                what: "Оборванный подвесной мост — излюбленная точка отдыха лодырей.", 
+                where: "Внешний край Ивовых Крон, нависающий над подлеском.", 
+                look: "Старый деревянный настил, поросший лишайником. Доски обрываются прямо над темной бездной, где натянут вылинявший холщовый гамак.", 
+                chars: ["theron", "pykh"] 
+            },
+            post: { 
+                title: "Пост Слухачей", 
+                what: "Тайная резиденция разведчиков и вестников Старца Ориса.", 
+                where: "Обособленная высокая пихта на стыке Диколесья.", 
+                look: "Аскетичное жилище, пол которого устлан свежей хвоей, а стены оплетены вибрирующими лозами-<span class="accent-purple">«слухачами»</span>, улавливающими шорохи границ.", 
+                chars: ["yvain"] 
+            },
+            camp: { 
+                title: "Стойбище Хвойного Клыка", 
+                what: "Укрепленный лагерь волчьих Звероустов под предводительством Брана.", 
+                where: "Скалистая гряда на опушке Диколесья.", 
+                look: "Заостренный палисад из черных бревен, украшенный рогами вепрей. В центре чадит костер из торфа, а на холме высятся <span class="accent-silver">родовые курганы</span>.", 
+                chars: ["bran"] 
+            },
+            outpost: { 
+                title: "Застава «Зеленый Рубеж»", 
+                what: "Оборонительная вышка Следопытов Пограничья.", 
+                where: "Крайняя восточная граница, перед Пепельной Пустошью.", 
+                look: "Мощная многоярусная платформа. Оборудована станковыми метателями отравленных шипов. Воздух здесь всегда пахнет гарью и пеплом.", 
+                chars: [] 
+            },
             
             // АКВИЛЛА
-            palace: { title: "Дворец Дожей", what: "Резиденция Кассиана и зал Совета.", where: "Высшая терраса Зеркального Венца.", look: "Дворец из белого мрамора и хрусталя в стиле арт-деко.", chars: ["cassian"] },
-            archive: { title: "Великий Архив Памяти", what: "Секретное хранилище воспоминаний.", where: "Центральный остров Венца.", look: "Монолитное здание со стеллажами мерцающих колб: золотых, багровых, голубых.", chars: [] },
-            salon: { title: "Салон «Ночная Орхидея»", what: "Элитный светский центр шпионажа.", where: "Павильон с видом на лагуну.", look: "Мраморные террасы, увитые черными орхидеями. Слуги в масках разносят вино.", chars: [] },
-            cabaret: { title: "Кабаре «Утонувшая Лилия»", what: "Полузатопленный клуб-аукцион.", where: "Перекресток Квартала Шепотов.", look: "Трехэтажное палаццо, уходящее фундаментом в воду. Внутри полумрак и бархат.", chars: ["violetta", "nicodem"] },
-            passage: { title: "Пассаж Стеклодувов", what: "Рынок Воспоминаний.", where: "Крытая набережная Большого Канала.", look: "Шумный коридор с жаром от печей. В витринах — тысячи изящных флаконов памяти.", chars: ["kaeli"] },
-            citadel_guard: { title: "Цитадель Зеркальной Стражи", what: "Штаб тайной полиции и лаборатории «зачистки».", where: "Граница Квартала Шепотов.", look: "Мрачное здание из темного камня с зеркальными окнами.", chars: ["varen"] },
-            lair: { title: "Заброшенный Часовой Шпиль", what: "Убежище Никодема.", where: "Нижний ярус, накренившийся над Бездной.", look: "Огромный циферблат без стрелок. Внутри — шелковые ковры и ворованные сокровища.", chars: ["nicodem"] },
-            pier: { title: "Причал «Мертвая Зыбь»", what: "Тайная стоянка и дом лодочника.", where: "На самом дне города.", look: "Сырые деревянные мостки над жирной водой. Пахнет тиной и ядами Бездны.", chars: ["corvus"] },
-            monoliths: { title: "Якорные Монолиты", what: "Инженерный комплекс, удерживающий город.", where: "Основание над воронкой Бездны.", look: "Колоссальные зубчатые передачи и цепи толщиной с корабельную мачту.", chars: [] },
+            palace: { 
+                title: "Палаццо Кассиана Вейна", 
+                what: "Резиденция Великого Дожа и тайный зал заседаний Десяти Масок.", 
+                where: "Высшая терраса Зеркального Венца.", 
+                look: "Величественный дворец из белого мрамора, хрусталя и лазурита с золотыми шпилями. Внутри Ротонда Совета с круглым столом из <span class="accent-purple">черного глубоководного стекла</span>.", 
+                chars: ["cassian"] 
+            },
+            archive: { 
+                title: "Великий Архив Памяти", 
+                what: "Хранилище воспоминаний высшей категории секретности.", 
+                where: "Центральный искусственный остров.", 
+                look: "Грандиозное здание без окон. Стеллажи уходят под хрустальный купол, храня сотни тысяч мерцающих стеклянных капсул с <span class="accent-silver">запечатанной человеческой памятью</span>.", 
+                chars: [] 
+            },
+            salon: { 
+                title: "Салон «Ночная Орхидея»", 
+                what: "Элитный светский салон и негласный центр шпионажа.", 
+                where: "Южная терраса Зеркального Венца с видом на лагуну.", 
+                look: "Открытые мраморные террасы, густо увитые ядовито-фиолетовыми ночными орхидеями. Слуги в масках разносят вино с каплями эссенции грез.", 
+                chars: [] 
+            },
+            cabaret: { 
+                title: "Кабаре «Утонувшая Лилия»", 
+                what: "Полузатопленный элитный клуб-аукцион контрабандистов.", 
+                where: "Узловой перекресток Квартала Шепотов.", 
+                look: "Трехэтажное палаццо, чей фундамент уходит прямо в темную воду. Внутри — тяжелые бархатные диваны, золоченые канделябры и сцена для <span class="accent-purple">закрытых торгов</span>.", 
+                chars: ["violetta", "nicodem"] 
+            },
+            passage: { 
+                title: "Пассаж Стеклодувов", 
+                what: "Торговая галерея, где создают фиалы для памяти.", 
+                where: "Арочная крытая набережная вдоль Большого Канала.", 
+                look: "Шумный коридор с жаром от печей гильдии. В витринах выставлены изящные флаконы: «Юность», «Вкус первой победы», «Забытый кошмар».", 
+                chars: ["kaeli"] 
+            },
+            citadel_guard: { 
+                title: "Цитадель Зеркальной Стражи", 
+                what: "Штаб тайной полиции и лаборатории ментальной «зачистки».", 
+                where: "Нависающий бастион над Нижними Доками.", 
+                look: "Хищное здание из вороненой стали. Окна закрыты <span class="accent-silver">зеркальными пластинами</span>. В казематах установлены кресла для выкачивания личностей.", 
+                chars: ["varen"] 
+            },
+            lair: { 
+                title: "Заброшенный Часовой Шпиль", 
+                what: "Логово Никодема и склад краденых сокровищ.", 
+                where: "Самый нижний ярус Гнилого Трюма, накренившийся над Бездной.", 
+                look: "Старая полузатопленная башня. Огромный циферблат без стрелок служит панорамным окном на воющую пустоту внизу. Внутри — украденные ковры и <span class="accent-purple">мерцающие самоцветы</span>.", 
+                chars: ["nicodem"] 
+            },
+            pier: { 
+                title: "Причал «Мертвая Зыбь»", 
+                what: "Тайная стоянка лодок и дом Слепого Гребца.", 
+                where: "На самом дне города, под циклопическими арочными опорами.", 
+                look: "Сырые деревянные помосты на ржавых сваях. Пахнет тиной, дегтем и <span class="accent-silver">ядовитыми испарениями</span> Бездны.", 
+                chars: ["corvus"] 
+            },
+            monoliths: { 
+                title: "Якорные Монолиты", 
+                what: "Инженерный комплекс, удерживающий платформы города от сползания в разлом.", 
+                where: "Основание Аквиллы, прямо над кромкой гигантской подводной воронки.", 
+                look: "Колоссальные зубчатые передачи и стальные цепи толщиной в корабельную мачту, вбитые в скальный монолит.", 
+                chars: [] 
+            },
             
             // КХОР-ТУЛ
-            ossuary: { title: "Оссификаторий", what: "Костяные мастерские.", where: "Скальный карниз.", look: "Полуоткрытая пещера со штабелями отбеленных черепов и костей.", chars: [] },
-            bridge: { title: "Мост Первого Предка", what: "Колоссальный висячий мост.", where: "Над пропастью.", look: "Настил из отшлифованных гигантских ребер без перил.", chars: [] },
-            honeycombs: { title: "Соты Братства", what: "Кельи монахов.", where: "Отвесная стена центрального утеса.", look: "Скалы, пронизанные сотнями круглых нор, к которым ведут железные скобы.", chars: [] },
-            plaza: { title: "Плац Непоколебимых", what: "Казармы храмовой стражи.", where: "Базальтовый выступ.", look: "Продуваемая плита без навесов. Воины спят на мерзлом граните.", chars: ["morvald"] },
-            wells: { title: "Колодцы Дознания", what: "Пыточный комплекс инквизиции.", where: "Шахты в толще скалы.", look: "Колодцы из обсидиана, где искусственно увеличивают гравитацию.", chars: ["enerion"] },
-            court: { title: "Двор Безмолвных Теней", what: "Казармы немых карателей.", where: "Внутренний двор инквизиции.", look: "Мертвое пространство из белого мрамора, где нет ни единого звука.", chars: ["valdis"] },
-            spire: { title: "Шпиль Белого Эха", what: "Личные покои Энериона.", where: "Башня над морем облаков.", look: "Декадентская роскошь: шелка, шкуры барсов и никаких перил.", chars: ["enerion", "neya"] },
-            sanctuary: { title: "Святилище Немого Камня", what: "Тронный зал Синода.", where: "Самый Высокий Пик.", look: "Монолитный трон, вокруг которого вмонтированы гигантские медные громоотводы.", chars: ["amon"] }
+            ossuary: { 
+                title: "Оссификаторий Матриарха Ваэлы", 
+                what: "Главный архитектурный цех королевства по обработке останков.", 
+                where: "Широкий скальный карниз в нижней трети Пиков.", 
+                look: "Огромная полуоткрытая пещера, овеваемая ледяными ветрами. Вдоль стен высятся штабеля отбеленных до жемчужного блеска <span class="accent-silver">черепов и костей</span>.", 
+                chars: [] 
+            },
+            bridge: { 
+                title: "Мост Первого Предка", 
+                what: "Колоссальный висячий мост, соединяющий центральные монолиты.", 
+                where: "Центральный пролет Пояса Тысячи Ребер над километровой пропастью.", 
+                look: "Настил шириной в пять шагов, целиком выложенный шлифованными ребрами гигантских предков. <span class="accent-purple">Перила отсутствуют</span> принципиально.", 
+                chars: [] 
+            },
+            honeycombs: { 
+                title: "Соты Братства", 
+                what: "Кельи рядовых остогонов, певчих и младших монахов.", 
+                where: "Отвесная стена центрального утеса.", 
+                look: "Скала напоминает пчелиный улей. Ряды крошечных отверстий, перемещение к которым происходит по выдолбленным уступам и железным скобам.", 
+                chars: [] 
+            },
+            plaza: { 
+                title: "Плац Непоколебимых", 
+                what: "Тренировочная база и гарнизон храмовой стражи.", 
+                where: "Плоский базальтовый выступ на стыке с военными перевалами.", 
+                look: "Голая, продуваемая бурями каменная плита. Воины спят прямо на <span class="accent-silver">мерзлом граните</span> в ритуальных веригах.", 
+                chars: ["morvald"] 
+            },
+            wells: { 
+                title: "Колодцы Дознания", 
+                what: "Казематы Инквизиции, где еретиков ломают магией тяжести.", 
+                where: "Основание консоли Карниза Покаяния.", 
+                look: "Круглые вертикальные шахты из черного обсидиана. Жрецы концентрируют «Священное Давление», <span class="accent-purple">искусственно увеличивая гравитацию</span> в десятки раз.", 
+                chars: ["enerion"] 
+            },
+            court: { 
+                title: "Двор Безмолвных Теней", 
+                what: "Казармы и ритуальный зал немых карателей (личной гвардии Энериона).", 
+                where: "Закрытый внутренний двор за тяжелыми решетками.", 
+                look: "Мертвое, глухое пространство из белого мрамора. Стражи со спиленными рогами бесшумно скользят в серых сутанах.", 
+                chars: ["valdis"] 
+            },
+            spire: { 
+                title: "Шпиль Белого Эха", 
+                what: "Личные покои Энериона.", 
+                where: "Изолированная башня Цитадели Зенита прямо над морем облаков.", 
+                look: "Декадентская роскошь: полы устланы шкурами барсов, стены задрапированы черным шелком с золотой вязью. На широкой террасе без перил <span class="accent-silver">гуляет горный ветер</span>.", 
+                chars: ["enerion", "neya"] 
+            },
+            sanctuary: { 
+                title: "Святилище Немого Камня", 
+                what: "Тронный зал, где Патриарх принимает решения Синода.", 
+                where: "Срезанная макушка Самого Высокого Пика, открытая в зенит.", 
+                look: "Монолитный метеоритный трон, вокруг которого вмонтированы гигантские <span class="accent-purple">медные громоотводы</span>. Штормовые молнии бьют прямо в святилище.", 
+                chars: ["amon"] 
+            }
         };
 
-        // ТУМАН
         function showMist() { document.getElementById('mist-layer').classList.add('active'); }
         function hideMist() { document.getElementById('mist-layer').classList.remove('active'); }
 
         // МОДАЛКА КАРТИНОК
         function openImageModal(element) {
             const url = element.style.backgroundImage.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+            if(!url || url === 'none') return;
             document.getElementById('modal-img').src = url;
             document.getElementById('image-modal').classList.add('active');
         }
@@ -601,8 +986,10 @@
         }
 
         // ОТКРЫТИЕ ПАНЕЛИ
-        function openRegion(id) {
+        function openMainRegion(id) {
             const reg = mainRegionsDB[id];
+            // В главной карте картинку ПОКАЗЫВАЕМ
+            document.getElementById('r-image').style.display = 'block';
             fillSidebar(reg.title, id, reg.desc, reg.society, reg.rule, null);
         }
 
@@ -611,12 +998,14 @@
             const desc = `<h3>Что это</h3><p>${loc.what}</p>`;
             const society = `<h3>Где находится</h3><p>${loc.where}</p>`;
             const rule = `<h3>Как выглядит</h3><p>${loc.look}</p>`;
+            // В локациях картинку СКРЫВАЕМ
+            document.getElementById('r-image').style.display = 'none';
             fillSidebar(loc.title, 'loc-' + locId, desc, society, rule, loc.chars);
         }
 
         function fillSidebar(title, imgId, desc, soc, rule, charsList) {
             document.getElementById('r-title').innerHTML = title;
-            document.getElementById('r-image').style.backgroundImage = `url('${imgId}.jpg')`;
+            document.getElementById('r-image').style.backgroundImage = `url('${imgId}-bg.jpg')`;
             document.getElementById('r-desc').innerHTML = desc;
             document.getElementById('r-society').innerHTML = soc;
             document.getElementById('r-rule').innerHTML = rule;
@@ -648,10 +1037,15 @@
 
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
 
-        // ДЛЯ СТАРОЙ СТРАНИЦЫ ПРАВИТЕЛЕЙ
-        function toggleRuler(id) {
-            document.querySelectorAll('.char-card').forEach(card => { if(card.id !== 'card-' + id) card.classList.remove('expanded'); });
-            document.getElementById('card-' + id).classList.toggle('expanded');
+        // ДЛЯ КАРТОЧЕК (ПРАВИТЕЛИ И БОТЫ)
+        function toggleCard(id) {
+            document.querySelectorAll('.char-card').forEach(card => { 
+                if(card.id !== id && !card.classList.contains('locked')) card.classList.remove('expanded'); 
+            });
+            const clicked = document.getElementById(id);
+            if(clicked && !clicked.classList.contains('locked')) {
+                clicked.classList.toggle('expanded');
+            }
         }
     </script>
 </body>
